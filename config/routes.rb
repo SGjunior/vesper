@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root to: 'venues#index'
 
   resources :venues, { only: [:index, :show] }
-  resoruces :squad, { only: [:new, :show] }
+  resources :squad, { only: [:new, :show] }
 
   # get '/dashboard', to: 'user#index', as: 'user_dashboard' # if we have time
 end
