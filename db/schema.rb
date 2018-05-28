@@ -93,10 +93,7 @@ ActiveRecord::Schema.define(version: 2018_05_28_204158) do
     t.string "instagram_handle"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-<<<<<<< HEAD
-=======
     t.integer "capacity"
->>>>>>> 1d76c0d141a8731eae4dcf8e26e409f9f4dc34fe
   end
 
   add_foreign_key "packages", "venues"
@@ -105,9 +102,5 @@ ActiveRecord::Schema.define(version: 2018_05_28_204158) do
   add_foreign_key "squadmembers", "squadchosenvenues"
   add_foreign_key "squadmembers", "squads"
   add_foreign_key "squadmembers", "users"
-<<<<<<< HEAD
-  add_foreign_key "squads", "packages"
-=======
->>>>>>> 1d76c0d141a8731eae4dcf8e26e409f9f4dc34fe
   add_foreign_key "squads", "users"
 end
