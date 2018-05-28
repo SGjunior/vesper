@@ -10,10 +10,55 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_28_190704) do
+ActiveRecord::Schema.define(version: 2018_05_28_192501) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "packages", force: :cascade do |t|
+    t.string "name"
+    t.integer "price"
+    t.text "description"
+    t.integer "available_per_night"
+    t.bigint "venue_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["venue_id"], name: "index_packages_on_venue_id"
+  end
+
+  create_table "squadchosenvenues", force: :cascade do |t|
+    t.bigint "squad_id"
+    t.bigint "venue_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["squad_id"], name: "index_squadchosenvenues_on_squad_id"
+    t.index ["venue_id"], name: "index_squadchosenvenues_on_venue_id"
+  end
+
+  create_table "squadmembers", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "squad_id"
+    t.bigint "squadchosenvenue_id"
+    t.boolean "will_be_present"
+    t.integer "contribution"
+    t.integer "swag_points"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["squad_id"], name: "index_squadmembers_on_squad_id"
+    t.index ["squadchosenvenue_id"], name: "index_squadmembers_on_squadchosenvenue_id"
+    t.index ["user_id"], name: "index_squadmembers_on_user_id"
+  end
+
+  create_table "squads", force: :cascade do |t|
+    t.datetime "night_out"
+    t.bigint "user_id"
+    t.bigint "package_id"
+    t.boolean "confirmed"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["package_id"], name: "index_squads_on_package_id"
+    t.index ["user_id"], name: "index_squads_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -32,4 +77,24 @@ ActiveRecord::Schema.define(version: 2018_05_28_190704) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "venues", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.float "longitude"
+    t.float "latitude"
+    t.string "address"
+    t.string "music_genre"
+    t.string "instagram_handle"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "packages", "venues"
+  add_foreign_key "squadchosenvenues", "squads"
+  add_foreign_key "squadchosenvenues", "venues"
+  add_foreign_key "squadmembers", "squadchosenvenues"
+  add_foreign_key "squadmembers", "squads"
+  add_foreign_key "squadmembers", "users"
+  add_foreign_key "squads", "packages"
+  add_foreign_key "squads", "users"
 end
