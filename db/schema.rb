@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_28_192501) do
+
+ActiveRecord::Schema.define(version: 2018_05_28_204158) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,6 +74,11 @@ ActiveRecord::Schema.define(version: 2018_05_28_192501) do
     t.inet "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "photo"
+    t.string "first_name"
+    t.string "last_name"
+    t.string "phone_number"
+    t.string "address"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -87,6 +93,10 @@ ActiveRecord::Schema.define(version: 2018_05_28_192501) do
     t.string "instagram_handle"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+<<<<<<< HEAD
+=======
+    t.integer "capacity"
+>>>>>>> 1d76c0d141a8731eae4dcf8e26e409f9f4dc34fe
   end
 
   add_foreign_key "packages", "venues"
@@ -95,6 +105,9 @@ ActiveRecord::Schema.define(version: 2018_05_28_192501) do
   add_foreign_key "squadmembers", "squadchosenvenues"
   add_foreign_key "squadmembers", "squads"
   add_foreign_key "squadmembers", "users"
+<<<<<<< HEAD
   add_foreign_key "squads", "packages"
+=======
+>>>>>>> 1d76c0d141a8731eae4dcf8e26e409f9f4dc34fe
   add_foreign_key "squads", "users"
 end
