@@ -7,8 +7,8 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 Package.destroy_all #done
-Squadchosenvenue.destroy_all
 Squadmember.destroy_all
+Squadchosenvenue.destroy_all
 Squad.destroy_all
 Venue.destroy_all #done
 User.destroy_all #done
@@ -92,8 +92,7 @@ end
       squad: squad,
       contribution: rand(20..200)
     )
-
-      squadmember.save!
+    squadmember.save!
   end
 
 
