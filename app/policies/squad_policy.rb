@@ -4,13 +4,4 @@ class SquadPolicy < ApplicationPolicy
       scope
     end
   end
-
-  def new?
-    true
-  end
-
-  def show?
-    # TODO : only squad member can see the show page
-    true
-  end
 end
