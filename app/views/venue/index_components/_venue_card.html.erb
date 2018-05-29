@@ -1,0 +1,29 @@
+<div class="card-index mdl-card mdl-shadow--2dp">
+  <%= link_to venue_path(venue.id) do %>
+  <% if venue.photo.nil? %>
+  <div class="card-index-picture mdl-card__title" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('https://loremflickr.com/320/240/food');">
+    <% else %>
+    <div class="card-index-picture mdl-card__title" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)),
+    url('<%= cl_image_path listing.photo, height: 300, width: 400, crop: :fill %>')">
+    <% end %>
+    <div class="card-index-title mdl-card__title-text"><%= venue.name %></div>
+  </div>
+  <% end %>
+
+
+  <div class="mdl-card__menu">
+    <span style="color: white; font-size: 10px;"><%= venue.capacity %></span>
+
+    <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+      <i class="material-icons">person</i>
+    </button>
+  </div>
+  <div class="mdl-card__menu mdl-card__menu-2">
+    <span style="color: white; font-size: 10px;"><%= venue.pricing %></span>
+
+    <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+      <i class="material-icons">attach_money</i>
+    </button>
+  </div>
+
+</div>

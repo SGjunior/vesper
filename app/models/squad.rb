@@ -6,5 +6,5 @@ class Squad < ApplicationRecord
   has_many :venues, through: :squadchosenvenues
 
   validates :user_id, presence: true
-  validates :user_id, uniqueness: true
+  # validates :user_id, uniqueness: true
 end

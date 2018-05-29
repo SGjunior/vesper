@@ -4,4 +4,13 @@ class SquadPolicy < ApplicationPolicy
       scope
     end
   end
+
+  def new?
+    # add policy, if his logged in or not
+    true
+  end
+
+  def create?
+    true
+  end
 end

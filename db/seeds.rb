@@ -43,6 +43,7 @@ end
     address: Faker::Address.full_address,
     capacity: [200, 400, 600].sample()  ,
     music_genre: Faker::Music.instrument,
+    pricing: rand(1..5),
     instagram_handle: 'https://www.instagram.com/beachclubmtl/'
   )
 
