@@ -1,7 +1,9 @@
 class SquadController < ApplicationController
+  before_action :set_squad, only: [:show]
+
   def new
     # if empty params squad_id
-    @squad = initialize_squad
+
 
 
     # else
@@ -21,9 +23,10 @@ class SquadController < ApplicationController
     # AJAX REQUESTS
     # look for email in users
     #if exists
+    user = User.find_by("email = '#{params[:email]}'")
 
     @squad = Squad.find(params[:id]) #TODO : something along those lines
-    Squadmember.new(extract_squad_member) #TODO : something along those lines
+    Squadmember.new(user: user, squad: @squad).save! #TODO : something along those lines
   end
 
   #AJAX REQUESTS
@@ -97,5 +100,8 @@ class SquadController < ApplicationController
     # params.require(:squadmember).permit(:user)
   end
 
+  def set_squad
+    @squad = Squad.find(params[:id])
+  end
 
 end
