@@ -1,5 +1,6 @@
 class SquadController < ApplicationController
   skip_before_action :authenticate_user!, only: [:create]
+  before_action :set_squad, only: [:show]
 
   def edit
     @squad = Squad.find(params[:id])
@@ -34,9 +35,12 @@ class SquadController < ApplicationController
   #AJAX REQUESTS
   def update
     # AJAX REQUESTS
-    @squad = Squad.find(params[:id]) #TODO : something along those lines
+    # look for email in users
+    #if exists
+    user = User.find_by("email = '#{params[:email]}'")
 
-    Squadmember.new(extract_squad_member) #TODO : something along those lines
+    @squad = Squad.find(params[:id]) #TODO : something along those lines
+    Squadmember.new(user: user, squad: @squad).save! #TODO : something along those lines
   end
 
   #AJAX REQUESTS
@@ -52,7 +56,7 @@ class SquadController < ApplicationController
 
   def show
     @squad = Squad.find(params[:id])
-    @squad.update(params_finalize_squad)
+    # @squad.update(params_finalize_squad)
 
     authorize @squad
   end
@@ -110,5 +114,8 @@ class SquadController < ApplicationController
     # params.require(:squadmember).permit(:user)
   end
 
+  def set_squad
+    @squad = Squad.find(params[:id])
+  end
 
 end

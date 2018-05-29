@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'squadmember/create'
   devise_for :users
   root to: 'venue#index'
 
@@ -6,6 +7,5 @@ Rails.application.routes.draw do
   resources :squad, { only: [:edit, :show, :update, :create] } do
     resource :squadmember, { only: [:create] }
   end
-
   # get '/dashboard', to: 'user#index', as: 'user_dashboard' # if we have time
 end
