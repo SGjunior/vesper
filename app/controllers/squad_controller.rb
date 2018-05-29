@@ -1,6 +1,6 @@
 class SquadController < ApplicationController
   skip_before_action :authenticate_user!, only: [:create]
-  before_action :set_squad, only: [:show]
+  before_action :set_squad, only: [:show, :edit]
 
   def edit
     @squad = Squad.find(params[:id])
