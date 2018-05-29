@@ -1,13 +1,28 @@
 class SquadController < ApplicationController
-  def new
-    # if empty params squad_id
-    @squad = initialize_squad
+  skip_before_action :authenticate_user!, only: [:create]
 
-
-    # else
-    # @squad = Squad.find
-    # end
+  def edit
+    @squad = Squad.find(params[:id])
     authorize @squad
+    render 'venue/edit'
+  end
+
+  #AJAX REQUEST
+  def create
+
+    @squad = Squad.new(user: current_user)
+    authorize @squad
+
+    @squad.save!
+
+
+    params[:chosenVenues].each do |venue_id|
+      Squadchosenvenue.new(squad: @squad, venue_id: venue_id).save!
+    end
+
+    render json: @squad
+
+    # redirect_to edit_squad(@squad)
   end
 
   #AJAX REQUESTS
@@ -17,7 +32,7 @@ class SquadController < ApplicationController
   end
 
   #AJAX REQUESTS
-  def add_squad_member
+  def update
     # AJAX REQUESTS
     @squad = Squad.find(params[:id]) #TODO : something along those lines
 
