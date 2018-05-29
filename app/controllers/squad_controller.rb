@@ -37,7 +37,7 @@ class SquadController < ApplicationController
 
   def show
     @squad = Squad.find(params[:id])
-    @squad.update(params_finalize_squad)
+    # @squad.update(params_finalize_squad)
 
     authorize @squad
   end
