@@ -17,10 +17,12 @@ class SquadController < ApplicationController
   end
 
   #AJAX REQUESTS
-  def add_squad_member
+  def update
     # AJAX REQUESTS
-    @squad = Squad.find(params[:id]) #TODO : something along those lines
+    # look for email in users
+    #if exists
 
+    @squad = Squad.find(params[:id]) #TODO : something along those lines
     Squadmember.new(extract_squad_member) #TODO : something along those lines
   end
 
