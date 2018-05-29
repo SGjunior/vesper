@@ -1,0 +1,54 @@
+.app {
+  display: flex;
+  /*position: sticky;*/
+}
+
+.main-index {
+  flex-basis: 60%;
+  display: flex;
+  flex-direction: column;
+  background-color: #1B5A72;
+  padding: 16px;
+  max-width: 70%;
+
+}
+
+.filters-stick {
+  flex-grow: 1;
+  top: 0;
+  position: sticky;
+  background-color: #F4F4F4;
+  z-index: 10;
+}
+
+.venues-chosen {
+  display: flex;
+  flex-grow: 1;
+  bottom: 0;
+  position: sticky;
+  background-color: #F4F4F4;
+  z-index: 9;
+  height: 250px;
+}
+
+.map {
+  flex-grow: 1;
+  height: 100vh;
+  top: 0;
+  position: sticky;
+  /*background-color: green;*/
+  // background-color: green; /* TODO : this is a temp color */
+}
+
+#map {
+  height: 100%;
+  width: 100%;
+}
+
+.venues {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  // top: 30px;
+  min-height: 100vh;
+}

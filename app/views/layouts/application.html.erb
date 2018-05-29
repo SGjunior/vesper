@@ -14,9 +14,17 @@
 
   </head>
   <body>
-    <%= render 'shared/navbar' %>
-    <%= render 'shared/flashes' %>
-    <%= yield %>
+
+    <div id="application-container">
+      <%= render 'shared/navbar' %>
+      <%= render 'shared/flashes' %>
+      <%= yield %>
+
+      <div id="footer">
+        <!-- add footer -->
+      </div>
+    </div>
+
     <%= javascript_include_tag 'application' %>
     <%= javascript_pack_tag 'application' %>
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>

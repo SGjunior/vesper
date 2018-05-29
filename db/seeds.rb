@@ -94,6 +94,7 @@ end
     address: Faker::Address.full_address,
     capacity: [200, 400, 600].sample()  ,
     music_genre: Faker::Music.instrument,
+    pricing: rand(1..5),
     instagram_handle: 'https://www.instagram.com/beachclubmtl/'
   )
 
@@ -116,9 +117,10 @@ end
 
 3.times do
 
+  squad_leader = User.all.sample()
   squad = Squad.new(
     night_out: Faker::Date.forward(rand(2..5)),
-    user: User.all.sample(),
+    user: squad_leader,
     package_id: 0,
     confirmed: false
   )
@@ -134,6 +136,13 @@ end
     squadchosenvenue.save!
   end
 
+  Squadmember.new(
+    user: squad_leader,
+    squadchosenvenue: squad.squadchosenvenues.sample(),
+    will_be_present: true,
+    squad: squad,
+    contribution: rand(20..200)
+  ).save!
 
   rand(2..4).times do
     squadmember = Squadmember.new(

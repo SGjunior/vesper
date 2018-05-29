@@ -1,2 +1,116 @@
-<h1>Venue#index</h1>
-<p>Find me in app/views/venue/index.html.erb</p>
+<!-- adding banner to the top of the page -->
+<div class="banner-main" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%), url('https://loremflickr.com/1200/900/venue');">
+
+  <div class="banner-content">
+    <h1>Book-A-Chef</h1>
+    <p>Just right for your diner parties!</p>
+    <a id="browse-main-btn" class="btn btn-primary btn-lg" href="#index-filters">Browse</a>
+  </div>
+</div>
+<!-- adding banner to the top of the page -->
+<div class="app mdl-shadow--2dp">
+  <div class="main-index" id="main">
+    <!-- STICKY FILTERS BAR -->
+    <%= render 'venue/index_components/search_filters' %>
+
+    <div class="venues">
+      <!-- Generate the cards in here -->
+        <% @Venues.each do |venue| %>
+          <%= render 'venue/index_components/venue_card', venue: venue %>
+        <% end %>
+    </div>
+
+
+    <!-- STICKY DECK BAR -->
+    <div class="venues-chosen stick-bottom">
+      <!-- generating chosen venues for now -->
+        <% 3.times do %>
+            <%= render 'venue/index_components/venue_card_chosen', venue: @Venues.sample() %>
+        <% end %>
+
+        <!-- FAB button with ripple -->
+       <button id="proceed-to-create-squad-btn" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" style="margin-left: 10px; margin-right: 20px;">
+        <i class="material-icons">arrow_right</i>
+      </button>
+    </div>
+  </div>
+
+
+
+    <!-- Generate the map in here -->
+    <div class="map">
+      <div id="map"></div>
+    </div>
+</div>
+
+
+
+
+
+<script>
+  const proceedButton = document.getElementById('proceed-to-create-squad-btn');
+
+  proceedButton.addEventListener('click', (event) => {
+
+    const chosenVenues = document.querySelectorAll('.card-index-small');
+
+    // console.log(chosenVenues);
+
+    if (chosenVenues.length < 3 ) {
+      alert(`You only have ${chosenVenues.length} venues selected`);
+    } else {
+      <% if user_signed_in? %>
+
+          // Send ajax request to the controller + redirect to new page
+          sendAjaxCreateRequest(chosenVenues);
+          // wait for the answer?
+          // redirect to squad#edit
+
+      <% else %>
+        // redirect to sign_in page
+        window.location.href = '/users/sign_in'
+      <% end %>
+    }
+
+
+  });
+
+  sendAjaxCreateRequest = (chosenVenues) => {
+
+    const authToken = document.querySelector('meta[name="csrf-token"]').content
+    const createUrl = '/squad';
+
+    let chosenVenuesArr = []
+
+    chosenVenues.forEach((venue) => {
+      chosenVenuesArr.push(venue.getAttribute("chosen-venue-id"));
+    });
+
+    fetch('/squad', {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest',
+        'X-CSRF-Token': authToken
+      },
+      body: JSON.stringify({ chosenVenues: chosenVenuesArr }),
+      credentials: 'same-origin'
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        window.location.href = `/squad/${data['id']}/edit`
+        // console.log(data['id']);
+      })
+      .catch(console.error);
+      // .then((data) => {
+        // console.log('???');
+      // });
+
+
+  }
+
+
+
+
+
+</script>

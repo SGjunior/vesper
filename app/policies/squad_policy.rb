@@ -6,11 +6,11 @@ class SquadPolicy < ApplicationPolicy
   end
 
   def new?
+    # add policy, if his logged in or not
     true
   end
 
-  def show?
-    # TODO : only squad member can see the show page
+  def create?
     true
   end
 end
