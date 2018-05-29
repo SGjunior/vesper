@@ -1,11 +1,3 @@
-<script>
-  function addTeamMember(event) {
-    event.preventDefault();
-    // email = getSelector....
-    // ajax.post('http://localhost:3000/squad/', { email: email}, function (result) {})
-  }
-</script>
-
 <div class="squad-card-image mdl-card mdl-shadow--2dp">
   <div class="mdl-card__title mdl-card--expand"></div>
   <div class="mdl-card__actions">
@@ -17,11 +9,38 @@
 <div class="squad-card-image mdl-card mdl-shadow--2dp">
   <div class="mdl-card__title mdl-card--expand"></div>
   <div class="mdl-card__actions">
-    <%= simple_form_for( [@squad, @squadmember] remote: true) do |f| %>
-
-    <% f.input :email %>
-    <% f.button :submit %>
+    <%= form_tag("/squad/#{@squad.id}", method: :put, remote: true) do %>
+      <%= text_field_tag(:email) %>
+      <%= submit_tag("add squad member", class: "btn btn-primary") %>
     <% end %>
-    <span class="btn btn-primary" onclick="addTeamMember">Add a team member</span>
   </div>
 </div>
+
+
+
+<script>
+  // function addSquadMember(event) {
+  //   event.preventDefault();
+
+  //   const teamMemberEmail = document.getElementById('email_new_squad_member');
+  //   const token = document.querySelector('meta[name="csrf-token"]').content
+  //   const request = {
+  //     method: 'POST',
+  //     headers: {
+  //      'content-type': 'application/json',
+  //      'X-Requested-With': 'XMLHttpRequest',
+  //      'X-CSRF-Token': token
+  //     },
+  //     body: JSON.stringify({ email: teamMemberEmail.value }),
+  //     credentials: 'same-origin',
+  //   };
+
+  //   fetch('/squad/<%= @squad.id %>/squadmember', request)
+  //     .then((result) => {
+  //       console.log(result);
+  //     })
+  //     .catch(console.error);
+  // }
+</script>
+
+
