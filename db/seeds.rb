@@ -34,7 +34,9 @@ array_of_businesess.each do |business|
     name: business["name"],
     longitude: business["coordinates"]["longitude"],
     latitude: business["coordinates"]["latitude"],
-    address: business["location"]["address1"]
+    address: business["location"]["address1"],
+    description: 'lorem ipsum',
+    music_genre: 'lorem_ipsum'
     )
 
 end
@@ -61,7 +63,9 @@ array_of_clubs.each do |club|
     name: club["name"],
     longitude: club["geometry"]["location"]["lng"],
     latitude: club["geometry"]["location"]["lat"],
-    address: club["vicinity"]
+    address: club["vicinity"],
+    description: 'lorem ipsum',
+    music_genre: 'lorem_ipsum'
     )
 end
 
