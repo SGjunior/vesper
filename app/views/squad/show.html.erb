@@ -21,18 +21,18 @@
 
     <h3>Squad Chosen Package : </h3>
     <% if @squad.package_id == 0 %>
-        <p>Not chosen yet</p>
+        <p id="chosen-package">Not chosen yet</p>
     <% else %>
-        <p><%= @squad.package.name %></p>
+        <p id="chosen-package"><%= Package.find(@squad.package_id).name %></p>
     <% end %>
 
 
-
-
-
-
-
-
+    <!-- Raised button -->
+    <%= link_to squad_confirm_path(@squad.id), { method: :post, remote: true } do %>
+      <button class="mdl-button mdl-js-button mdl-button--raised">
+        confirm
+      </button>
+    <% end %>
 
 
 
@@ -43,7 +43,7 @@
       <!-- TODO : List all the packages -->
       <% @squadChosenVenue.venue.packages.each do |package| %>
 
-        <%= render 'squad/show_components/package_card', package: package %>
+        <%= render 'squad/show_components/package_card', package: package, squad: @squad %>
       <% end %>
     </div>
 </div>

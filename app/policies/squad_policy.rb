@@ -17,4 +17,12 @@ class SquadPolicy < ApplicationPolicy
   def show?
     true
   end
+
+  def update_package?
+    record.user == user
+  end
+
+  def confirm_squad_order?
+    record.user == user
+  end
 end
