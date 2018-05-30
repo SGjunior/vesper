@@ -19,6 +19,8 @@ require 'json'
 require 'open-uri'
 require 'net/http'
 
+puts "calling yelp API"
+
 uri = URI("https://api.yelp.com/v3/businesses/search?location=montreal&categories=danceclubs,stripclubs&limit=50")
 
 request = Net::HTTP::Get.new(uri)
@@ -35,8 +37,13 @@ array_of_businesess.each do |business|
     longitude: business["coordinates"]["longitude"],
     latitude: business["coordinates"]["latitude"],
     address: business["location"]["address1"],
-    description: 'lorem ipsum',
-    music_genre: 'lorem_ipsum'
+    description: business["categories"].map { |c| c["title"] }.join(" - "),
+    music_genre: 'lorem_ipsum',
+    rating: business["rating"],
+    photo: business["image_url"],
+    review_count: business["review_count"],
+    pricing: business["price"]
+
     )
 
 end
@@ -47,6 +54,8 @@ end
 # user = JSON.parse(user_serialized)
 
 # puts "#{user['name']} - #{user['bio']}"
+
+puts "calling google places"
 
 uri = URI("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=45.5017,-73.5673&radius=1500&type=club&keyword=club&key=#{ENV['GOOGLE_PLACES_API_KEY']}")
 
@@ -68,6 +77,8 @@ array_of_clubs.each do |club|
     music_genre: 'lorem_ipsum'
     )
 end
+
+puts "done calling APIs"
 
 10.times do
 
