@@ -14,6 +14,61 @@ Venue.destroy_all #done
 User.destroy_all #done
 
 
+
+require 'json'
+require 'open-uri'
+require 'net/http'
+
+uri = URI("https://api.yelp.com/v3/businesses/search?location=montreal&categories=danceclubs,stripclubs&limit=50")
+
+request = Net::HTTP::Get.new(uri)
+request["Authorization"] = "Bearer #{ENV['YELP_API_KEY']}"
+http = Net::HTTP.new(uri.hostname, uri.port)
+http.use_ssl = true
+response = http.start { |http| http.request(request) }
+results = JSON.parse(response.body)
+
+array_of_businesess = results["businesses"]
+array_of_businesess.each do |business|
+  Venue.create!(
+    name: business["name"],
+    longitude: business["coordinates"]["longitude"],
+    latitude: business["coordinates"]["latitude"],
+    address: business["location"]["address1"],
+    description: 'lorem ipsum',
+    music_genre: 'lorem_ipsum'
+    )
+
+end
+
+#API FOR GOOGLE PLACES
+# url = 'https://api.github.com/users/ssaunier'
+# user_serialized = open(url).read
+# user = JSON.parse(user_serialized)
+
+# puts "#{user['name']} - #{user['bio']}"
+
+uri = URI("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=45.5017,-73.5673&radius=1500&type=club&keyword=club&key=#{ENV['GOOGLE_PLACES_API_KEY']}")
+
+request = Net::HTTP::Get.new(uri)
+http = Net::HTTP.new(uri.hostname, uri.port)
+http.use_ssl = true
+response = http.start { |http| http.request(request) }
+results = JSON.parse(response.body)
+
+array_of_clubs = results["results"]
+
+array_of_clubs.each do |club|
+  Venue.create!(
+    name: club["name"],
+    longitude: club["geometry"]["location"]["lng"],
+    latitude: club["geometry"]["location"]["lat"],
+    address: club["vicinity"],
+    description: 'lorem ipsum',
+    music_genre: 'lorem_ipsum'
+    )
+end
+
 10.times do
 
 first_name = Faker::Name.first_name
@@ -106,3 +161,4 @@ end
 
 
 end
+
