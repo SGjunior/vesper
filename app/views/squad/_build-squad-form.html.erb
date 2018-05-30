@@ -14,7 +14,7 @@
 
   function addSquadMember(e) {
   e.preventDefault();
-  const squadRow = document.querySelector('.squad-row');
+  const squadRow = document.querySelector('.squad-cards');
   squadRow.insertAdjacentHTML('beforeend',"<%= j render 'squad-member-card' %>");
   }
 </script>
