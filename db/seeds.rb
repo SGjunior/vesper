@@ -195,6 +195,5 @@ end
     squadmember.save!
   end
 
-
 end
 
