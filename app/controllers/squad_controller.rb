@@ -5,7 +5,7 @@ class SquadController < ApplicationController
   def edit
     @squad = Squad.find(params[:id])
     authorize @squad
-    render 'venue/edit'
+    render 'squad/edit'
   end
 
   #AJAX REQUEST
@@ -38,9 +38,9 @@ class SquadController < ApplicationController
     # look for email in users
     #if exists
     user = User.find_by("email = '#{params[:email]}'")
-
     @squad = Squad.find(params[:id]) #TODO : something along those lines
-    Squadmember.new(user: user, squad: @squad).save! #TODO : something along those lines
+    authorize @squad
+    Squadmember.new(user: user, squad: @squad, squadchosenvenue_id: @squad.squadchosenvenues.first.id).save! #TODO : something along those lines
   end
 
   #AJAX REQUESTS
