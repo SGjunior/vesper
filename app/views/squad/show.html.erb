@@ -1,11 +1,15 @@
-<div class="container">
-  <div class="squad-row">
-    <div class="squad-cards">
-      <%= render 'squad-card' %>
-    </div>
+<div class="app mdl-shadow--2dp">
+  <div class="main-index" id="main">
+
   </div>
 
-  <div class="build-squad-form">
-    <% render 'build-squad-form' %>
-  </div>
+
+
+    <div class="map">
+      <!-- TODO : List all the packages -->
+      <% @squadChosenVenue.venue.packages.each do |package| %>
+
+        <%= render 'squad/show_components/package_card', package: package %>
+      <% end %>
+    </div>
 </div>
