@@ -56,8 +56,9 @@ class SquadController < ApplicationController
 
   def show
     @squad = Squad.find(params[:id])
-    # @squad.update(params_finalize_squad)
-
+    @squadChosenVenue = find_squad_chosen_venue
+    @squadTotalContribution = find_squad_total_contribution
+    # raise
     authorize @squad
   end
 
@@ -91,20 +92,6 @@ class SquadController < ApplicationController
 
   end
 
-  def initialize_squad
-
-    squad = Squad.new(user: current_user, night_out: params[:night_out])
-
-    venues = extract_squad_chosen_venues
-
-    venues.each do |venue|
-      # new_venue = Squadchosenvenue.new(venue)
-      Squadchosenvenue.new(venue: venue, squad: squad).save!
-    end
-
-    squad
-  end
-
   def extract_squad_chosen_venues
     #TODO : receive JS http request
   end
@@ -118,4 +105,27 @@ class SquadController < ApplicationController
     @squad = Squad.find(params[:id])
   end
 
+  def find_squad_chosen_venue
+    vote_results = {}
+    @squad.squadmembers.each do |squadmember|
+      if vote_results[squadmember.squadchosenvenue]
+        vote_results[squadmember.squadchosenvenue] += 1
+      else
+        vote_results[squadmember.squadchosenvenue] = 1
+      end
+    end
+    vote_result = vote_results.max_by{|k,v| v}
+    return vote_result[0]
+  end
+
+  def find_squad_total_contribution
+    contribution = 0;
+
+    @squad.squadmembers.each do |squadmember|
+      contribution += squadmember.contribution
+    end
+
+    return contribution
+
+  end
 end
