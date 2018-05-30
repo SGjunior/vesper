@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 2018_05_30_182953) do
     t.bigint "venue_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "photo"
     t.index ["venue_id"], name: "index_packages_on_venue_id"
   end
 

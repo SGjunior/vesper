@@ -1,11 +1,11 @@
 class SquadController < ApplicationController
   skip_before_action :authenticate_user!, only: [:create]
-  before_action :set_squad, only: [:show]
+  before_action :set_squad, only: [:show, :edit]
 
   def edit
     @squad = Squad.find(params[:id])
     authorize @squad
-    render 'venue/edit'
+    render 'squad/edit'
   end
 
   #AJAX REQUEST
@@ -20,6 +20,10 @@ class SquadController < ApplicationController
     params[:chosenVenues].each do |venue_id|
       Squadchosenvenue.new(squad: @squad, venue_id: venue_id).save!
     end
+
+    Squadmember.new(user: current_user, squad: @squad, squadchosenvenue_id: @squad.squadchosenvenues.first.id).save!
+
+
 
     render json: @squad
 
@@ -38,11 +42,10 @@ class SquadController < ApplicationController
     # look for email in users
     #if exists
     user = User.find_by("email = '#{params[:email]}'")
-
     @squad = Squad.find(params[:id]) #TODO : something along those lines
-    Squadmember.new(user: user, squad: @squad).save! #TODO : something along those lines
+    authorize @squad
+    Squadmember.new(user: user, squad: @squad, squadchosenvenue_id: @squad.squadchosenvenues.first.id).save! #TODO : something along those lines
   end
-
   #AJAX REQUESTS
 
   def confirm_squad_member
@@ -56,20 +59,37 @@ class SquadController < ApplicationController
 
   def show
     @squad = Squad.find(params[:id])
-    # @squad.update(params_finalize_squad)
-
+    @squadChosenVenue = find_squad_chosen_venue
+    @squadTotalContribution = find_squad_total_contribution
+    # raise
     authorize @squad
   end
 
   # AJAX REQUESTS
   def confirm_squad_order
     # TODO : add some booking logic + return JS to display confirmation report
+    @squad = Squad.find(params[:id])
+    authorize @squad
+
+    @squad.update(confirmed: true)
+
+
+    respond_to do |format|
+      format.js
+    end
+
   end
 
   # AJAX REQUESTS
   def update_package
     @squad = Squad.find(params[:id])
-    @squad.update(params_update_package)
+    @package = Package.find(params[:package_id])
+    @squad.update(package_id: @package.id)
+    authorize @squad
+
+    respond_to do |format|
+      format.js
+    end
   end
 
   private
@@ -82,27 +102,12 @@ class SquadController < ApplicationController
     params.require(:squadmember).permit(:contribution, :squadchosenvenue_id)
   end
 
-
   def params_finalize_squad
     # 601:  TODO : fire only when leader clicks on button to go to show page.
     # it's been decided :
     # => jscript will return squadchosenvenue_id of the venue with the highest vote counter on 601 submit
     params.require(:squad).permit(:squadchosenvenue_id)
 
-  end
-
-  def initialize_squad
-
-    squad = Squad.new(user: current_user, night_out: params[:night_out])
-
-    venues = extract_squad_chosen_venues
-
-    venues.each do |venue|
-      # new_venue = Squadchosenvenue.new(venue)
-      Squadchosenvenue.new(venue: venue, squad: squad).save!
-    end
-
-    squad
   end
 
   def extract_squad_chosen_venues
@@ -118,4 +123,27 @@ class SquadController < ApplicationController
     @squad = Squad.find(params[:id])
   end
 
+  def find_squad_chosen_venue
+    vote_results = {}
+    @squad.squadmembers.each do |squadmember|
+      if vote_results[squadmember.squadchosenvenue]
+        vote_results[squadmember.squadchosenvenue] += 1
+      else
+        vote_results[squadmember.squadchosenvenue] = 1
+      end
+    end
+    vote_result = vote_results.max_by{|k,v| v}
+    return vote_result[0]
+  end
+
+  def find_squad_total_contribution
+    contribution = 0;
+
+    @squad.squadmembers.each do |squadmember|
+      contribution += squadmember.contribution
+    end
+
+    return contribution
+
+  end
 end
