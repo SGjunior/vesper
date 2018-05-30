@@ -42,7 +42,6 @@ class SquadController < ApplicationController
     authorize @squad
     Squadmember.new(user: user, squad: @squad, squadchosenvenue_id: @squad.squadchosenvenues.first.id).save! #TODO : something along those lines
   end
-
   #AJAX REQUESTS
 
   def confirm_squad_member
@@ -65,12 +64,28 @@ class SquadController < ApplicationController
   # AJAX REQUESTS
   def confirm_squad_order
     # TODO : add some booking logic + return JS to display confirmation report
+    @squad = Squad.find(params[:id])
+    authorize @squad
+
+    @squad.update(confirmed: true)
+
+
+    respond_to do |format|
+      format.js
+    end
+
   end
 
   # AJAX REQUESTS
   def update_package
     @squad = Squad.find(params[:id])
-    @squad.update(params_update_package)
+    @package = Package.find(params[:package_id])
+    @squad.update(package_id: @package.id)
+    authorize @squad
+
+    respond_to do |format|
+      format.js
+    end
   end
 
   private
@@ -82,7 +97,6 @@ class SquadController < ApplicationController
   def params_confirm_squad_member
     params.require(:squadmember).permit(:contribution, :squadchosenvenue_id)
   end
-
 
   def params_finalize_squad
     # 601:  TODO : fire only when leader clicks on button to go to show page.
