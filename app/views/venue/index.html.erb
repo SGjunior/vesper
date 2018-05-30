@@ -39,7 +39,7 @@
 
     <!-- Generate the map in here -->
     <div class="map">
-      <div id="map"></div>
+      <div id="map" data-markers="<%= @markers.to_json %>"></div>
     </div>
 </div>
 
@@ -102,15 +102,5 @@
         // console.log(data['id']);
       })
       .catch(console.error);
-      // .then((data) => {
-        // console.log('???');
-      // });
-
-
   }
-
-
-
-
-
 </script>

@@ -21,6 +21,10 @@ class SquadController < ApplicationController
       Squadchosenvenue.new(squad: @squad, venue_id: venue_id).save!
     end
 
+    Squadmember.new(user: current_user, squad: @squad, squadchosenvenue_id: @squad.squadchosenvenues.first.id).save!
+
+
+
     render json: @squad
 
     # redirect_to edit_squad(@squad)
