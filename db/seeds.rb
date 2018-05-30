@@ -36,7 +36,9 @@ array_of_businesess.each do |business|
     latitude: business["coordinates"]["latitude"],
     address: business["location"]["address1"],
     description: 'lorem ipsum',
-    music_genre: 'lorem_ipsum'
+    music_genre: 'lorem_ipsum',
+    pricing: rand(1..3),
+    capacity: [200, 400, 600].sample()
     )
 
 end
@@ -65,7 +67,9 @@ array_of_clubs.each do |club|
     latitude: club["geometry"]["location"]["lat"],
     address: club["vicinity"],
     description: 'lorem ipsum',
-    music_genre: 'lorem_ipsum'
+    music_genre: 'lorem_ipsum',
+    pricing: rand(1..3),
+    capacity: [200, 400, 600].sample()
     )
 end
 
@@ -98,7 +102,7 @@ end
     address: Faker::Address.full_address,
     capacity: [200, 400, 600].sample()  ,
     music_genre: Faker::Music.instrument,
-    pricing: rand(1..5),
+    pricing: rand(1..3),
     instagram_handle: 'https://www.instagram.com/beachclubmtl/'
   )
 

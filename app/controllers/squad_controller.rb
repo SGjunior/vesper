@@ -5,7 +5,7 @@ class SquadController < ApplicationController
   def edit
     @squad = Squad.find(params[:id])
     authorize @squad
-    render 'venue/edit'
+    render 'squad/edit'
   end
 
   #AJAX REQUEST
@@ -89,20 +89,6 @@ class SquadController < ApplicationController
     # => jscript will return squadchosenvenue_id of the venue with the highest vote counter on 601 submit
     params.require(:squad).permit(:squadchosenvenue_id)
 
-  end
-
-  def initialize_squad
-
-    squad = Squad.new(user: current_user, night_out: params[:night_out])
-
-    venues = extract_squad_chosen_venues
-
-    venues.each do |venue|
-      # new_venue = Squadchosenvenue.new(venue)
-      Squadchosenvenue.new(venue: venue, squad: squad).save!
-    end
-
-    squad
   end
 
   def extract_squad_chosen_venues
