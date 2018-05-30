@@ -10,7 +10,7 @@ Package.destroy_all #done
 Squadmember.destroy_all
 Squadchosenvenue.destroy_all
 Squad.destroy_all
-Venue.destroy_all #done
+
 User.destroy_all #done
 
 
@@ -19,58 +19,88 @@ require 'json'
 require 'open-uri'
 require 'net/http'
 
-uri = URI("https://api.yelp.com/v3/businesses/search?location=montreal&categories=danceclubs,stripclubs&limit=50")
+if false
+Venue.destroy_all
 
-request = Net::HTTP::Get.new(uri)
-request["Authorization"] = "Bearer #{ENV['YELP_API_KEY']}"
-http = Net::HTTP.new(uri.hostname, uri.port)
-http.use_ssl = true
-response = http.start { |http| http.request(request) }
-results = JSON.parse(response.body)
+  uri = URI("https://api.yelp.com/v3/businesses/search?location=montreal&categories=danceclubs,stripclubs&limit=50")
 
-array_of_businesess = results["businesses"]
-array_of_businesess.each do |business|
-  Venue.create!(
-    name: business["name"],
-    longitude: business["coordinates"]["longitude"],
-    latitude: business["coordinates"]["latitude"],
-    address: business["location"]["address1"],
-    description: 'lorem ipsum',
-    music_genre: 'lorem_ipsum',
-    pricing: rand(1..3),
-    capacity: [200, 400, 600].sample()
-    )
+  request = Net::HTTP::Get.new(uri)
+  request["Authorization"] = "Bearer #{ENV['YELP_API_KEY']}"
+  http = Net::HTTP.new(uri.hostname, uri.port)
+  http.use_ssl = true
+  response = http.start { |http| http.request(request) }
+  results = JSON.parse(response.body)
 
-end
+  array_of_businesess = results["businesses"]
+  array_of_businesess.each do |business|
+    venue = Venue.new(
+      name: business["name"],
+      longitude: business["coordinates"]["longitude"],
+      latitude: business["coordinates"]["latitude"],
+      address: business["location"]["address1"],
+      description: 'lorem ipsum',
+      music_genre: 'lorem_ipsum',
+      pricing: rand(1..3),
+      capacity: [200, 400, 600].sample()
+      )
 
-#API FOR GOOGLE PLACES
-# url = 'https://api.github.com/users/ssaunier'
-# user_serialized = open(url).read
-# user = JSON.parse(user_serialized)
+    venue.save!
 
-# puts "#{user['name']} - #{user['bio']}"
+    4.times do
+      package = Package.new(
+        name: Faker::Beer.name,
+        price: rand(140..600),
+        description: 'Lorem ipsum dolor sit amet, ut amet arcu, a vel. Bibendum enim curabitur, tincidunt congue consectetuer, nunc in. Wisi wisi, vitae taciti tempor. Massa est, arcu integer, vulputate velit eu.',
+        available_per_night: rand(2..8),
+        venue: venue
+      )
 
-uri = URI("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=45.5017,-73.5673&radius=1500&type=club&keyword=club&key=#{ENV['GOOGLE_PLACES_API_KEY']}")
+      package.save!
+    end
+  end
+  #API FOR GOOGLE PLACES
+  # url = 'https://api.github.com/users/ssaunier'
+  # user_serialized = open(url).read
+  # user = JSON.parse(user_serialized)
 
-request = Net::HTTP::Get.new(uri)
-http = Net::HTTP.new(uri.hostname, uri.port)
-http.use_ssl = true
-response = http.start { |http| http.request(request) }
-results = JSON.parse(response.body)
+  # puts "#{user['name']} - #{user['bio']}"
 
-array_of_clubs = results["results"]
+  uri = URI("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=45.5017,-73.5673&radius=1500&type=club&keyword=club&key=#{ENV['GOOGLE_PLACES_API_KEY']}")
 
-array_of_clubs.each do |club|
-  Venue.create!(
-    name: club["name"],
-    longitude: club["geometry"]["location"]["lng"],
-    latitude: club["geometry"]["location"]["lat"],
-    address: club["vicinity"],
-    description: 'lorem ipsum',
-    music_genre: 'lorem_ipsum',
-    pricing: rand(1..3),
-    capacity: [200, 400, 600].sample()
-    )
+  request = Net::HTTP::Get.new(uri)
+  http = Net::HTTP.new(uri.hostname, uri.port)
+  http.use_ssl = true
+  response = http.start { |http| http.request(request) }
+  results = JSON.parse(response.body)
+
+  array_of_clubs = results["results"]
+
+  array_of_clubs.each do |club|
+    venue = Venue.new(
+      name: club["name"],
+      longitude: club["geometry"]["location"]["lng"],
+      latitude: club["geometry"]["location"]["lat"],
+      address: club["vicinity"],
+      description: 'lorem ipsum',
+      music_genre: 'lorem_ipsum',
+      pricing: rand(1..3),
+      capacity: [200, 400, 600].sample()
+      )
+
+    venue.save!
+
+    4.times do
+      package = Package.new(
+        name: Faker::Beer.name,
+        price: rand(140..600),
+        description: 'Lorem ipsum dolor sit amet, ut amet arcu, a vel. Bibendum enim curabitur, tincidunt congue consectetuer, nunc in. Wisi wisi, vitae taciti tempor. Massa est, arcu integer, vulputate velit eu.',
+        available_per_night: rand(2..8),
+        venue: venue
+      )
+
+      package.save!
+    end
+  end
 end
 
 10.times do
@@ -162,6 +192,5 @@ end
     )
     squadmember.save!
   end
-
 
 end
