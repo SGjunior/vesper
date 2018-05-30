@@ -40,7 +40,8 @@ class SquadController < ApplicationController
     user = User.find_by("email = '#{params[:email]}'")
     @squad = Squad.find(params[:id]) #TODO : something along those lines
     authorize @squad
-    Squadmember.new(user: user, squad: @squad, squadchosenvenue_id: @squad.squadchosenvenues.first.id).save! #TODO : something along those lines
+    binding.pry
+    Squadmember.new(user: user, squad: @squad).save! #TODO : something along those lines
   end
 
   #AJAX REQUESTS

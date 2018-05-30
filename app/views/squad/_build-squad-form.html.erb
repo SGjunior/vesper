@@ -1,10 +1,10 @@
 <!-- add squad member -->
 <div class="squad-card-image mdl-card mdl-shadow--2dp">
-  <div class="mdl-card__title mdl-card--expand"></div>
-  <div class="mdl-card__actions">
+  <div class="mdl-card__title"></div>
+  <div class="mdl-card__actions mdl-card--expand">
     <%= form_tag("/squad/#{@squad.id}", method: :put, remote: true) do %>
       <%= text_field_tag(:email) %>
-      <%= submit_tag("add squad member by email", class: "btn btn-primary", id: "squad-add-btn") %>
+      <%= submit_tag("+ squaddie (email)", class: "btn btn-primary", id: "squad-add-btn") %>
     <% end %>
   </div>
 </div>
@@ -13,7 +13,6 @@
   document.getElementById('squad-add-btn').addEventListener("click", addSquadMember);
 
   function addSquadMember(e) {
-  e.preventDefault();
   const squadRow = document.querySelector('.squad-cards');
   squadRow.insertAdjacentHTML('beforeend',"<%= j render 'squad-member-card' %>");
   }
