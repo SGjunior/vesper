@@ -1,6 +1,6 @@
 class Squad < ApplicationRecord
   belongs_to :user
-  has_one :package
+  has_one :package # add foreign key ?
   has_many :squadmembers
   has_many :squadchosenvenues
   has_many :venues, through: :squadchosenvenues

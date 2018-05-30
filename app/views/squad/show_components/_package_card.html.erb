@@ -1,13 +1,14 @@
 <div class="card-index mdl-card mdl-shadow--2dp">
-    <% if package.photo.nil? %>
-      <div class="card-index-picture mdl-card__title" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('https://loremflickr.com/320/240/food');">
-      <% else %>
-      <div class="card-index-picture mdl-card__title" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)),
-      url('<%= cl_image_path listing.photo, height: 300, width: 400, crop: :fill %>')">
+    <%= link_to squad_package_path(squad.id, package.id), { method: :post, remote: true } do %>
+      <% if package.photo.nil? %>
+        <div class="card-index-picture mdl-card__title" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('https://loremflickr.com/320/240/food');">
+        <% else %>
+        <div class="card-index-picture mdl-card__title" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)),
+        url('<%= cl_image_path listing.photo, height: 300, width: 400, crop: :fill %>')">
+      <% end %>
+        <div class="card-index-title mdl-card__title-text"><%= package.name %></div>
+      </div>
     <% end %>
-    <div class="card-index-title mdl-card__title-text"><%= package.name %></div>
-  </div>
-
 
   <div class="mdl-card__menu">
     <!-- TODO : say the package is for how many people -->
