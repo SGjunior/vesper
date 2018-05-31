@@ -19,6 +19,7 @@ require 'json'
 require 'open-uri'
 require 'net/http'
 
+
 puts "calling yelp API"
 
 uri = URI("https://api.yelp.com/v3/businesses/search?location=montreal&categories=danceclubs,stripclubs&limit=50")
