@@ -40,18 +40,20 @@ class SquadController < ApplicationController
     user = User.find_by("email = '#{params[:email]}'")
     @squad = Squad.find(params[:id]) #TODO : something along those lines
     authorize @squad
-    binding.pry
-    Squadmember.new(user: user, squad: @squad).save! #TODO : something along those lines
+    @squadmember = Squadmember.new(user: user, squad: @squad, squadchosenvenue: @squad.squadchosenvenues.first, contribution: 0) #TODO : something along those lines
+    @squadmember.save!
+    respond_to do |format|
+    format.js
+    end
   end
   #AJAX REQUESTS
 
   def confirm_squad_member
     @squad = Squad.find(params[:id])
-
    squadmember = Squadmember.find_by('user_id current_user') # TODO : figure activerecord call to find squadmember id in the good squad and the good user_id
-
+   squadmember.squadchosenvenue_id = 0 (params[:venue_id])
    squadmember.update(params_confirm_squad_member)
-
+   # routes to make accessible in view, remove status "selected", add "selected" for latest id
   end
 
   def show
@@ -137,7 +139,7 @@ class SquadController < ApplicationController
     contribution = 0;
 
     @squad.squadmembers.each do |squadmember|
-      contribution += squadmember.contribution
+      # contribution += squadmember.contribution
     end
 
     return contribution

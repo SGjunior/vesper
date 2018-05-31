@@ -2,10 +2,11 @@
 
   <div class="squad-row">
     <div class="squad-cards">
-      <%= render 'user-squad-card' %>
+      <%= render 'squad/edit-components/user-squad-card' %>
       <div class="build-squad">
-        <%= render 'build-squad-form' %>
+        <%= render 'squad/edit-components/build-squad-form' %>
       </div>
+      <%= render 'squad/edit-components/squad-member-card' %>
     </div>
 
     <div class="contribution-row">
@@ -14,7 +15,7 @@
 
     <div class="vote-row">
       <div class="chosen-venues-vote-cards">
-        <%= render 'squad/show_components/chosen-venues-vote-card' %>
+        <%= render 'squad/edit-components/chosen-venues-vote-card' %>
       </div>
     </div>
 

@@ -9,11 +9,3 @@
   </div>
 </div>
 
-<script type="text/javascript">
-  document.getElementById('squad-add-btn').addEventListener("click", addSquadMember);
-
-  function addSquadMember(e) {
-  const squadRow = document.querySelector('.squad-cards');
-  squadRow.insertAdjacentHTML('beforeend',"<%= j render 'squad-member-card' %>");
-  }
-</script>
