@@ -1,0 +1,10 @@
+<% s = @squad.squadmembers.last%>
+  <% s_member = User.find(s.user_id) %>
+  <div class="squad-card-image mdl-card mdl-shadow--2dp">
+    <div class="mdl-card__title"><%= s_member.first_name %></div>
+    <div class="mdl-card__actions">
+      <%= s_member.email %></span>
+    </div>
+  </div>
+
+

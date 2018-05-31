@@ -1,0 +1,11 @@
+<!-- add squad member -->
+<div class="squad-card-image mdl-card mdl-shadow--2dp">
+  <div class="mdl-card__title"></div>
+  <div class="mdl-card__actions mdl-card--expand">
+    <%= form_tag("/squad/#{@squad.id}", method: :put, remote: true) do %>
+      <%= text_field_tag(:email) %>
+      <%= submit_tag("+ squaddie (email)", class: "btn btn-primary", id: "squad-add-btn") %>
+    <% end %>
+  </div>
+</div>
+
