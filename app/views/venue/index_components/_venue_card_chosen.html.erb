@@ -26,8 +26,10 @@
   </div>
   <div class="mdl-card__menu mdl-card__menu-2">
     <span style="color: white; font-size: 10px; margin-right: 13px;">
-      <% venue.pricing.times do  %>
+      <% if venue.pricing %>
+      <% venue.pricing.length.times do  %>
         <i class="material-icons" style="font-size: 21px !important; letter-spacing: -13px !important;">attach_money</i>
+      <% end %>
       <% end %>
     </span>
   </div>
