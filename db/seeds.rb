@@ -14,6 +14,18 @@ Squad.destroy_all
 User.destroy_all #done
 
 
+def convert_yelp_pricing_to_integer(yelp_price)
+  if yelp_price.nil?
+    1
+  elsif yelp_price.is_a? Integer
+    yelp_price
+  elsif yelp_price.is_a? Integer
+    yelp_price.count("$")
+  else
+    1
+  end
+end
+
 
 require 'json'
 require 'open-uri'
@@ -43,7 +55,7 @@ array_of_businesess.each do |business|
     rating: business["rating"],
     photo: business["image_url"],
     review_count: business["review_count"],
-    pricing: business["price"]
+    pricing: convert_yelp_pricing_to_integer(business["price"])
 
     )
   venue.save!
