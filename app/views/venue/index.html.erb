@@ -1,10 +1,64 @@
+<style>
+  #container-lols {
+  margin: 20px;
+  width: 400px;
+  height: 400px;
+}
+
+#container-lols2 {
+  margin: 20px;
+  width: 400px;
+  height: 400px;
+}
+
+#container-lols2 svg path {
+  fill: none;
+  /*stroke: #000;*/
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: 0.2s;
+}
+
+#container-lols2 svg:hover path {
+  d: path("M-215,3C-128,363 154,463 306,-29");
+  /*stroke: gold;*/
+}
+
+</style>
 <!-- adding banner to the top of the page -->
 <div class="banner-main" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%), url('https://loremflickr.com/1200/900/venue');">
 
+  <!-- <div class="banner-main" style="background-color: black;"> -->
+
+
+  <div id="container-lols">
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" viewBox='-350 -350 900 900'>
+      <path  fill-opacity="0" stroke-width="10" stroke="#bbb" d='M-315,3
+               C-128,-363 154,463 306,-29'/>
+      <path  fill-opacity="0" id="heart-path" stroke-width="20" stroke="#ED6A5A" d='M-415,3
+                 C-128,-363 154,463 306,-29'/>
+      <path  fill-opacity="0" id="heart-path2" stroke-width="20" stroke="#FFEA82" d='M-215,3
+               C-128,-363 154,463 306,-29'/>
+    </svg>
+  </div>
+
+  <div id="container-lols2">
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" viewBox='-350 -350 900 900'>
+      <path  fill-opacity="0" stroke-width="10" stroke="#bbb" d='M-315,3
+               C-128,-363 154,463 306,-29'/>
+      <path  fill-opacity="0" id="heart-path" stroke-width="20" stroke="#ED6A5A" d='M-415,3
+                 C-128,-363 154,463 306,-29'/>
+      <path  fill-opacity="0" id="heart-path2" stroke-width="20" stroke="#FFEA82" d='M-215,3
+               C-128,-363 154,463 306,-29'/>
+    </svg>
+  </div>
+
+
+
   <div class="banner-content">
-    <h1>Book-A-Chef</h1>
-    <p>Just right for your diner parties!</p>
-    <a id="browse-main-btn" class="btn btn-primary btn-lg" href="#index-filters">Browse</a>
+    <h1>Vesper</h1>
+    <p>Wildest Party planner!</p>
+    <a id="browse-main-btn" class="btn btn-primary btn-lg" href="#index-filters">Find a Venue</a>
   </div>
 </div>
 <!-- adding banner to the top of the page -->
@@ -39,7 +93,7 @@
 
     <!-- Generate the map in here -->
     <div class="map">
-      <div id="map"></div>
+      <div id="map" data-markers="<%= @markers.to_json %>"></div>
     </div>
 </div>
 
@@ -102,15 +156,6 @@
         // console.log(data['id']);
       })
       .catch(console.error);
-      // .then((data) => {
-        // console.log('???');
-      // });
-
-
   }
-
-
-
-
 
 </script>

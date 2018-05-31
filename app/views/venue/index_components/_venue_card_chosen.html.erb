@@ -21,15 +21,17 @@
     <span style="color: white; font-size: 10px;"><%= venue.capacity %></span>
 
     <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-      <i class="material-icons">person</i>
+      <i class="material-icons">group</i>
     </button>
   </div>
   <div class="mdl-card__menu mdl-card__menu-2">
-    <span style="color: white; font-size: 10px;"><%= venue.pricing %></span>
-
-    <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-      <i class="material-icons">attach_money</i>
-    </button>
+    <span style="color: white; font-size: 10px; margin-right: 13px;">
+      <% if venue.pricing %>
+      <% venue.pricing.length.times do  %>
+        <i class="material-icons" style="font-size: 21px !important; letter-spacing: -13px !important;">attach_money</i>
+      <% end %>
+      <% end %>
+    </span>
   </div>
 
 </div>

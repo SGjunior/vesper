@@ -1,7 +1,7 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 #
-# Examples:
+# Examples:2
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
@@ -10,7 +10,7 @@ Package.destroy_all #done
 Squadmember.destroy_all
 Squadchosenvenue.destroy_all
 Squad.destroy_all
-Venue.destroy_all #done
+
 User.destroy_all #done
 
 
@@ -32,7 +32,7 @@ results = JSON.parse(response.body)
 
 array_of_businesess = results["businesses"]
 array_of_businesess.each do |business|
-  Venue.create!(
+  venue = Venue.new(
     name: business["name"],
     longitude: business["coordinates"]["longitude"],
     latitude: business["coordinates"]["latitude"],
@@ -45,7 +45,20 @@ array_of_businesess.each do |business|
     pricing: business["price"]
 
     )
+  venue.save!
 
+
+  4.times do
+    package = Package.new(
+      name: Faker::Beer.name,
+      price: rand(140..600),
+      description: 'Lorem ipsum dolor sit amet, ut amet arcu, a vel. Bibendum enim curabitur, tincidunt congue consectetuer, nunc in. Wisi wisi, vitae taciti tempor. Massa est, arcu integer, vulputate velit eu.',
+      available_per_night: rand(2..8),
+      venue: venue
+    )
+
+    package.save!
+  end
 end
 
 #API FOR GOOGLE PLACES
@@ -68,7 +81,7 @@ results = JSON.parse(response.body)
 array_of_clubs = results["results"]
 
 array_of_clubs.each do |club|
-  Venue.create!(
+  venue = Venue.new(
     name: club["name"],
     longitude: club["geometry"]["location"]["lng"],
     latitude: club["geometry"]["location"]["lat"],
@@ -76,6 +89,19 @@ array_of_clubs.each do |club|
     description: 'lorem ipsum',
     music_genre: 'lorem_ipsum'
     )
+  venue.save!
+
+  4.times do
+    package = Package.new(
+      name: Faker::Beer.name,
+      price: rand(140..600),
+      description: 'Lorem ipsum dolor sit amet, ut amet arcu, a vel. Bibendum enim curabitur, tincidunt congue consectetuer, nunc in. Wisi wisi, vitae taciti tempor. Massa est, arcu integer, vulputate velit eu.',
+      available_per_night: rand(2..8),
+      venue: venue
+    )
+
+    package.save!
+  end
 end
 
 puts "done calling APIs"
@@ -109,7 +135,7 @@ end
     address: Faker::Address.full_address,
     capacity: [200, 400, 600].sample()  ,
     music_genre: Faker::Music.instrument,
-    pricing: rand(1..5),
+    pricing: rand(1..3),
     instagram_handle: 'https://www.instagram.com/beachclubmtl/'
   )
 
@@ -170,6 +196,4 @@ end
     squadmember.save!
   end
 
-
 end
-

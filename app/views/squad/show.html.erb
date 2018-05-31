@@ -1,11 +1,49 @@
-<div class="container">
-  <div class="squad-row">
-    <div class="squad-cards">
-      <%= render 'squad-card' %>
-    </div>
+<div class="app mdl-shadow--2dp">
+  <div class="main-index" id="main">
+    <p>Venue name : </p>
+    <h2><%= @squadChosenVenue.venue.name %></h2>
+
+    <hr>
+
+      <h3>Squad members : </h3>
+      <% @squad.squadmembers.each do |squadmember| %>
+         <p><%= squadmember.user.first_name %> <%= squadmember.user.last_name %> / contribution : <%= squadmember.contribution %> $
+         </p>
+      <% end %>
+
+    <hr>
+
+    <h3>Contribution Total : </h3>
+
+    <p><%= @squadTotalContribution %> $</p>
+
+    <hr>
+
+    <h3>Squad Chosen Package : </h3>
+    <% if @squad.package_id == 0 %>
+        <p id="chosen-package">Not chosen yet</p>
+    <% else %>
+        <p id="chosen-package"><%= Package.find(@squad.package_id).name %></p>
+    <% end %>
+
+
+    <!-- Raised button -->
+    <%= link_to squad_confirm_path(@squad.id), { method: :post, remote: true } do %>
+      <button class="mdl-button mdl-js-button mdl-button--raised">
+        confirm
+      </button>
+    <% end %>
+
+
+
   </div>
 
-  <div class="build-squad-form">
-    <% render 'build-squad-form' %>
-  </div>
+    <div class="map">
+      <h3>Packages :</h3>
+      <!-- TODO : List all the packages -->
+      <% @squadChosenVenue.venue.packages.each do |package| %>
+
+        <%= render 'squad/show_components/package_card', package: package, squad: @squad %>
+      <% end %>
+    </div>
 </div>
