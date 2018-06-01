@@ -181,10 +181,6 @@ venue_attributes = [
     capacity: 100,
     pricing: 2,
     instagram_handle: 'https://www.instagram.com/beachclubmtl/'
-  },
-  {
-    name: "This",
-    description: "That"
   }
 ]
 
