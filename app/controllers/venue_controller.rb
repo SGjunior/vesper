@@ -7,6 +7,34 @@ class VenueController < ApplicationController
   end
 
 
+  def create
+    @venue = Venue.new
+    authorize @venue
+    # TODO if / else
+
+  end
+
+  def new
+    @venue = Venue.new
+    authorize @venue
+  end
+
+  def edit
+    @venue = Venue.find(params[:id])
+    authorize @venue
+  end
+
+  def update
+    @venue = Venue.find(params[:id])
+    authorize @venue
+    if
+      @venue.update(update_venue_params)
+      redirect_to venue_path(@venue)
+    else
+      render "edit"
+    end
+  end
+
   def index
     @squad = Squad.new(user: current_user)
 
@@ -31,4 +59,11 @@ class VenueController < ApplicationController
       lng: @venue.longitude
     }]
   end
+
+  private
+
+  def update_venue_params
+    params.require(:venue).permit(:description, :music_genre, :instagram_handle, :pricing, :capacity, :rating, :review_count, :photo)
+  end
+
 end
