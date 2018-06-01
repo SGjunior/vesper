@@ -2,7 +2,7 @@ class VenueController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
 
   def create
-    @venue = Venue.new(set_venue_params)
+    @venue = Venue.new
     authorize @venue
     # TODO if / else
 
@@ -20,9 +20,13 @@ class VenueController < ApplicationController
 
   def update
     @venue = Venue.find(params[:id])
-    @venue.save(set_venue_params)
     authorize @venue
-      #todo if/else
+    if
+      @venue.update(update_venue_params)
+      redirect_to venue_path(@venue)
+    else
+      render "edit"
+    end
   end
 
   def index
@@ -56,7 +60,8 @@ class VenueController < ApplicationController
 
   private
 
-  def set_venue_params
+  def update_venue_params
+    params.require(:venue).permit(:description, :music_genre, :instagram_handle, :pricing, :capacity, :rating, :review_count, :photo)
   end
 
 end
