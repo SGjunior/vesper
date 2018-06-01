@@ -34,7 +34,7 @@ require 'net/http'
 
 puts "calling yelp API"
 
-uri = URI("https://api.yelp.com/v3/businesses/search?location=montreal&categories=danceclubs,stripclubs&limit=50")
+uri = URI("https://api.yelp.com/v3/businesses/search?location=montreal&categories=danceclubs&limit=50")
 
 request = Net::HTTP::Get.new(uri)
 request["Authorization"] = "Bearer #{ENV['YELP_API_KEY']}"
@@ -121,8 +121,8 @@ puts "done calling APIs"
 
 10.times do
 
-first_name = Faker::Name.first_name
-last_name = Faker::Name.last_name
+  first_name = Faker::Name.first_name
+  last_name = Faker::Name.last_name
 
   user = User.new(
     first_name: first_name,
@@ -138,19 +138,39 @@ last_name = Faker::Name.last_name
 
 end
 
-5.times do
-
-  venue = Venue.new(
-    name: Faker::Beer.hop,
-    description: 'Lorem ipsum dolor sit amet, ut amet arcu, a vel. Bibendum enim curabitur, tincidunt congue consectetuer, nunc in. Wisi wisi, vitae taciti tempor. Massa est, arcu integer, vulputate velit eu.',
-    latitude: (45.5017 + rand() - rand()),
-    longitude: (rand() - 73.5673 - rand()),
-    address: Faker::Address.full_address,
-    capacity: [200, 400, 600].sample()  ,
-    music_genre: Faker::Music.instrument,
-    pricing: rand(1..3),
+venue_attributes = [
+  {
+    name: "Martin's Club",
+    description: "Whatever",
+    music_genre: "",
+    address: "",
+    # latitude: (45.5017 + rand() - rand()),
+    # longitude: (rand() - 73.5673 - rand()),
+    address: "123 not fake",
+    capacity: 100,
+    music_genre: "brazilian",
+    pricing: 2,
     instagram_handle: 'https://www.instagram.com/beachclubmtl/'
-  )
+  },
+  {
+    name: "This",
+    description: "That"
+  }
+]
+
+# 5.times do
+venue_attributes.each do |venue_attributes_hash|
+  venue = Venue.new(venue_attributes_hash)
+    # name: venue_attributes_hash[:name],
+    # description: venue_attributes_hash[:description],
+    # # description: 'Lorem ipsum dolor sit amet, ut amet arcu, a vel. Bibendum enim curabitur, tincidunt congue consectetuer, nunc in. Wisi wisi, vitae taciti tempor. Massa est, arcu integer, vulputate velit eu.',
+    # latitude: (45.5017 + rand() - rand()),
+    # longitude: (rand() - 73.5673 - rand()),
+    # address: venue_attributes_hash[:address],
+    # capacity: [200, 400, 600].sample()  ,
+    # music_genre: Faker::Music.instrument,
+    # pricing: rand(1..3),
+    # instagram_handle: 'https://www.instagram.com/beachclubmtl/'
 
   venue.save!
 
@@ -208,5 +228,4 @@ end
     )
     squadmember.save!
   end
-
 end
