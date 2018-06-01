@@ -1,23 +1,32 @@
 <div class="show-container">
-    <div class="venue-background" style="background-image: url('<%= cl_image_path @venue.photo %>')">
+    <div class="venue-background" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.4) 0%, rgba(0,36,61,0.6) 50%), url('<%= cl_image_path @venue.photo %>')">
 
     <div class="container">
       <div class="row" id="venue-info">
 
         <div class="col-xs-12 col-md-4">
-          <div class="row">
-            <div class="col-xs-12">
-              <h1><%= @venue.name %>
-              <p><%= @venue.address %> </p></h1>
+          <div class="align-content-center">
+            <div class="row">
+              <div class="col-xs-12">
+                <h1><%= @venue.name %>
+                <p><%= @venue.address %> </p></h1>
+              </div>
             </div>
-          </div>
-          <div class="row">
-              <div class="col-xs-12"><body><%= @venue.description %> </body></div>
-              <div class="col-xs-12"><p><%= @venue.music_genre %> </p></div>
-              <div class="col-xs-6"><p>Price: <%= @venue.pricing %> </p></div>
-              <div class="col-xs-6"><p>Rating: <%= @venue.rating %> </p></div>
-              <div class="col-xs-6"><p>Fans: <%= @venue.review_count %> </p></div>
-              <div class="col-xs-6"><p>Capacity: <%= @venue.capacity %> </p></div>
+            <div class="row">
+                <div class="col-xs-12"><body><i class="fas fa-glass-martini"></i> <%= @venue.description %> </body></div>
+                <div class="col-xs-12"><p><i class="fas fa-music"></i> <%= @venue.music_genre %> </p></div>
+                <div class="col-xs-6"><p><% @venue.pricing.times do %>
+                  <i class="fas fa-dollar-sign"></i>
+                <% end %>
+                </p></div>
+
+                <div class="col-xs-6"><p><% @venue.rating.round.times do  %>
+                  <i class="fas fa-star"></i>
+                <% end %>
+                </p></div>
+                <div class="col-xs-6"><p><i class="fas fa-fire"></i> <%= @venue.review_count %> bookings</p></div>
+                <div class="col-xs-6"><p><i class="fas fa-users"></i> <%= @venue.capacity %> capacity</p></div>
+            </div>
           </div>
         </div>
 
