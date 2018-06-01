@@ -23,12 +23,13 @@
 
 .venues-chosen {
   display: flex;
-  flex-grow: 1;
+  // flex-grow: 1;
   bottom: 0;
   position: sticky;
   background-color: #F4F4F4;
   z-index: 9;
-  height: 250px;
+  height: 100px;
+  overflow: hidden;
 }
 
 .map {

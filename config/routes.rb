@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   get 'squadmember/create'
   devise_for :users
-  root to: 'venue#index'
+  root to: 'venue#welcome'
 
   resources :venue, { only: [:index, :show] }
   resources :squad, { only: [:edit, :show, :update, :create] } do

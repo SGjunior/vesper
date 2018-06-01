@@ -1,5 +1,11 @@
 class VenueController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:index, :show]
+  skip_before_action :authenticate_user!, only: [:index, :show, :welcome]
+
+  def welcome
+    @venues = Venue.all
+    authorize @venues
+  end
+
 
   def index
     @Venues = policy_scope(Venue).all # ????? -> wtf is this for
