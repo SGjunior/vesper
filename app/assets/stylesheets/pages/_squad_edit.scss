@@ -20,7 +20,39 @@
 }
 
 .contribution-wrapper {
-  min-height: 20vh;
+  min-height: 30vh;
   background-color: #380036;
   margin-top: -5vh;
 }
+
+.contribution-head {
+  text-align: center;
+  margin-top: 50px;
+  h2 {
+    font-size: 20em;
+    color: white;
+  }
+  h5 {
+    font-size: 8em;
+    color: #fa3e94;
+  }
+}
+
+.contribution-inputs {
+  text-align: center;
+  margin: 20px auto;
+
+}
+.squad-wrapper {
+  min-height: 60vh !important;
+  background-color: #380036;
+}
+
+.squad-container {
+  margin: 50px;
+  display: flex;
+  justify-content: space-between;
+}
+
+
+
