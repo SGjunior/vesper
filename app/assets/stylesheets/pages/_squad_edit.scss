@@ -1,7 +1,26 @@
 .selected-venue {
-  border:20px solid #2ece39;
+  border:5px solid #02c3bd;
+// -webkit-box-shadow:0px 0px 85px 30px #02c3bd ;
+// -moz-box-shadow:0px 0px 85px 30px #02c3bd ;
+// box-shadow:0px 0px 85px 30px #02c3bd ;
 }
 
 .contribution-row {
   margin: 50px auto;
+}
+
+.edit-venues {
+  display: flex;
+  align-content: flex-start;
+}
+
+.chosen-float-overlay {
+  min-height: 60vh;
+  position: relative;
+}
+
+.contribution-wrapper {
+  min-height: 20vh;
+  background-color: #380036;
+  margin-top: -5vh;
 }

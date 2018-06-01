@@ -1,31 +1,26 @@
-Current user : <%= current_user.id %>
 
-<div class="container">
 
-  <div class="row">
-    <div class="vote-row">
-      <div class="chosen-venues-vote-cards">
-        <%= render 'squad/edit-components/chosen-venues-vote-card' %>
-      </div>
+<div class="index-wrapper">
+<p style="color: white">Current user : <%= current_user.id %></p>
+  <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+    <div class="chosen-float-overlay edit-venues">
+      <%= render 'squad/edit-components/chosen-venues-vote-card' %>
     </div>
   </div>
-
-  <div class="row">
-    <div class="contribution-row">
-      <%= render 'squad/edit-components/contribution-input' %>
-    </div>
-  </div>
+</div>
+<div class="contribution-wrapper">
 
 
-    <div class="row">
-      <div class="squad-row">
-        <div class="squad-cards">
-            <%= render 'squad/edit-components/user-squad-card' %>
-            <div class="build-squad">
-              <%= render 'squad/edit-components/build-squad-form' %>
-            </div>
-          <%= render 'squad/edit-components/squad-member-card' %>
-        </div>
+  <!-- <div class="row"> -->
+    <%= render 'squad/edit-components/contribution-input' %>
+  <!-- </div> -->
+  <!-- <div class="row"> -->
+    <div class="squad-cards">
+      <%= render 'squad/edit-components/user-squad-card' %>
+      <div class="build-squad">
+        <%= render 'squad/edit-components/build-squad-form' %>
       </div>
+      <%= render 'squad/edit-components/squad-member-card' %>
     </div>
+  <!-- </div> -->
 </div>

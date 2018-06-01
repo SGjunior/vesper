@@ -2,19 +2,17 @@ class VenueController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show, :welcome]
 
   def welcome
-    @venues = Venue.all
-    authorize @venues
+    @venue = Venue.first
+    authorize @venue
   end
 
 
   def index
-    @Venues = policy_scope(Venue).all # ????? -> wtf is this for
     @squad = Squad.new(user: current_user)
 
+    @Venues = policy_scope(Venue).where.not(latitude: nil, longitude: nil).limit(20)
 
-    @venues_on_map = Venue.where.not(latitude: nil, longitude: nil)
-
-    @markers = @venues_on_map.map do |venue|
+    @markers = @Venues.map do |venue|
       {
         lat: venue.latitude,
         lng: venue.longitude,
@@ -22,11 +20,6 @@ class VenueController < ApplicationController
         # infoWindow: { content: render_to_string(partial: "venue/index_components/venue_card", locals: { venue: venue }) }
       }
     end
-
-    # raise
-
-
-
   end
 
   def show

@@ -3,16 +3,6 @@
   /*position: sticky;*/
 }
 
-.main-index {
-  flex-basis: 60%;
-  display: flex;
-  flex-direction: column;
-  background-color: #1B5A72;
-  padding: 16px;
-  max-width: 70%;
-
-}
-
 .filters-stick {
   flex-grow: 1;
   top: 0;
@@ -21,15 +11,36 @@
   z-index: 10;
 }
 
+.main-index {
+  flex-basis: 60%;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+
+  padding: 16px;
+  // max-width: 70%;
+
+}
+
+.index-wrapper {
+  background-color: rgba(3, 0, 39, 0.95);
+  min-height: 50vh !important;
+}
+
 .venues-chosen {
   display: flex;
-  // flex-grow: 1;
+  flex-grow: 1;
+  margin: 0 auto;
   bottom: 0;
   position: sticky;
-  background-color: #F4F4F4;
+  background-color: rgba(3, 0, 39, 0.95);
   z-index: 9;
   height: 100px;
+  max-width: 85% !important;
   overflow: hidden;
+  -webkit-box-shadow:0px 0px 24px 2px #000000 ;
+  -moz-box-shadow:0px 0px 24px 2px #000000 ;
+  box-shadow:0px 0px 24px 2px #000000 ;
 }
 
 .map {

@@ -1,0 +1,65 @@
+.card-index {
+  flex-basis: calc(30%);
+  max-height: 350px !important;
+  // min-height: 200px !important;
+  margin: 20px auto;
+  // cursor: pointer;
+
+  // border-radius:20px !important;
+  // -moz-border-radius:20px !important;
+  // -webkit-border-radius:20px !important;
+
+}
+
+.card-index.mdl-card a {
+  text-decoration: none;
+}
+
+.card-index-title.mdl-card__title-text {
+  color: white;
+}
+
+.mdl-card__menu .mdl-button .material-icons {
+  color: white;
+}
+
+.mdl-card__menu-2 {
+  top: 42px !important;
+}
+
+.card-index-picture {
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+}
+
+.card-index-title {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.card-index:hover {
+  opacity: 0.8;
+}
+
+.card-index-description {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+}
+.card-index-features {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card-index-small {
+
+  flex-basis: calc(30% - 20px);
+
+  .card-index-picture {
+    height: 150px
+  }
+}
+
+// testing other card types --------------------------------------------------

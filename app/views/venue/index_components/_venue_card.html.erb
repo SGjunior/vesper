@@ -1,35 +1,35 @@
-<div class="card-index mdl-card mdl-shadow--2dp">
-  <%= link_to venue_path(venue.id) do %>
-  <% if venue.photo.nil? %>
-  <div class="card-index-picture mdl-card__title" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('https://loremflickr.com/320/240/food');">
-    <% else %>
-    <div class="card-index-picture mdl-card__title" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)),
-    url('<%= cl_image_path listing.photo, height: 300, width: 400, crop: :fill %>')">
-    <% end %>
-    <div class="card-index-title mdl-card__title-text"><%= venue.name %></div>
+<div class="blog-card spring-fever mdl-shadow--2dp" data-venue-id="<%= venue.id %>">
+  <div class="title-content">
+    <h3><%= venue.name %></h3>
+    <div class="intro">★★★</div>
+    <div class="intro">$$$</div>
   </div>
+
+  <!-- <div class="utility-info">
+    <ul class="utility-list">
+      <li class="comments">12</li>
+      <li class="date">03.12.2015</li>
+    </ul>
+  </div> -->
+  <!-- overlays -->
+  <!-- <div class="gradient-overlay"></div> -->
+  <div class="color-overlay"></div>
+  <div class="card-info">
+  <!-- Raised button with ripple -->
+  <%= link_to venue_path(venue.id) do %>
+    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+      Info
+    </button>
   <% end %>
 
-
-  <div class="mdl-card__menu">
-    <span style="color: white; font-size: 10px;"><%= venue.capacity %></span>
-
-    <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-      <i class="material-icons">group</i>
+  <!-- Raised button with ripple -->
+    <button class="select-venue-btn mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" data-venue-id="<%= venue.id %>">
+      Select
     </button>
-  </div>
-  <div class="mdl-card__menu mdl-card__menu-2">
-    <!-- <span style="color: white; font-size: 10px;"><%= venue.pricing %></span> -->
 
-    <span style="color: white; font-size: 10px; margin-right: 13px;">
-      <% venue.pricing.times do  %>
-        <i class="material-icons" style="font-size: 21px !important; letter-spacing: -13px !important;">attach_money</i>
-      <% end %>
-    </span>
-    <!-- <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"> -->
+  </div><!-- /.card-info -->
+</div><!-- /.blog-card -->
 
-    <!-- </button> -->
 
-  </div>
 
-</div>
+

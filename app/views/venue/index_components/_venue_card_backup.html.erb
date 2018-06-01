@@ -1,0 +1,35 @@
+<div class="card-index mdl-card mdl-shadow--2dp">
+  <%= link_to venue_path(venue.id) do %>
+  <% if venue.photo.nil? %>
+  <div class="card-index-picture mdl-card__title" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('https://images.unsplash.com/photo-1486307358651-0e65d426a51c?ixlib=rb-0.3.5&s=479e11c5ee02903101cbd0f3bcd8fdff&auto=format&fit=crop&w=1050&q=80');">
+    <% else %>
+    <div class="card-index-picture mdl-card__title" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)),
+    url('<%= cl_image_path listing.photo, height: 300, width: 400, crop: :fill %>')">
+    <% end %>
+    <div class="card-index-title mdl-card__title-text"><%= venue.name %></div>
+  </div>
+  <% end %>
+
+
+  <div class="mdl-card__menu">
+    <span style="color: white; font-size: 10px;"><%= venue.capacity %></span>
+
+    <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+      <i class="material-icons">group</i>
+    </button>
+  </div>
+  <div class="mdl-card__menu mdl-card__menu-2">
+    <!-- <span style="color: white; font-size: 10px;"><%= venue.pricing %></span> -->
+
+    <span style="color: white; font-size: 10px; margin-right: 13px;">
+      <% venue.pricing.times do  %>
+        <i class="material-icons" style="font-size: 21px !important; letter-spacing: -13px !important;">attach_money</i>
+      <% end %>
+    </span>
+    <!-- <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"> -->
+
+    <!-- </button> -->
+
+  </div>
+
+</div>
