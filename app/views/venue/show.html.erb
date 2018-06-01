@@ -1,2 +1,54 @@
-<h1>Venue#show</h1>
-<p>Find me in app/views/venue/show.html.erb</p>
+<div class="show-container">
+    <div class="venue-background" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.4) 0%, rgba(0,36,61,0.6) 50%), url('<%= cl_image_path @venue.photo %>')">
+
+      <div class="container">
+        <div class="row" id="venue-info">
+
+          <div class="col-xs-12 col-md-4">
+            <div class="align-content-center">
+              <div class="row">
+                <div class="col-xs-12">
+                  <h1><%= @venue.name %>
+                  <p><%= @venue.address %> </p></h1>
+                </div>
+              </div>
+              <div class="row">
+                  <div class="col-xs-12"><body><i class="fas fa-glass-martini"></i> <%= @venue.description %> </body></div>
+                  <div class="col-xs-12"><p><i class="fas fa-music"></i> <%= @venue.music_genre %> </p></div>
+                  <div class="col-xs-6"><p><% @venue.pricing.times do %>
+                    <i class="fas fa-dollar-sign"></i>
+                  <% end %>
+                  </p></div>
+
+                  <div class="col-xs-6"><p><% @venue.rating.round.times do  %>
+                    <i class="fas fa-star"></i>
+                  <% end %>
+                  </p></div>
+                  <div class="col-xs-6"><p><i class="fas fa-fire"></i> <%= @venue.review_count %> bookings</p></div>
+                  <div class="col-xs-6"><p><i class="fas fa-users"></i> <%= @venue.capacity %> capacity</p></div>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  <div class="venue-social-pictures col-md-4 col-md-offset-5">
+      <div>
+        <%= cl_image_tag("bar-datcha-bar-kabinet")%>
+      </div>
+      <div>
+        <%= cl_image_tag("bar-datcha-bar-datcha")%>
+      </div>
+      <div>
+        <%= cl_image_tag("eepoie34syfg9jcpblpd")%>
+      </div>
+  </div>
+</div>
+
+
+
+
+
+
