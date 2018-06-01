@@ -3,6 +3,7 @@ class SquadController < ApplicationController
   before_action :set_squad, only: [:show, :edit]
 
   def edit
+    @squadTotalContribution = find_squad_total_contribution
     @squad = Squad.find(params[:id])
     authorize @squad
     render 'squad/edit'
@@ -145,7 +146,9 @@ class SquadController < ApplicationController
     contribution = 0;
 
     @squad.squadmembers.each do |squadmember|
-      # contribution += squadmember.contribution
+      unless squadmember.contribution.nil?
+        contribution += squadmember.contribution
+      end
     end
 
     return contribution
