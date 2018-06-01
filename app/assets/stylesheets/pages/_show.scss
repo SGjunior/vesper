@@ -1,0 +1,17 @@
+.show-container{
+  height: 100vh;
+  background-color: $black;
+  color: white;
+}
+
+.venue-background {
+  min-height: 100%;
+  clip-path: polygon(0 0, 100% 0, 100% 48%, 0 90%);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#venue-info {
+  margin-top: 15px;
+}

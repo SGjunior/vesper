@@ -1,5 +1,21 @@
-<div class="container">
-  <div class="venue-bg">
+<div class="show-container">
+    <div class="venue-background" style="background-image: url('<%= cl_image_path @venue.photo %>')">
+
+    <div class="container">
+      <div class="row-padded" id="venue-info">
+        <div class="col-xs-12 col-md-4">
+          <h1><%= @venue.name %> </h1>
+          <p><%= @venue.description %> </p>
+          <p><%= @venue.address %> </p>
+          <p><%= @venue.pricing %> </p>
+          <p><%= @venue.rating %> </p>
+          <p><%= @venue.music_genre %> </p>
+          <p><%= @venue.review_count %> </p>
+          <p><%= @venue.capacity %> </p>
+          <p><%= @venue.instagram_handle %> </p>
+        </div>
+      </div>
+    </div>
 
   </div>
 </div>
@@ -8,10 +24,4 @@
 
 
 
-
-
-
-
-<%= cl_image_tag @venue.photo %>
-<%= @venue.name %>
 
