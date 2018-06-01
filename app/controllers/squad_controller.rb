@@ -3,6 +3,7 @@ class SquadController < ApplicationController
   before_action :set_squad, only: [:show, :edit]
 
   def edit
+    @squadTotalContribution = find_squad_total_contribution
     @squad = Squad.find(params[:id])
     authorize @squad
     render 'squad/edit'
@@ -53,11 +54,17 @@ class SquadController < ApplicationController
   #AJAX REQUESTS
 
   def confirm_squad_member
-    @squad = Squad.find(params[:id])
-   squadmember = Squadmember.find_by('user_id current_user') # TODO : figure activerecord call to find squadmember id in the good squad and the good user_id
-   squadmember.squadchosenvenue_id = 0 (params[:venue_id])
-   squadmember.update(params_confirm_squad_member)
-   # routes to make accessible in view, remove status "selected", add "selected" for latest id
+   @squad = Squad.find(params[:id])
+
+   squadmember = @squad.squadmembers.find_by(user: current_user)
+   squadmember.squadchosenvenue_id = params[:squadchosenvenue_id].to_i
+   squadmember.contribution = params[:contribution].to_i
+   squadmember.will_be_present = params[:will_be_present]
+   squadmember.save!
+
+   authorize squadmember
+
+   render json: @squad
   end
 
   def show
@@ -101,10 +108,6 @@ class SquadController < ApplicationController
     params.require(:squad).permit(:package_id)
   end
 
-  def params_confirm_squad_member
-    params.require(:squadmember).permit(:contribution, :squadchosenvenue_id)
-  end
-
   def params_finalize_squad
     # 601:  TODO : fire only when leader clicks on button to go to show page.
     # it's been decided :
@@ -143,7 +146,9 @@ class SquadController < ApplicationController
     contribution = 0;
 
     @squad.squadmembers.each do |squadmember|
-      # contribution += squadmember.contribution
+      unless squadmember.contribution.nil?
+        contribution += squadmember.contribution
+      end
     end
 
     return contribution

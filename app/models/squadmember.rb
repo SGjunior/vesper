@@ -5,5 +5,6 @@ class Squadmember < ApplicationRecord
 
   # validates :contribution, numericality: { only_integer: true, greater_than: 0 }
   # validates :will_be_present, inclusion: { in: [true, false] }
+  validates :user, uniqueness: { scope: :squad }
 
 end

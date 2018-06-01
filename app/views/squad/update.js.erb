@@ -1,5 +1,8 @@
-const squadRow = document.querySelector('.squad-cards');
-squadRow.insertAdjacentHTML('beforeend',"<%= j render 'squad/edit-components/new-squad-member-card' %>");
+// const squadRow = document.querySelector('.squad-cards');
+// squadRow.insertAdjacentHTML('beforeend',"<%= j render 'squad/edit-components/new-squad-member-card' %>");
+
+window.location.href = '/squad/<%= @squad.id %>/edit';
+// console.log('test');
 
 
 

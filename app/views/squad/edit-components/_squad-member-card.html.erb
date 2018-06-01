@@ -1,11 +1,83 @@
 <% @squad.squadmembers.each do |s| %>
   <% s_member = User.find(s.user_id) %>
-  <div class="squad-card-image mdl-card mdl-shadow--2dp">
+
+
+
+
+
+<!--   <div class="squad-card-image mdl-card mdl-shadow--2dp">
     <div class="mdl-card__title"><%= s_member.first_name %></div>
     <div class="mdl-card__actions">
       <%= s_member.email %></span>
     </div>
+  </div> -->
+
+<!-- <div class="squad-card-image mdl-card mdl-shadow--2dp">
+  <div class="mdl-card__title mdl-card--expand"></div>
+  <div class="mdl-card__actions">
+    <span class="squad-card-image__filename">test</span>
   </div>
+</div>
+
+
+ -->
+<div class="blog-card spring-fever mdl-shadow--2dp">
+  <div class="title-content">
+    <h3><%= s_member.first_name %></h3>
+    <% if @squad.user == s.user %>
+      <div class="intro">LEADER</div>
+    <% else %>
+      <div class="intro">SideKick</div>
+    <% end %>
+  </div>
+
+  <div class="color-overlay"></div>
+  <div class="card-info">
+  <div class="intro" style="margin-top: 30px !important; margin-bottom: 30px !important;">International man of mysteries</div>
+  <div class="intro" style="margin-top: 30px !important; margin-bottom: 30px !important;">Contribution : <%= s.contribution %></div>
+    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+      Info
+    </button>
+
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <% end %>
+
+
 
 

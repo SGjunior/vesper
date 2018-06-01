@@ -1,11 +1,37 @@
-<div class="squad-card-image mdl-card mdl-shadow--2dp">
+<!-- <div class="squad-card-image mdl-card mdl-shadow--2dp">
   <div class="mdl-card__title mdl-card--expand"></div>
   <div class="mdl-card__actions">
-    <span class="squad-card-image__filename"><%=@squad.user.first_name %></span>
+    <span class="squad-card-image__filename">test</span>
   </div>
 </div>
 
 
+ -->
+<div class="blog-card spring-fever mdl-shadow--2dp">
+  <div class="title-content">
+    <h3><%= @squad.user.first_name %></h3>
+    <div class="intro">LEADER</div>
+  </div>
+
+  <!-- <div class="utility-info">
+    <ul class="utility-list">
+      <li class="comments">12</li>
+      <li class="date">03.12.2015</li>
+    </ul>
+  </div> -->
+  <!-- overlays -->
+  <!-- <div class="gradient-overlay"></div> -->
+  <div class="color-overlay"></div>
+  <div class="card-info">
+  <!-- Raised button with ripple -->
+  <div class="intro" style="margin-top: 30px !important; margin-bottom: 30px !important;">International man of mysteries</div>
+  <div class="intro" style="margin-top: 30px !important; margin-bottom: 30px !important;">Contribution : <%= @squad.squadmembers.find_by(user: @squad.user).contribution %></div>
+    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+      Info
+    </button>
+
+  </div><!-- /.card-info -->
+</div><!-- /.blog-card -->
 
 
 
@@ -28,31 +54,5 @@
 
 
 
-
-
-<script>
-  // function addSquadMember(event) {
-  //   event.preventDefault();
-
-  //   const teamMemberEmail = document.getElementById('email_new_squad_member');
-  //   const token = document.querySelector('meta[name="csrf-token"]').content
-  //   const request = {
-  //     method: 'POST',
-  //     headers: {
-  //      'content-type': 'application/json',
-  //      'X-Requested-With': 'XMLHttpRequest',
-  //      'X-CSRF-Token': token
-  //     },
-  //     body: JSON.stringify({ email: teamMemberEmail.value }),
-  //     credentials: 'same-origin',
-  //   };
-
-  //   fetch('/squad/<%= @squad.id %>/squadmember', request)
-  //     .then((result) => {
-  //       console.log(result);
-  //     })
-  //     .catch(console.error);
-  // }
-</script>
 
 
