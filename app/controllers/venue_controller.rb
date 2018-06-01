@@ -1,6 +1,30 @@
 class VenueController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
 
+  def create
+    @venue = Venue.new(set_venue_params)
+    authorize @venue
+    # TODO if / else
+
+  end
+
+  def new
+    @venue = Venue.new
+    authorize @venue
+  end
+
+  def edit
+    @venue = Venue.find(params[:id])
+    authorize @venue
+  end
+
+  def update
+    @venue = Venue.find(params[:id])
+    @venue.save(set_venue_params)
+    authorize @venue
+      #todo if/else
+  end
+
   def index
     @Venues = policy_scope(Venue).all # ????? -> wtf is this for
     @squad = Squad.new(user: current_user)
@@ -18,9 +42,6 @@ class VenueController < ApplicationController
     end
 
     # raise
-
-
-
   end
 
   def show
@@ -32,4 +53,10 @@ class VenueController < ApplicationController
       lng: @venue.longitude
     }]
   end
+
+  private
+
+  def set_venue_params
+  end
+
 end

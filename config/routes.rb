@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   devise_for :users
   root to: 'venue#index'
 
-  resources :venue, { only: [:index, :show] }
+  resources :venue, { except: [:destroy] }
   resources :squad, { only: [:edit, :show, :update, :create] } do
     resource :squadmember, { only: [:create] }
   end

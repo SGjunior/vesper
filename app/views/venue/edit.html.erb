@@ -1,0 +1,104 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+
+      <h2>Edit venue!</h2>
+
+      <%= form_for @venue do |f|  %>
+
+        <div class="form-group">
+          <%= f.label :name %>
+          <%= f.text_field :description, { class: 'form-control' } %>
+        </div>
+
+
+        <div class="form-group">
+          <%= f.label :description %>
+          <%= f.text_field :description, { class: 'form-control' } %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :address %>
+          <%= f.text_field :address, { class: 'form-control' } %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :latitude %>
+          <%= f.number_field :latitude, { class: 'form-control' } %>
+          <%= f.label :longitude %>
+          <%= f.number_field :longitude, { class: 'form-control' } %>
+        </div>
+
+
+        <div class="form-group">
+          <%= f.label :music_genre %>
+          <%= f.text_field :music_genre, { class: 'form-control' } %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :instagram_handle %>
+          <%= f.text_field :instagram_handle, { class: 'form-control' } %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :pricing %>
+          <%= f.number_field :pricing , { class: 'form-control' } %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :capacity %>
+          <%= f.number_field :capacity , { class: 'form-control' } %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :rating %>
+          <%= f.number_field :rating, { class: 'form-control' } %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :review_count %>
+          <%= f.number_field :review_count, { class: 'form-control' } %>
+        </div>
+
+        <!-- adding the address autocomplete to this part of the project -->
+
+        <div class="form-group">
+          <label class="btn btn-primary">
+              Upload image
+              <span style="display:none;">
+                <%= f.file_field :photo%>
+              </span>
+          </label>
+          <span id="file_name_display">No File Chosen</span>
+        </div>
+
+        <%= f.submit 'Create Listing', { class: 'btn btn-success float-left', style: 'width: 150px' } %>
+
+
+      <% end %>
+
+    </div>
+  </div>
+</div>
+
+
+<script>
+
+// todo : put in a js file
+let elInputListingPhoto = document.getElementById('listing_photo');
+elInputListingPhoto.addEventListener('input', (event) => { uploadOnChange() });
+
+function uploadOnChange() {
+    var filename = elInputListingPhoto.value;
+    var lastIndex = filename.lastIndexOf("\\");
+    if (lastIndex >= 0) {
+        filename = filename.substring(lastIndex + 1);
+    }
+
+    if (filename == '') { filename = 'No File Chosen'; }
+
+    document.getElementById('file_name_display').innerHTML = filename;
+}
+
+
+</script>
