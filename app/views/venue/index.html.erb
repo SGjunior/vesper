@@ -1,102 +1,42 @@
-<style>
-  #container-lols {
-  margin: 20px;
-  width: 400px;
-  height: 400px;
-}
 
-#container-lols2 {
-  margin: 20px;
-  width: 400px;
-  height: 400px;
-}
-
-#container-lols2 svg path {
-  fill: none;
-  /*stroke: #000;*/
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  transition: 0.2s;
-}
-
-#container-lols2 svg:hover path {
-  d: path("M-215,3C-128,363 154,463 306,-29");
-  /*stroke: gold;*/
-}
-
-</style>
-<!-- adding banner to the top of the page -->
-<div class="banner-main" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%), url('https://loremflickr.com/1200/900/venue');">
-
-  <!-- <div class="banner-main" style="background-color: black;"> -->
+  <!-- <div class="app mdl-shadow--2dp"> -->
+    <div class="index-wrapper">
+      <div class="row">
+        <div class="col-xs-12  col-sm-10 col-sm-offset-1">
+          <div class="main-index" id="main">
+            <div class="venues">
+              <!-- Generate the cards in here -->
+                <% @Venues.each do |venue| %>
+                  <%= render 'venue/index_components/venue_card', venue: venue %>
+                <% end %>
+            </div>
+          </div>
 
 
-  <div id="container-lols">
-    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" viewBox='-350 -350 900 900'>
-      <path  fill-opacity="0" stroke-width="10" stroke="#bbb" d='M-315,3
-               C-128,-363 154,463 306,-29'/>
-      <path  fill-opacity="0" id="heart-path" stroke-width="20" stroke="#ED6A5A" d='M-415,3
-                 C-128,-363 154,463 306,-29'/>
-      <path  fill-opacity="0" id="heart-path2" stroke-width="20" stroke="#FFEA82" d='M-215,3
-               C-128,-363 154,463 306,-29'/>
-    </svg>
-  </div>
-
-  <div id="container-lols2">
-    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" viewBox='-350 -350 900 900'>
-      <path  fill-opacity="0" stroke-width="10" stroke="#bbb" d='M-315,3
-               C-128,-363 154,463 306,-29'/>
-      <path  fill-opacity="0" id="heart-path" stroke-width="20" stroke="#ED6A5A" d='M-415,3
-                 C-128,-363 154,463 306,-29'/>
-      <path  fill-opacity="0" id="heart-path2" stroke-width="20" stroke="#FFEA82" d='M-215,3
-               C-128,-363 154,463 306,-29'/>
-    </svg>
-  </div>
+          <!-- Generate the map in here -->
+          <div class="map" hidden>
+            <div id="map" data-markers="<%= @markers.to_json %>"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <!-- </div> -->
 
 
 
-  <div class="banner-content">
-    <h1>Vesper</h1>
-    <p>Wildest Party planner!</p>
-    <a id="browse-main-btn" class="btn btn-primary btn-lg" href="#index-filters">Find a Venue</a>
-  </div>
+
+<!-- STICKY DECK BAR -->
+<div class="venues-chosen stick-bottom">
+  <!-- generating chosen venues for now -->
+    <% # 3.times do %>
+        <% #render 'venue/index_components/venue_card', venue: @Venues.sample() %>
+    <% # end %>
+
+    <!-- FAB button with ripple -->
+   <button id="proceed-to-create-squad-btn" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" style="margin-left: 10px; margin-right: 20px;">
+    <i class="material-icons">arrow_right</i>
+  </button>
 </div>
-<!-- adding banner to the top of the page -->
-<div class="app mdl-shadow--2dp">
-  <div class="main-index" id="main">
-    <!-- STICKY FILTERS BAR -->
-    <%= render 'venue/index_components/search_filters' %>
-
-    <div class="venues">
-      <!-- Generate the cards in here -->
-        <% @Venues.each do |venue| %>
-          <%= render 'venue/index_components/venue_card', venue: venue %>
-        <% end %>
-    </div>
-
-
-    <!-- STICKY DECK BAR -->
-    <div class="venues-chosen stick-bottom">
-      <!-- generating chosen venues for now -->
-        <% 3.times do %>
-            <%= render 'venue/index_components/venue_card_chosen', venue: @Venues.sample() %>
-        <% end %>
-
-        <!-- FAB button with ripple -->
-       <button id="proceed-to-create-squad-btn" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" style="margin-left: 10px; margin-right: 20px;">
-        <i class="material-icons">arrow_right</i>
-      </button>
-    </div>
-  </div>
-
-
-
-    <!-- Generate the map in here -->
-    <div class="map">
-      <div id="map" data-markers="<%= @markers.to_json %>"></div>
-    </div>
-</div>
-
 
 
 
@@ -106,9 +46,9 @@
 
   proceedButton.addEventListener('click', (event) => {
 
-    const chosenVenues = document.querySelectorAll('.card-index-small');
+    const chosenVenues = document.querySelectorAll('.chosen-venue-card');
 
-    // console.log(chosenVenues);
+    console.log(chosenVenues);
 
     if (chosenVenues.length < 3 ) {
       alert(`You only have ${chosenVenues.length} venues selected`);
@@ -137,7 +77,7 @@
     let chosenVenuesArr = []
 
     chosenVenues.forEach((venue) => {
-      chosenVenuesArr.push(venue.getAttribute("chosen-venue-id"));
+      chosenVenuesArr.push(venue.getAttribute("data-venue-id"));
     });
 
     fetch('/squad', {
@@ -157,5 +97,48 @@
       })
       .catch(console.error);
   }
+
+
+// LOGIC TO ADD A SELECTED VENUE ----------------------------
+
+
+
+const venuesChosenContainer = document.querySelector('.venues-chosen')
+const venuesSelectBtns = document.querySelectorAll('.select-venue-btn');
+
+venuesSelectBtns.forEach((btn) => {
+  btn.addEventListener('click', (event) => {
+    const chosenVenues = document.querySelectorAll('.chosen-venue-card');
+
+    if (chosenVenues.length < 3 ) {
+
+      const venueId = event.currentTarget.attributes['data-venue-id'];
+      const selectedVenueEl = event.currentTarget.parentElement.parentElement
+      const selectedVenueInnerHTML = selectedVenueEl.innerHTML
+
+      // console.log(selectedVenueEl);
+
+      selectedVenueEl.remove();
+
+      venuesChosenContainer.prepend(selectedVenueEl)
+
+      // console.log(selectedVenueEl);
+      selectedVenueEl.classList.add('chosen-venue-card')
+
+    } else {
+      alert('you already have 3 cards in your deck!');
+    }
+  });
+});
+
+
+
+
+// LOGIC TO ADD A SELECTED VENUE ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+
+
+
 
 </script>

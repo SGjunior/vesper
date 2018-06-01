@@ -1,0 +1,92 @@
+
+
+<!-- Numeric Textfield with Floating Label -->
+<% unless @squad.squadmembers.find_by(user: current_user).will_be_present %>
+  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    <input id="contribution-input" class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="sample4">
+    <label class="mdl-textfield__label" for="sample4">Your contribution!</label>
+    <span class="mdl-textfield__error">Input is not a number!</span>
+  </div>
+
+<!-- FAB button -->
+<button id="submit-edit" class="mdl-button mdl-js-button mdl-button--fab">
+  <i class="material-icons">arrow_right</i>
+</button>
+
+<% end %>
+
+<script>
+
+document.getElementById('submit-edit').addEventListener('click', (event) => {
+  event.preventDefault();
+
+  submitMemberConfirmation();
+});
+
+const getContributionValue = () => {
+
+  const contributionEl = document.getElementById('contribution-input');
+  if (contributionEl.value != undefined) {
+    return contributionEl.value;
+  } else {
+    alert('please choose a contribution amount!');
+  }
+}
+
+const getChosenVenue = () => {
+
+  const chosenVenueEl = document.querySelector('.selected-venue');
+
+
+  if (chosenVenueEl) {
+    const chosenVenueId = chosenVenueEl.attributes['data-venue-id'].value;
+    return chosenVenueId
+  } else {
+    alert('please choose a venue');
+    return undefined
+  }
+}
+
+const submitMemberConfirmation = () => {
+    const chosenVenueId = getChosenVenue();
+    const contributionValue = getContributionValue();
+
+    if (contributionValue != undefined && chosenVenueId != undefined) {
+
+      sendAjaxPostMemberConfirmation(chosenVenueId, contributionValue);
+
+    }
+
+}
+
+const sendAjaxPostMemberConfirmation = (chosenVenueId, contributionValue) => {
+    const authToken = document.querySelector('meta[name="csrf-token"]').content
+    const url = '/squad/<%= @squad.id %>/member/confirm'
+
+    fetch(url, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest',
+        'X-CSRF-Token': authToken
+      },
+      body: JSON.stringify({
+                              squadchosenvenue_id: chosenVenueId,
+                              contribution: contributionValue,
+                              will_be_present: true
+                           }),
+      credentials: 'same-origin'
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        window.location.href = `/squad/${data['id']}/edit`
+        // console.log(data['id']);
+        console.log('hello');
+      })
+      .catch(console.error);
+
+}
+
+
+
+</script>

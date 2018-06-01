@@ -53,11 +53,17 @@ class SquadController < ApplicationController
   #AJAX REQUESTS
 
   def confirm_squad_member
-    @squad = Squad.find(params[:id])
-   squadmember = Squadmember.find_by('user_id current_user') # TODO : figure activerecord call to find squadmember id in the good squad and the good user_id
-   squadmember.squadchosenvenue_id = 0 (params[:venue_id])
-   squadmember.update(params_confirm_squad_member)
-   # routes to make accessible in view, remove status "selected", add "selected" for latest id
+   @squad = Squad.find(params[:id])
+
+   squadmember = @squad.squadmembers.find_by(user: current_user)
+   squadmember.squadchosenvenue_id = params[:squadchosenvenue_id].to_i
+   squadmember.contribution = params[:contribution].to_i
+   squadmember.will_be_present = params[:will_be_present]
+   squadmember.save!
+
+   authorize squadmember
+
+   render json: @squad
   end
 
   def show
@@ -99,10 +105,6 @@ class SquadController < ApplicationController
 
   def params_update_package
     params.require(:squad).permit(:package_id)
-  end
-
-  def params_confirm_squad_member
-    params.require(:squadmember).permit(:contribution, :squadchosenvenue_id)
   end
 
   def params_finalize_squad

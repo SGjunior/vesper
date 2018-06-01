@@ -5,6 +5,10 @@ class VenuePolicy < ApplicationPolicy
     end
   end
 
+  def welcome?
+    true
+  end
+
   def index?
     true
   end

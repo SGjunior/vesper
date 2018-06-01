@@ -25,4 +25,5 @@ class SquadPolicy < ApplicationPolicy
   def confirm_squad_order?
     record.user == user
   end
+
 end
