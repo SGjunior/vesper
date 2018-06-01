@@ -103,6 +103,38 @@ Venue.destroy_all
   end
 end
 
+
+User.create(
+    first_name: 'Jean',
+    last_name:  'Giroux',
+    email: "qwerty@gmail.com",
+    photo: 'https://avatars2.githubusercontent.com/u/5466297?s=460&v=4',
+    phone_number: "514-321-4321",
+    address: Faker::Address.full_address,
+    password: 'qwerty'
+  )
+
+User.create(
+    first_name: 'Jack',
+    last_name:  'Gaark',
+    email: "qwerty2@gmail.com",
+    photo: 'https://avatars2.githubusercontent.com/u/5466297?s=460&v=4',
+    phone_number: "514-321-4321",
+    address: Faker::Address.full_address,
+    password: 'qwerty'
+  )
+
+User.create(
+    first_name: 'Adam',
+    last_name:  'Epstein',
+    email: "qwerty3@gmail.com",
+    photo: 'https://avatars2.githubusercontent.com/u/5466297?s=460&v=4',
+    phone_number: "514-321-4321",
+    address: Faker::Address.full_address,
+    password: 'qwerty'
+  )
+
+
 10.times do
 
 first_name = Faker::Name.first_name

@@ -1,8 +1,11 @@
 <style>
   #container-lols {
   margin: 20px;
-  width: 400px;
-  height: 400px;
+  width: 50%;
+  height: 50%;
+  left: 0px !important;
+  float: left;
+  position: absolute;
 }
 
 #container-lols2 {
@@ -26,40 +29,48 @@
 
 </style>
 <!-- adding banner to the top of the page -->
-<div class="banner-main" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%), url('https://loremflickr.com/1200/900/venue');">
+<!-- <div id="banner-landing-main" class="banner-main" style="background-image: linear-gradient(-225deg, rgba(3,0,39, 0.6) 0%, rgba(3,0,39, 0.8) 50%), url('https://loremflickr.com/1200/900/venue');"> -->
+<div id="banner-landing-main" class="banner-main" style="background-image: linear-gradient(-225deg, rgba(3,0,39, 0.6) 0%, rgba(3,0,39, 0.8) 50%), url('https://images.unsplash.com/photo-1519111887837-a48ccf9edc00?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6e0f38f79ded4dee16fd71841a0f12e6&auto=format&fit=crop&w=1500&q=80');">
 
   <!-- <div class="banner-main" style="background-color: black;"> -->
-
-
-  <div id="container-lols">
-    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" viewBox='-350 -350 900 900'>
-      <path  fill-opacity="0" stroke-width="10" stroke="#bbb" d='M-315,3
-               C-128,-363 154,463 306,-29'/>
-      <path  fill-opacity="0" id="heart-path" stroke-width="20" stroke="#ED6A5A" d='M-415,3
-                 C-128,-363 154,463 306,-29'/>
-      <path  fill-opacity="0" id="heart-path2" stroke-width="20" stroke="#FFEA82" d='M-215,3
-               C-128,-363 154,463 306,-29'/>
-    </svg>
-  </div>
-
-  <div id="container-lols2">
-    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" viewBox='-350 -350 900 900'>
-      <path  fill-opacity="0" stroke-width="10" stroke="#bbb" d='M-315,3
-               C-128,-363 154,463 306,-29'/>
-      <path  fill-opacity="0" id="heart-path" stroke-width="20" stroke="#ED6A5A" d='M-415,3
-                 C-128,-363 154,463 306,-29'/>
-      <path  fill-opacity="0" id="heart-path2" stroke-width="20" stroke="#FFEA82" d='M-215,3
-               C-128,-363 154,463 306,-29'/>
-    </svg>
-  </div>
-
-
-
-  <div class="banner-content">
+  <div class="banner-content" style="z-index:10 !important">
     <h1>Vesper</h1>
     <p>Wildest Party planner!</p>
     <a id="browse-main-btn" class="btn btn-primary btn-lg" href="#index-filters">Find a Venue</a>
   </div>
+
+
+  <div id="container-lols" hidden style="z-index:1">
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" viewBox='-350 -350 900 900'>
+
+      <!-- purple -->
+      <path  fill-opacity="0" id="heart-path2" stroke-width="20" stroke="rgba(56, 0, 54, 0.7)" d='M-415,3
+               C-228,-263 154,463 606,-90'/>
+<!-- C458,-403 504,263 606,-145 -->
+      <!-- teal -->
+      <path  fill-opacity="0" id="hearth-path0" stroke-width="20" stroke="rgba(2, 195, 189, 0.7)" d='M-415,3
+               C-228,-163 154,463 606,-90'/>
+      <!-- pink -->
+      <path  fill-opacity="0" id="heart-path" stroke-width="20" stroke="rgba(250, 62, 148, 0.7)" d='M-415,3
+                 C-228,-363 154,463 606,-90'/>
+
+    </svg>
+  </div>
+
+<!--   <div id="container-lols2">
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" viewBox='-350 -350 900 900'>
+      <path  fill-opacity="0" stroke-width="10" stroke="#bbb" d='M-315,3
+               C-128,-363 154,463 306,-29'/>
+      <path  fill-opacity="0" id="heart-path" stroke-width="20" stroke="#ED6A5A" d='M-415,3
+                 C-128,-363 154,463 306,-29'/>
+      <path  fill-opacity="0" id="heart-path2" stroke-width="20" stroke="#FFEA82" d='M-215,3
+               C-128,-363 154,463 306,-29'/>
+    </svg>
+  </div> -->
+
+
+
+
 </div>
 <!-- adding banner to the top of the page -->
 <div class="app mdl-shadow--2dp">
@@ -92,7 +103,7 @@
 
 
     <!-- Generate the map in here -->
-    <div class="map">
+    <div class="map" hidden>
       <div id="map" data-markers="<%= @markers.to_json %>"></div>
     </div>
 </div>

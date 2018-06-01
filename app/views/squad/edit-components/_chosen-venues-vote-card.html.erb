@@ -1,10 +1,8 @@
 <% @squad.squadchosenvenues.each do |v| %>
 <% chosen_venue = Venue.find(v.venue_id) %>
 
-
-<%= link_to member_confirm_path(chosen_venue.id), remote: true, method: :post,  class: "venue-choice-card" do %>
   <div class="col-md-4">
-    <div class="squad-card-image mdl-card mdl-shadow--2dp" id="<%=chosen_venue.id%>">
+    <div class="squad-card-image mdl-card mdl-shadow--2dp" data-venue-id="<%= v.id %>">
       <div class="vote-counter-integer" id="vote-for-<%=chosen_venue.id%>"><p>0</p></div>
       <div class="mdl-card__title"><%= chosen_venue.name %></div>
       <div class="mdl-card__actions mdl-card--expand">
@@ -17,4 +15,32 @@
   </div>
 
 <% end %>
+
+
+<script>
+
+<% unless @squad.squadmembers.find_by(user: current_user).will_be_present %>
+const venues = document.querySelectorAll('.squad-card-image')
+
+venues.forEach((venue) => {
+
+  venue.addEventListener('click', (event) => {
+
+    handleVenueClick(event);
+
+
+  });
+});
+
+  const handleVenueClick = (event) => {
+
+    venues.forEach((venue) => {
+      venue.classList.remove('selected-venue');
+    });
+
+    event.currentTarget.classList.add('selected-venue');
+
+  };
+
 <% end %>
+</script>

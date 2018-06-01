@@ -1,0 +1,28 @@
+<% @squad.squadchosenvenues.each do |v| %>
+<% chosen_venue = Venue.find(v.venue_id) %>
+
+
+<%= link_to member_confirm_path(@squad.id,chosen_venue.id), remote: true, method: :post,  class: "venue-choice-card" do %>
+  <div class="col-md-4">
+    <div class="squad-card-image mdl-card mdl-shadow--2dp" id="<%=chosen_venue.id%>">
+      <div class="vote-counter-integer" id="vote-for-<%=chosen_venue.id%>"><p>0</p></div>
+      <div class="mdl-card__title"><%= chosen_venue.name %></div>
+      <div class="mdl-card__actions mdl-card--expand">
+        <ul>
+          <li><%= chosen_venue.address %></li>
+          <li><%= chosen_venue.music_genre %></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+<% end %>
+<% end %>
+
+
+<script>
+
+
+const venues = document.querySelectorAll('venue-choice-card')
+
+</script>

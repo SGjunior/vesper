@@ -7,11 +7,21 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
+
+  // background-color: #030027;
+  // background-blend-mode: overlay;
+
+  // -webkit-filter: sepia(100%) hue-rotate(90deg) saturate(400%);
+  // filter: yellow(100%) hue-rotate(90deg) saturate(400%);
 }
 .banner-main h1 {
-  font-size: 50px;
+  font-size: 60px;
   font-weight: bold;
+  letter-spacing: 30px !important;
+
   text-shadow: 0px 1px rgba(0, 0, 0, 0.2);
+  font-family: 'Megrim';
 }
 .banner-main p {
   font-size: 25px;
