@@ -142,13 +142,11 @@ venue_attributes = [
   {
     name: "Martin's Club",
     description: "Whatever",
-    music_genre: "",
-    address: "",
+    music_genre: "brazilian",
+    address: "123 not fake",
     # latitude: (45.5017 + rand() - rand()),
     # longitude: (rand() - 73.5673 - rand()),
-    address: "123 not fake",
     capacity: 100,
-    music_genre: "brazilian",
     pricing: 2,
     instagram_handle: 'https://www.instagram.com/beachclubmtl/'
   },
