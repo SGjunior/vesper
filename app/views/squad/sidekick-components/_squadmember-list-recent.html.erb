@@ -1,0 +1,21 @@
+<div class="squadmember-list-container mdl-shadow--2dp" data-recent-user-id="<%= user.id %>">
+  <img class="avatar-large" src="https://kitt.lewagon.com/placeholder/users/gabriel-dehan">
+  <!-- <div class="message-name"> -->
+    <!-- <h3>Gab Dehan</h3> -->
+    <!-- <p>10/07/17</p> -->
+  <!-- </div> -->
+  <div class="squadmember-recent-list-name">
+    <p><strong><%= "#{user.first_name} #{user.last_name}" %></strong></p>
+    <!--     <p>
+      I am not sure yet! I might be in Shanghai at this moment... Can I tell you later?
+    </p> -->
+  </div>
+  <div class="sidekick-recent-list-last-row">
+    <%= link_to create_squadmember_path(@squad.id,user.id), { method: :post, remote: true } do %>
+    <!-- Colored FAB button -->
+      <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+        <i class="material-icons">add</i>
+      </button>
+    <% end %>
+  </div>
+</div>

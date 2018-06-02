@@ -10,7 +10,7 @@ Package.destroy_all #done
 Squadmember.destroy_all
 Squadchosenvenue.destroy_all
 Squad.destroy_all
-
+Venue.destroy_all
 User.destroy_all #done
 
 

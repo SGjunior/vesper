@@ -92,7 +92,8 @@
     })
       .then((response) => response.json())
       .then((data) => {
-        window.location.href = `/squad/${data['id']}/edit`
+        // window.location.href = `/squad/${data['id']}/edit`
+        window.location.href = `/squad/${data['id']}/sidekicks`
         // console.log(data['id']);
       })
       .catch(console.error);

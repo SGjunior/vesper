@@ -1,8 +1,24 @@
 // const squadRow = document.querySelector('.squad-cards');
 // squadRow.insertAdjacentHTML('beforeend',"<%= j render 'squad/edit-components/new-squad-member-card' %>");
 
-window.location.href = '/squad/<%= @squad.id %>/edit';
+// window.location.href = '/squad/<%= @squad.id %>/sidekicks';
 // console.log('test');
 
 
+// data-recent-user-id
+const recentSquadmemberEl = document.querySelector('[data-recent-user-id="<%= @squadmember.user.id %>"')
+
+if (recentSquadmemberEl) {
+  $('[data-recent-user-id="<%= @squadmember.user.id %>"]').fadeOut(300, function() { $(this).remove(); });
+}
+
+const squadContainer = document.querySelector('.squad-container');
+
+
+if (squadContainer) {
+  squadContainer.insertAdjacentHTML('beforeend',"<%= j render 'squad/edit-components/new-squad-member-card' %>");
+
+
+  $('[data-handle-squadmember="<%= @squadmember.user.id %>"]').delay(300).fadeIn(1000);
+}
 
