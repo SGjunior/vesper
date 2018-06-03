@@ -12,10 +12,10 @@
   background: 0;
 }
 
-/* Logo */
+/* Circular Logos */
 .navbar-wagon-brand {
-  height: 50px;
-  width: 50px;
+  height: 45px;
+  width: 45px;
   border-radius: 50%;
   border: 2px solid $mint;
   color: $mint;
@@ -24,13 +24,6 @@
   line-height: 32px;
   font-family: 'Megrim';
   padding: 8px;
-}
-
-/* User Avatar */
-.navbar-wagon .avatar {
-  height: 35px;
-  width: 35px;
-  border-radius: 50%;
 }
 
 /* Right section */
@@ -44,6 +37,7 @@
 .navbar-wagon-item {
   cursor: pointer;
   padding: 0 20px;
+  color: $mint;
 }
 
 /* Navbar link */
@@ -57,15 +51,20 @@
 }
 
 /* Dropdown menu */
+.dropdown i {
+  font-size: 24px;
+}
+
 .navbar-wagon-dropdown-menu {
   margin-top: 15px;
   box-shadow: 1px 1px 4px #E6E6E6;
-  border-color: #E6E6E6;
+  border-color: $mint;
+  background: 0;
 }
 .navbar-wagon-dropdown-menu li > a {
   transition: color 0.3s ease;
   font-weight: lighter !important;
-  color: #999999 !important;
+  color: $mint !important;
   font-size: 15px !important;
   line-height: 22px !important;
   padding: 10px 20px;
