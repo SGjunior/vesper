@@ -8,11 +8,22 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  z-index: 99;
+  background: 0;
 }
 
 /* Logo */
-.navbar-wagon-brand img {
+.navbar-wagon-brand {
   height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  border: 2px solid $mint;
+  color: $mint;
+  text-align: center;
+  font-size: 32px ;
+  line-height: 32px;
+  font-family: 'Megrim';
+  padding: 8px;
 }
 
 /* User Avatar */
@@ -74,4 +85,14 @@
   transform: rotate(45deg);
   border-left: 1px solid #E6E6E6;
   border-top: 1px solid #E6E6E6;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%
+}
+
+.sticky + .content {
+  padding-top: 60px;
 }
