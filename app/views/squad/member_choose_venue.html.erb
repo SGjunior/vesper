@@ -1,22 +1,22 @@
 <div class="index-wrapper">
 <!-- DEBUG INFO -->
-<p style="color: white; margin-top: 50px;">Current user : <%= current_user.id %></p>
-<ul>
-  <% @squad.squadmembers.each do |member| %>
-    <li style="color: white">user : <%= member.user.id %> | member : <%= member.id %> | venue : <%= member.squadchosenvenue_id %></li>
-  <% end %>
-</ul>
+<div hidden>
+  <p style="color: white; margin-top: 50px;">Current user : <%= current_user.id %></p>
+  <ul>
+    <% @squad.squadmembers.each do |member| %>
+      <li style="color: white">user : <%= member.user.id %> | member : <%= member.id %> | venue : <%= member.squadchosenvenue_id %></li>
+    <% end %>
+  </ul>
 
-<ul>
-  <% @squad.squadchosenvenues.each do |cvenue| %>
-    <li style="color: white"> cvenue.id = <%= cvenue.id %> | <%= cvenue.venue.name %></li>
-  <% end %>
-</ul>
-<!-- DEBUG INFO -->
-
-<h2 style="color: white; margin-left: 20px;">Pick your venue :</h2>
-  <div class="col-xs-12 col-sm-10 col-sm-offset-1">
-    <div class="chosen-float-overlay edit-venues">
+  <ul>
+    <% @squad.squadchosenvenues.each do |cvenue| %>
+      <li style="color: white"> cvenue.id = <%= cvenue.id %> | <%= cvenue.venue.name %></li>
+    <% end %>
+  </ul>
+  <!-- DEBUG INFO -->
+</div>
+  <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+    <div class="chosen-float-overlay edit-venues" style="margin-top: 5vh;">
       <%= render 'squad/edit-components/chosen-venues-vote-card' %>
     </div>
   </div>
