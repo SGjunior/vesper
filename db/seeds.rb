@@ -53,11 +53,10 @@ array_of_businesess.each do |business|
     description: business["categories"].map { |c| c["title"] }.join(" - "),
     music_genre: 'lorem_ipsum',
     rating: business["rating"],
-    photo: business["image_url"],
+    remote_photo_url: business["image_url"],
     review_count: business["review_count"],
     pricing: convert_yelp_pricing_to_integer(business["price"])
-
-    )
+  )
   venue.save!
 
 
@@ -181,10 +180,6 @@ venue_attributes = [
     capacity: 100,
     pricing: 2,
     instagram_handle: 'https://www.instagram.com/beachclubmtl/'
-  },
-  {
-    name: "This",
-    description: "That"
   }
 ]
 

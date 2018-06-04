@@ -20,9 +20,10 @@
     <hr>
 
     <h3>Squad Chosen Package : </h3>
-    <% if @squad.package_id == 0 %>
+    <% if @squad.package_id.nil? %>
         <p id="chosen-package">Not chosen yet</p>
     <% else %>
+    <%= raise %>
         <p id="chosen-package"><%= Package.find(@squad.package_id).name %></p>
     <% end %>
 
