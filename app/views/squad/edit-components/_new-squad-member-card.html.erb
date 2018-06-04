@@ -1,10 +1,6 @@
 <% s = @squad.squadmembers.last%>
 <% s_member = User.find(s.user_id) %>
 
-<div class="container">'
-  <div class="row">
-
-
     <div class="col-md-3 col-sm-6">
       <div class="squad-member" data-handle-squadmember="<%= s_member.id %>" style="display: none;">
 
@@ -29,7 +25,3 @@
 
       </div>
     </div>
-
-
-  </div>
-</div>
