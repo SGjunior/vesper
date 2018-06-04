@@ -2,13 +2,18 @@
   <!-- <div class="app mdl-shadow--2dp"> -->
     <div class="index-wrapper">
       <div class="row">
-        <div class="col-xs-12  col-sm-10 col-sm-offset-1">
-          <div class="main-index" id="main">
-            <div class="venues">
-              <!-- Generate the cards in here -->
-                <% @Venues.each do |venue| %>
-                  <%= render 'venue/index_components/venue_card', venue: venue %>
-                <% end %>
+        <div class="col-xs-12  col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+          <div class="container">
+            <div class="row">
+              <div class="main-index" id="main">
+                <div class="venues">
+
+                  <!-- Generate the cards in here -->
+                    <% @Venues.each do |venue| %>
+                      <%= render 'venue/index_components/venue_card', venue: venue %>
+                    <% end %>
+                </div>
+              </div>
             </div>
           </div>
 

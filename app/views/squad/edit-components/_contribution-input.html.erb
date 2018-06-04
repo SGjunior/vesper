@@ -20,7 +20,7 @@
           </div>
 
           <!-- FAB button -->
-          <button id="submit-edit" class="mdl-button mdl-js-button mdl-button--fab" style="float: right">
+          <button id="member-confirm-contribution-btn" class="mdl-button mdl-js-button mdl-button--fab" style="float: right">
             <i class="material-icons">arrow_right</i>
           </button>
         </div>
@@ -29,25 +29,13 @@
     <% end %>
 
 
-
-<div id="slider"></div>
-
-<script>
-$( "#slider" ).slider();
-</script>
-
-
-
-
-
-
 <script>
 
-if (document.getElementById('submit-edit')) {
+if (document.getElementById('member-confirm-contribution-btn')) {
 
-  document.getElementById('submit-edit').addEventListener('click', (event) => {
+  document.getElementById('member-confirm-contribution-btn').addEventListener('click', (event) => {
     event.preventDefault();
-    submitMemberConfirmation();
+    submitMemberContributionChoice();
   });
 }
 const getContributionValue = () => {
@@ -60,35 +48,20 @@ const getContributionValue = () => {
   }
 }
 
-const getChosenVenue = () => {
-
-  const chosenVenueEl = document.querySelector('.selected-venue');
-
-
-  if (chosenVenueEl) {
-    const chosenVenueId = chosenVenueEl.attributes['data-venue-id'].value;
-    return chosenVenueId
-  } else {
-    alert('please choose a venue');
-    return undefined
-  }
-}
-
-const submitMemberConfirmation = () => {
-    const chosenVenueId = getChosenVenue();
+const submitMemberContributionChoice = () => {
     const contributionValue = getContributionValue();
 
-    if (contributionValue != undefined && chosenVenueId != undefined) {
+    if (contributionValue != undefined) {
 
-      sendAjaxPostMemberConfirmation(chosenVenueId, contributionValue);
+      sendAjaxPostMemberContributionChoice(contributionValue);
 
     }
 
 }
 
-const sendAjaxPostMemberConfirmation = (chosenVenueId, contributionValue) => {
+const sendAjaxPostMemberContributionChoice = (chosenVenueId, contributionValue) => {
     const authToken = document.querySelector('meta[name="csrf-token"]').content
-    const url = '/squad/<%= @squad.id %>/member/confirm'
+    const url = '/squad/<%= @squad.id %>/<%= @squad.squadmembers.find_by(user: current_user).id %>/choosecontribution'
 
     fetch(url, {
       method: "POST",
@@ -98,9 +71,7 @@ const sendAjaxPostMemberConfirmation = (chosenVenueId, contributionValue) => {
         'X-CSRF-Token': authToken
       },
       body: JSON.stringify({
-                              squadchosenvenue_id: chosenVenueId,
-                              contribution: contributionValue,
-                              will_be_present: true
+                              contribution: contributionValue
                            }),
       credentials: 'same-origin'
     })

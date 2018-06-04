@@ -1,23 +1,27 @@
 <% s = @squad.squadmembers.last%>
-  <% s_member = User.find(s.user_id) %>
+<% s_member = User.find(s.user_id) %>
 
-<div class="blog-card spring-fever mdl-shadow--2dp" data-handle-squadmember="<%= s_member.id %>" style="display: none;">
-  <div class="title-content">
-    <h3><%= s_member.first_name %></h3>
-    <% if @squad.user == s.user %>
-      <div class="intro">LEADER</div>
-    <% else %>
-      <div class="intro">SideKick</div>
-    <% end %>
-  </div>
+    <div class="col-xs-12 col-sm-6">
+      <div class="squad-member" data-handle-squadmember="<%= s_member.id %>" style="display: none;">
 
-  <div class="color-overlay"></div>
-  <div class="card-info">
-  <div class="intro" style="margin-top: 30px !important; margin-bottom: 30px !important;">International man of mysteries</div>
-  <div class="intro" style="margin-top: 30px !important; margin-bottom: 30px !important;">Contribution : <%= s.contribution %></div>
-    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
-      Info
-    </button>
+        <div class="member-avatar">
+          <img src="https://kitt.lewagon.com/placeholder/users/gabriel-dehan">
+        </div>
 
-  </div>
-</div>
+        <div class="squad-member-info">
+          <h3 class="title"><%= s_member.first_name %></h3>
+          <% if @squad.user == s.user %>
+            <span class="squad-rank">LEADER</span>
+          <% else %>
+            <span class="squad-rank">SideKick</span>
+          <% end %>
+        </div>
+
+        <ul class="social-links">
+          <li><a href="#" class="fas fa-comment-alt"></a></li>
+          <li><a href="#" class="fab fa-facebook-messenger"></a></li>
+
+        </ul>
+
+      </div>
+    </div>
