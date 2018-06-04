@@ -39,7 +39,8 @@
       </div>
 
       <div class="checkout-button-container">
-        <%= link_to edit_squad_path(@squad.id), { id: 'checkout-sidekicks-btn'} do %>
+        <!-- don't know what should go as second argument to path helper method below -->
+        <%= link_to member_choose_contribution_path(@squad.id, 1), { id: 'checkout-sidekicks-btn'} do %>
           <div class="svg-wrapper">
             <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
               <rect id="shape" height="40" width="150" />
