@@ -40,4 +40,19 @@ if (document.querySelector('.banner-main')) {
 
     // }, 2000);
   }
+
+  if (document.querySelector('.banner-main')) {
+
+    var slider = document.getElementById("myRange");
+    var output = document.getElementById("contribution-input");
+    output.innerHTML = slider.value; // Display the default slider value
+
+    // Update the current slider value (each time you drag the slider handle)
+    slider.oninput = function() {
+      output.innerHTML = this.value;
+    }
+
+
+
+  }
 });
