@@ -24,11 +24,15 @@ class SquadController < ApplicationController
 
     Squadmember.new(user: current_user, squad: @squad, squadchosenvenue_id: @squad.squadchosenvenues.first.id).save!
 
-
-
     render json: @squad
-
     # redirect_to edit_squad(@squad)
+  end
+
+  def add_sidekick
+    @squad = Squad.find(params[:id])
+    @squadmember = Squadmember.new
+
+    authorize @squad
   end
 
   #AJAX REQUESTS
@@ -38,17 +42,24 @@ class SquadController < ApplicationController
   end
 
   #AJAX REQUESTS
+
+  #AJAX REQUESTS
   def update
     # AJAX REQUESTS
     # look for email in users
     #if exists
-    user = User.find_by("email = '#{params[:email]}'")
+    if params[:adding_user_id].nil?
+      user = User.find_by("email = '#{params[:email]}'")
+    else
+      user = User.find(params[:adding_user_id])
+    end
+
     @squad = Squad.find(params[:id]) #TODO : something along those lines
     authorize @squad
     @squadmember = Squadmember.new(user: user, squad: @squad, squadchosenvenue: @squad.squadchosenvenues.first, contribution: 0) #TODO : something along those lines
     @squadmember.save!
     respond_to do |format|
-    format.js
+      format.js
     end
   end
   #AJAX REQUESTS

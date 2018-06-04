@@ -1,15 +1,17 @@
-<!-- add squad member -->
-<!-- <div class="squad-card-image mdl-card mdl-shadow--2dp"> -->
-  <!-- <div class="mdl-card__title"></div> -->
-  <!-- <div class="mdl-card__actions mdl-card--expand"> -->
-    <%= form_tag("/squad/#{@squad.id}", method: :put, remote: true) do %>
-    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-      <%= text_field_tag(:email, '', class: 'mdl-textfield__input' ) %>
-    <label class="mdl-textfield__label" for="sample3">Invite your friends with email!</label>
-  </div>
 
-      <%= submit_tag("+", class: "mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored", id: "squad-add-btn") do %>
-      <% end %>
+  <h3 style="text-align: center;">Recent SideKicks</h3>
+  <% current_user.squads.second_to_last.squadmembers.each do |squadmember| %>
+    <% unless @squad.squadmembers.find_by(user: squadmember.user) %>
+      <%= render 'squad/sidekick-components/squadmember-list-recent', user: squadmember.user, squad: @squad %>
     <% end %>
-  <!-- </div> -->
-<!-- Textfield with Floating Label -->
+  <% end %>
+
+
+
+
+
+
+
+
+
+
