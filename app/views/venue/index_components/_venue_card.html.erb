@@ -17,14 +17,14 @@
   <div class="card-info">
   <!-- Raised button with ripple -->
   <%= link_to venue_path(venue.id) do %>
-    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
-      Info
+    <button class="awesome-button">
+      <i class="fas fa-info-circle"></i>
     </button>
   <% end %>
 
   <!-- Raised button with ripple -->
-    <button class="select-venue-btn mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" data-venue-id="<%= venue.id %>">
-      Select
+    <button class="select-button" data-venue-id="<%= venue.id %>">
+      <i class="far fa-hand-point-up"></i>
     </button>
   </div><!-- /.card-info -->
 </div><!-- /.blog-card -->
