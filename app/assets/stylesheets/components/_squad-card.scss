@@ -1,19 +1,133 @@
-.squad-card-image.mdl-card {
-  width: 256px;
-  height: 256px;
-  /* background: url('/images/logo.png') center / cover; */
-  flex: 0 0 250px;
-
+.squad-member {
+  padding: 30px 0 40px;
+  background-image: -webkit-linear-gradient(top left, #051937, #11173a, #1f123c, #2c0b3a, #380036);
+  background-image: -o-linear-gradient(top left, #051937, #11173a, #1f123c, #2c0b3a, #380036);
+  background-image: linear-gradient(to bottom right, #051937, #11173a, #1f123c, #2c0b3a, #380036);  text-align: center;
+  overflow: hidden;
+  position: relative;
+  border-radius: 20px;
+  margin: 10px;
+  min-height: 355px;
 }
 
-.squad-card-image > .mdl-card__actions {
-  height: 52px;
-  padding: 16px;
-  background: rgba(0, 0, 0, 0.2);
+.squad-member .member-avatar {
+  display: inline-block;
+  width: 130px;
+  height: 130px;
+  margin-bottom: 50px;
+  position: relative;
+  z-index: 1;
 }
 
-.squad-card-image__filename {
-  color: #fff;
-  font-size: 14px;
+.squad-member .member-avatar:before {
+  content: "";
+  width: 100%;
+  background: $mint;
+  position: absolute;
+  bottom: 135%;
+  right: 0;
+  left: 0;
+  transform: scale(3);
+  transition: all 0.3s linear 0s ;
+}
+
+.squad-member:hover .member-avatar:before {
+  height: 100%;
+}
+
+.squad-member .member-avatar:after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: $mint;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.squad-member .member-avatar img {
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+  transform: scale(1);
+  transition: all 0.9s ease 0s;
+}
+
+.squad-member:hover .member-avatar img {
+  box-shadow: 0 0 0 14px white;
+  transform: scale(0.7 );
+}
+
+.squad-member .squad-member-info {
+  margin-bottom: 30px;
+}
+
+.squad-member .title {
+  font-size: 26px;
   font-weight: 500;
+  color: white;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  margin-bottom: 5px;
 }
+
+.squad-member .squad-rank {
+  display: block;
+  font-size: 16px;
+  color: $pink;
+  text-transform: capitalize;
+}
+
+.squad-member .social-links {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  background: $mint;
+  position: absolute;
+  bottom: -100px;
+  left: 0;
+  transition: all 0.5s ease 0s;
+}
+
+.squad-member:hover .social-links {
+  bottom: 0;
+}
+
+.squad-member .social-links li {
+  display: inline-block;
+}
+
+.squad-member .social-links li a {
+  display: block;
+  padding: 10px;
+  font-size: 18px;
+  color: white;
+  transition: all 0.5s ease 0s;
+
+}
+
+.squad-member .social-links li a:hover {
+  text-decoration: none;
+  background: white;
+  color: $mint;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
