@@ -11,11 +11,11 @@
     </p> -->
   </div>
   <div class="sidekick-recent-list-last-row">
-    <%= link_to create_squadmember_path(@squad.id,user.id), { method: :post, remote: true } do %>
+    <%= link_to create_squadmember_path(@squad.id,user.id), { method: :post, remote: true, class: 'mdl-button mdl-js-button mdl-button--fab' } do %>
     <!-- Colored FAB button -->
-      <button class="mdl-button">
+      <!-- <button class="mdl-button"> -->
         <i class="material-icons" id="add-button">add</i>
-      </button>
+      <!-- </button> -->
     <% end %>
   </div>
 </div>
