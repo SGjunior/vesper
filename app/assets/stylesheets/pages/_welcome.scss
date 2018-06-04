@@ -1,0 +1,81 @@
+.welcome-button {
+    line-height: 50px;
+    height: 100%;
+    text-align: center;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 125px;
+    width: 60%;
+    cursor: pointer;
+    padding: 15px;
+}
+
+.button1{
+  color: rgba(255,255,255,0);
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
+  position: relative;
+}
+.button1 a{
+  color: white;
+  text-decoration: none;
+  display: block;
+}
+.button1 span{
+  z-index: 2;
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.button1::before{
+  content: 'Find a venue!';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
+  border: 1px solid rgba(255,255,255,0.5);
+  background-color: rgba(190,44,121,1);
+  color: white;
+  font-weight: 500;
+}
+.button1::after{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
+  border: 1px solid rgba(255,255,255,0.5);
+  background-color: rgba(255,255,255,0.25);
+
+}
+.button1:hover::before{
+    -webkit-transform: rotate(-45deg);
+       -moz-transform: rotate(-45deg);
+        -ms-transform: rotate(-45deg);
+         -o-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+      background-color: rgba(255,255,255,0);
+}
+.button1:hover::after{
+    -webkit-transform: rotate(45deg);
+       -moz-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+         -o-transform: rotate(45deg);
+            transform: rotate(45deg);
+      background-color: rgba(255,255,255,0);
+}
