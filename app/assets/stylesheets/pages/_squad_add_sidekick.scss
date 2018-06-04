@@ -71,6 +71,31 @@
 .fancy-h3 {
   font-size: 42px;
   font-family: 'Megrim' !important;
+  color: white;
+}
+
+.fancy-h3:hover {
+  color: white;
+}
+.fancy-h3:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #000;
+  visibility: hidden;
+  -webkit-transform: scaleX(0);
+  transform: scaleX(0);
+  -webkit-transition: all 0.3s ease-in-out 0s;
+  transition: all 0.3s ease-in-out 0s;
+}
+
+.fancy-h3:hover:before {
+  visibility: visible;
+  -webkit-transform: scaleX(1);
+  transform: scaleX(1);
 }
 
 #add-button {
@@ -78,3 +103,4 @@
   border-radius: 50%;
   padding: 5px;
 }
+

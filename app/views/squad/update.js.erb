@@ -12,7 +12,7 @@ if (recentSquadmemberEl) {
   $('[data-recent-user-id="<%= @squadmember.user.id %>"]').fadeOut(300, function() { $(this).remove(); });
 }
 
-const squadContainer = document.querySelector('.squad-container');
+const squadContainer = document.getElementById('squad-row');
 
 
 if (squadContainer) {
