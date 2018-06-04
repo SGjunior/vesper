@@ -1,0 +1,193 @@
+<div class="index-wrapper">
+<!-- DEBUG INFO -->
+<div hidden>
+  <p style="color: white; margin-top: 50px;">Current user : <%= current_user.id %></p>
+  <ul>
+    <% @squad.squadmembers.each do |member| %>
+      <li style="color: white">user : <%= member.user.id %> | member : <%= member.id %> | venue : <%= member.squadchosenvenue_id %></li>
+    <% end %>
+  </ul>
+
+  <ul>
+    <% @squad.squadchosenvenues.each do |cvenue| %>
+      <li style="color: white"> cvenue.id = <%= cvenue.id %> | <%= cvenue.venue.name %></li>
+    <% end %>
+  </ul>
+  <!-- DEBUG INFO -->
+</div>
+  <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+    <div class="chosen-float-overlay edit-venues" style="margin-top: 5vh;">
+      <%= render 'squad/edit-components/chosen-venues-vote-card' %>
+    </div>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-xs-12">
+    <div style="margin: 50px auto !important; width: 500px; text-align: center;">
+        <h4 id="status-display" style="display: none;"></h4>
+      <!-- Raised button -->
+      <button id="member-confirm-venue-btn" class="mdl-button mdl-js-button mdl-button--raised">
+        Proceed
+      </button>
+
+      <button id="member-locked-venue-btn" class="mdl-button mdl-js-button mdl-button--raised" style="display: none;">
+        Locked
+      </button>
+      <%= link_to member_choose_contribution_path(@squad.id, @squad.squadmembers.find_by(user: current_user).id) do %>
+      <button id="member-proceed-venue-btn" class="mdl-button mdl-js-button mdl-button--raised" style="display: none;">
+        Proceed2
+      </button>
+      <% end %>
+    </div>
+  </div>
+</div>
+<!-- FAB button -->
+
+<script>
+
+if (document.getElementById('member-confirm-venue-btn')) {
+
+  document.getElementById('member-confirm-venue-btn').addEventListener('click', (event) => {
+    event.preventDefault();
+    submitMemberVenueChoice();
+  });
+}
+const getChosenVenue = () => {
+
+  const chosenVenueEl = document.querySelector('.selected-venue');
+
+
+  if (chosenVenueEl) {
+    const chosenVenueId = chosenVenueEl.attributes['data-venue-id'].value;
+    return chosenVenueId
+  } else {
+    alert('please choose a venue');
+    return undefined
+  }
+}
+
+const submitMemberVenueChoice = () => {
+    const chosenVenueId = getChosenVenue();
+
+    if (chosenVenueId != undefined) {
+
+      sendAjaxPostMemberVenueChoice(chosenVenueId);
+
+    }
+}
+
+const sendAjaxPostMemberVenueChoice = (chosenVenueId) => {
+    const authToken = document.querySelector('meta[name="csrf-token"]').content
+    const url = '/squad/<%= @squad.id %>/<%= @squad.squadmembers.find_by(user: current_user.id).id %>/choosevenue'
+
+    fetch(url, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest',
+        'X-CSRF-Token': authToken
+      },
+      body: JSON.stringify({
+                              squadchosenvenue_id: chosenVenueId
+                           }),
+      credentials: 'same-origin'
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        terminateSelectionState();
+        // setTimeout((event) => { displayStatus() }, 1000);
+        waitingForSquad();
+        // displayStatus();
+
+      })
+      .catch(console.error);
+}
+
+// WIP
+const fetchVenueStatus = () => {
+    const authToken = document.querySelector('meta[name="csrf-token"]').content
+    const url = '/squad/<%= @squad.id %>/choosevenue'
+
+    fetch(url, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest',
+        'X-CSRF-Token': authToken
+      },
+      body: JSON.stringify({
+                              status: 'fetching',
+                           }),
+      credentials: 'same-origin'
+    })
+      .then((response) => response.json())
+      .then((data) => { displayStatus(data);
+        // return (data);
+        // window.location.href = `/squad/${data['id']}/edit`
+        // console.log(data['id']);
+        // console.log(data);
+
+      })
+      .catch(console.error);
+}
+
+const terminateSelectionState = () => {
+  const btn = document.getElementById('member-confirm-venue-btn');
+  $('#member-confirm-venue-btn').fadeOut();
+  // $('member-locked-venue-btn').fadeIn();
+
+  console.log('|||||||||||||');
+  // remove all select buttons
+  // remove all the classes of selected venue
+  // remove the proceed btn
+}
+
+const displayStatus = (data) => {
+  // show locked btn | unlock
+  // display people that have yet to rsvp / how many are we still missing
+
+  // let data = fetchVenueStatus();
+
+
+  // $('#member-proceed-venue-btn').fadeIn();
+  $('#status-display').fadeIn();
+
+  console.log('--------');
+  console.log(data);
+  console.log(data.squad.id);
+  const statusDisplayEl = document.getElementById('status-display')
+
+  if (data.status.ready) {
+      $('#member-locked-venue-btn').fadeOut();
+      $('#member-proceed-venue-btn').delay(500).fadeIn();
+      statusDisplayEl.innerHTML = `We have enough votes! Lets get going!`;
+  } else {
+    $('#member-proceed-venue-btn').fadeOut();
+    $('#member-locked-venue-btn').delay(500).fadeIn();
+    statusDisplayEl.innerHTML = `Missing votes : ${data.status.missing_cnt}; waiting for : ${data.status.waiting_for}`
+  }
+}
+
+document.addEventListener("DOMContentLoaded", function(event) {
+  if (<%= @squad.squadmembers.find_by(user: current_user).squadchosenvenue_id.nil?%>) {
+    console.log('has not yet chosen a venue');
+  } else {
+    console.log('has chosen a venue, waiting on his friends');
+    terminateSelectionState();
+    setTimeout((event) => { waitingForSquad(); }, 500);
+
+  }
+});
+
+const waitingForSquad = () => {
+  setInterval(function(){
+    console.log('initializing fetch');
+    fetchVenueStatus();
+    console.log('done updating');
+
+  }, 1000);
+}
+
+</script>
