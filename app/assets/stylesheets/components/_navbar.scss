@@ -23,6 +23,35 @@
   line-height: 32px;
   font-family: 'Megrim';
   padding: 8px;
+  margin: 0 5px;
+
+  transition: all 0.5s ease;
+
+  &.small {
+    height: 10px;
+    width: 10px;
+  }
+
+  &.medium {
+    height: 30px;
+    width: 30px;
+    font-size: 13px;
+    line-height: 13px;
+  }
+
+  &.done {
+    background-color: $mint;
+    color: $black;
+  }
+
+  &.current {
+    background-color: $purple;
+    opacity: 1.0 !important;
+  }
+
+  &.progress-nav {
+    opacity: 0.5;
+  }
 }
 
 /* Right section */
@@ -30,6 +59,16 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.display-task-message {
+  color: $mint;
+  font-size: 20px;
+  float: right;
+  right: 0px;
+  // position: absolute;
+  margin-right:0px !important;
+
 }
 
 /* Basic navbar item */
@@ -56,6 +95,7 @@
 
 .navbar-wagon-dropdown-menu {
   margin-top: 15px;
+  left: -45px;
   box-shadow: 1px 1px 4px #E6E6E6;
   border-color: $mint;
   background: 0;
