@@ -21,20 +21,15 @@
 
 .contribution-wrapper {
   min-height: 30vh;
-  background-color: #380036;
+  background-color: $black;
 }
 
 .contribution-head {
-  text-align: center;
-  margin-top: 50px;
-  h2 {
-    font-size: 20em;
-    color: white;
-  }
-  h5 {
-    font-size: 8em;
-    color: #fa3e94;
-  }
+  // text-align: center;
+  // margin-top: 50px;
+  padding-top: 55px;
+  padding-bottom: 20px;
+
 }
 
 .contribution-inputs {
@@ -42,7 +37,5 @@
   margin: 20px auto;
 
 }
-
-
 
 
