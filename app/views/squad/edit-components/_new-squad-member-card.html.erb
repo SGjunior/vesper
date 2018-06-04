@@ -1,7 +1,7 @@
 <% s = @squad.squadmembers.last%>
   <% s_member = User.find(s.user_id) %>
 
-<div class="blog-card spring-fever mdl-shadow--2dp">
+<div class="blog-card spring-fever mdl-shadow--2dp" data-handle-squadmember="<%= s_member.id %>" style="display: none;">
   <div class="title-content">
     <h3><%= s_member.first_name %></h3>
     <% if @squad.user == s.user %>

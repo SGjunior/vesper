@@ -18,6 +18,11 @@ class SquadPolicy < ApplicationPolicy
     true
   end
 
+  def add_sidekick?
+    record.user == user
+
+  end
+
   def update_package?
     record.user == user
   end

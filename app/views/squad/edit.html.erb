@@ -18,7 +18,6 @@
 <div class="squad-wrapper">
   <div class="row">
   <div class="col-xs-12 col-sm-10 col-sm-offset-1">
-    <%= render 'squad/edit-components/build-squad-form' %>
     <div class="squad-container">
 
       <%= render 'squad/edit-components/squad-member-card' %>
@@ -26,3 +25,11 @@
     </div>
   </div>
 </div>
+
+
+
+<%= link_to squad_path(@squad.id) do %>
+   <button id="proceed-to-create-squad-btn" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" style="margin-left: 10px; margin-right: 20px;">
+    <i class="material-icons">arrow_right</i>
+  </button>
+<% end %>
