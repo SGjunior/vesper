@@ -64,4 +64,17 @@
 .squad-container {
   margin: 15px;
   justify-content: space-between;
+  max-height: 100%;
+  overflow: auto;
+}
+
+.fancy-h3 {
+  font-size: 42px;
+  font-family: 'Megrim' !important;
+}
+
+#add-button {
+  background: $mint;
+  border-radius: 50%;
+  padding: 5px;
 }

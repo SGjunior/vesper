@@ -66,17 +66,17 @@
 }
 
 .squad-member .title {
-  font-size: 22px;
-  font-weight: 700;
+  font-size: 26px;
+  font-weight: 500;
   color: white;
-  letter-spacing: 1px;
-  text-transform: capitalize;
+  letter-spacing: 5px;
+  text-transform: uppercase;
   margin-bottom: 5px;
 }
 
 .squad-member .squad-rank {
   display: block;
-  font-size: 14px;
+  font-size: 16px;
   color: $pink;
   text-transform: capitalize;
 }
