@@ -1,43 +1,68 @@
 <div class="navbar-wagon" hidden>
   <!-- Logo -->
-  <%= link_to root_path, class: "navbar-wagon-brand" do %>
-    V
+  <% if user_signed_in? %>
+  <div class="navbar-wagon-item">
+    <div class="dropdown">
+      <div class="navbar-wagon-brand dropdown-toggle" id="navbar-wagon-menu" data-toggle="dropdown">
+      V </div>
+      <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
+        <li>
+          <%= link_to "/" do %>
+          <i class="fas fa-home"></i> <%= t(".profile", default: "Home") %>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to "#" do %>
+          <i class="fa fa-user"></i> <%= t(".profile", default: "Profile") %>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to "#" do %>
+          <i class="fa fa-cog"></i>  <%= t(".settings", default: "Settings") %>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to destroy_user_session_path, method: :delete do %>
+          <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <% else %>
+
+
+  <% link_to root_path, class: "navbar-wagon-brand" do %>
+  V
+  <% end %>
+
   <% end %>
 
   <!-- Right Navigation -->
+
   <div class="navbar-wagon-right">
+        <% if user_signed_in? %>
 
-    <% if user_signed_in? %>
+    <div class="display-task-message">
 
-      <!-- Links when logged in -->
+    </div>
 
-      <!-- Avatar with dropdown menu -->
-      <div class="navbar-wagon-item">
-        <div class="dropdown">
-          <div class="navbar-wagon-brand dropdown-toggle" id="navbar-wagon-menu" data-toggle="dropdown">
-            1 </div>
-          <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
-            <li>
-              <%= link_to "#" do %>
-                <i class="fa fa-user"></i> <%= t(".profile", default: "Profile") %>
-              <% end %>
-            </li>
-            <li>
-              <%= link_to "#" do %>
-                <i class="fa fa-cog"></i>  <%= t(".settings", default: "Settings") %>
-              <% end %>
-            </li>
-            <li>
-              <%= link_to destroy_user_session_path, method: :delete do %>
-                <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>
-              <% end %>
-            </li>
-          </ul>
-        </div>
-      </div>
+    <!-- Links when logged in -->
+
+    <%# link_to "Messages", "#", class: "navbar-wagon-item navbar-wagon-link", style:"visbility: hidden" %>
+
+    <!-- Avatar with dropdown menu -->
+    <!-- <div class="navbar-wagon-item"> -->
+        <div element-handle="1"   class="navbar-wagon-brand progress-nav medium">1</div>
+        <div element-handle="2"   class="navbar-wagon-brand progress-nav medium">2</div>
+        <div element-handle="3"   class="navbar-wagon-brand progress-nav medium">3</div>
+        <div element-handle="3.1" class="navbar-wagon-brand progress-nav small"></div>
+        <div element-handle="4"   class="navbar-wagon-brand progress-nav medium">4</div>
+        <div element-handle="4.1" class="navbar-wagon-brand progress-nav small"></div>
+    <!-- </div> -->
     <% else %>
-      <!-- Login link (when logged out) -->
-      <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "navbar-wagon-item navbar-wagon-link" %>
+    <!-- Login link (when logged out) -->
+    <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "navbar-wagon-item navbar-wagon-link" %>
     <% end %>
   </div>
 
@@ -46,3 +71,65 @@
 </div>
 
 
+<script>
+
+function getKeyByValue(object, value) {
+  return Object.keys(object).find(key => object[key] === value);
+}
+
+document.addEventListener("DOMContentLoaded", function(event) {
+  const displayTaskMessage = document.querySelector('.display-task-message');
+  const location = window.location.href
+  const pages = {
+                 1: /\/venue$/,
+                 2: /\/squad\/[0-9]{1,}\/sidekicks$/,
+                 3: /\/squad\/[0-9]{1,}\/[0-9]{1,}\/choosevenue$/,
+                 4: /\/squad\/[0-9]{1,}\/[0-9]{1,}\/choosecontribution$/
+                }
+
+  const instructions = {
+                        1: 'Select 3 venues',
+                        2: 'Invite your friends',
+                        3: 'Vote for your favorite venue',
+                        3.1: 'Wait for your friends to vote',
+                        4: 'Choose your contribution amount',
+                        4.1: 'Wait for the your friends to contribute',
+                        5: 'PARTY TIME'
+                        }
+
+  // console.log(pages.values());
+  var keys = Object.keys(pages);
+  var values = Object.values(pages);
+
+  values.some((value) => {
+    const matchingEl = document.querySelector(`[element-handle="${getKeyByValue(pages, value)}"]`);
+    const currentKey = getKeyByValue(pages, value);
+
+    if (currentKey > 3) {
+      document.querySelector(`[element-handle="3.1"]`).classList.add('done');
+    }
+
+    if (location.match(value)) {
+      displayTaskMessage.innerHTML = instructions[currentKey]
+      setTimeout((event) => {
+      console.log('we matched the value');
+      matchingEl.classList.add('current');
+      }, 400);
+
+      return true;
+    } else {
+      setTimeout((event) => {
+        matchingEl.classList.add('done');
+      }, 50);
+    }
+
+  });
+
+});
+
+
+
+
+
+
+</script>

@@ -39,13 +39,11 @@
       </div>
     </div>
 
-
-
-      <%= link_to edit_squad_path(@squad.id), { id: 'checkout-sidekicks-btn'} do %>
-        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
-          Proceed
-        </button>
-      <% end %>
+    <%= link_to member_choose_venue_path(@squad.id, @squad.squadmembers.find_by(user: current_user.id)), { id: 'checkout-sidekicks-btn'} do %>
+      <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+        Proceed
+      </button>
+    <% end %>
 
   <script>
 
