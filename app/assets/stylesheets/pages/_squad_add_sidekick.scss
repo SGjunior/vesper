@@ -104,3 +104,15 @@
   padding: 5px;
 }
 
+.add-sidekick-right {
+  height: 675px;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.checkout-button-container {
+  justify-content: flex-end;
+  display: flex;
+}
