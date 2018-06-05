@@ -1,6 +1,6 @@
 
 .contribution-row {
-  margin: 50px auto;
+  // margin: 50px auto;
 }
 
 .chosen-float-overlay {
@@ -11,6 +11,8 @@
 .contribution-wrapper {
   min-height: 30vh;
   background-color: $black;
+  max-width: 100vw !important;
+  // width: 100vw !important;
 }
 
 .contribution-head {
@@ -30,10 +32,11 @@
 
 #animated-progress-container {
   height: 300px;
-  width: 100%;
+  max-width: 80vw !important;
+  // overflow: hidden;
   // position: fixed;
   top: -40px;
-  left: -25px;
+  // left: -25px;
   // bottom: 0px;
   // left: 0px;
 }
