@@ -38,10 +38,38 @@
 
   <% end %>
 
-  <!-- Right Navigation -->
-
   <div class="navbar-wagon-right">
         <% if user_signed_in? %>
+
+
+    <!-- Right Navigation -->
+      <% unless @searchBar.nil? %>
+
+
+
+    <!-- Expandable Textfield -->
+    <!-- Design inspired by: https://dribbble.com/shots/1992789 -->
+    <div class="search-bar" style="padding-top: 28px; padding-right: 30px;">
+      <form>
+        <input type="text" />
+        <div class="after"></div>
+        <input type="submit" />
+      </form>
+      <h4>&nbsp;</h4>
+    </div>
+
+
+
+
+
+
+
+
+      <% end %>
+
+
+
+
 
     <div class="display-task-message">
 
@@ -128,9 +156,63 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 });
 
+document.addEventListener("DOMContentLoaded", function(event) {
+  // EXPERIMENTING WITH THE SEARCHBAR
 
+  var s = $('input'),
+      f  = $('form'),
+      a = $('.after'),
+      m = $('h4');
 
+  s.focus(function(){
+    if( f.hasClass('open') ) return;
+    f.addClass('in');
+    setTimeout(function(){
+      f.addClass('open');
+      f.removeClass('in');
+    }, 1300);
+  });
 
+  a.on('click', function(e){
+    e.preventDefault();
+    if( !f.hasClass('open') ) return;
+     s.val('');
+    f.addClass('close');
+    f.removeClass('open');
+    setTimeout(function(){
+      f.removeClass('close');
+    }, 1300);
+  })
 
+  f.submit(function(e){
+    e.preventDefault();
+    m.html('Thanks, high five!').addClass('show');
+    f.addClass('explode');
+    setTimeout(function(){
+      s.val('');
+      f.removeClass('explode');
+      m.removeClass('show');
+    }, 3000);
+  })
 
+  $(document).mouseup(function(e)
+  {
+      var container = $(".search-bar");
+      // var container2 = $
+
+      // if the target of the click isn't the container nor a descendant of the container
+      if (!container.is(e.target) && container.has(e.target).length === 0)
+      {
+        if (f.hasClass('open')) {
+          s.val('');
+          f.addClass('close');
+          f.removeClass('open');
+          setTimeout(function(){
+            f.removeClass('close');
+          }, 1300);
+        }
+      }
+  });
+
+});
 </script>

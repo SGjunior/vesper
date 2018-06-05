@@ -31,6 +31,7 @@ class SquadController < ApplicationController
   def add_sidekick
     @squad = Squad.find(params[:id])
     @squadmember = Squadmember.new
+    @searchBar = true;
 
     authorize @squad
   end
