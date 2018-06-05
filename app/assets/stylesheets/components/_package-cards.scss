@@ -2,6 +2,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Roboto', sans-serif !important;
+  z-index: 0;
 }
 
 section {
@@ -22,6 +23,8 @@ section {
   box-shadow: 0 10px 15px rgba(0, 0, 0, .7);
   transition: .5s;
   overflow: hidden;
+  -webkit-transition : -webkit-filter 750ms linear;
+  z-index: 2;
 }
 
 .package-card:hover {
@@ -31,6 +34,7 @@ section {
 .col-sm-4:nth-child(1) .package-card,
 .col-sm-4:nth-child(1) .package-card .package-title .fas {
   background: linear-gradient(-45deg, #f403d1, #64b5f6);
+
 }
 
 .col-sm-4:nth-child(2) .package-card,
@@ -51,7 +55,7 @@ section {
   width: 100%;
   height: 40%;
   background: rgba(255, 255, 255, 0.1);
-  z-index: 1;
+  z-index: 5;
   transform: skewY(-5deg) scale(1.5);
 }
 
@@ -72,12 +76,12 @@ section {
   padding: 0;
   color: white;
   font-size: 28px;
-  z-index: 2;
+  z-index: 6;
 }
 
 .package-price {
   position: relative;
-  z-index:  2;
+  z-index:  6;
 }
 
 .package-price h2 {
@@ -89,7 +93,7 @@ section {
 
 .package-options {
   position: relative;
-  z-index:  2;
+  z-index:  6;
 }
 
 .package-options ul {
@@ -109,7 +113,7 @@ section {
   font-size: 16px;
   cursor: pointer;
   position: relative;
-  z-index:  2;
+  z-index:  6;
   background: white;
   color: $mint;
   line-height: 40px;
@@ -126,4 +130,9 @@ section {
 .package-card a:hover {
   text-decoration: none;
 
+}
+
+.grayscale {
+    -webkit-filter: grayscale(90%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(90%);
 }
