@@ -94,8 +94,6 @@ if (document.querySelector('.banner-main')) {
       // Update the current slider value (each time you drag the slider handle)
       slider.oninput = function() {
 
-
-
         output.innerHTML = this.value;
         // console.log(this.value /100);
         if (this.value < 33) {

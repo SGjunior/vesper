@@ -101,6 +101,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
   var keys = Object.keys(pages);
   var values = Object.values(pages);
 
+
   values.some((value) => {
     const matchingEl = document.querySelector(`[element-handle="${getKeyByValue(pages, value)}"]`);
     const currentKey = getKeyByValue(pages, value);

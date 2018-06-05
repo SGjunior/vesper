@@ -7,12 +7,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  z-index: 99;
+  z-index: 999;
 }
 
 .navbar-wagon-brand a:hover {
   text-decoration: none !important;
   color: $mint !important;
+  z-index: 999;
 }
 
 /* Circular Logos */
@@ -28,6 +29,7 @@
   font-family: 'Megrim';
   padding: 8px;
   margin: 0 5px;
+  z-index: 999;
 
   transition: all 0.5s ease;
 
@@ -49,7 +51,7 @@
   }
 
   &.current {
-    background-color: $purple;
+    background-color: $pink;
     opacity: 1.0 !important;
   }
 
@@ -103,6 +105,7 @@
   box-shadow: 1px 1px 4px #E6E6E6;
   border-color: $mint;
   background: 0;
+  z-index: 999;
 }
 .navbar-wagon-dropdown-menu li > a {
   transition: color 0.3s ease;
