@@ -22,7 +22,7 @@ class SquadController < ApplicationController
       Squadchosenvenue.new(squad: @squad, venue_id: venue_id).save!
     end
 
-    Squadmember.new(user: current_user, squad: @squad, squadchosenvenue_id: @squad.squadchosenvenues.first.id).save!
+    Squadmember.new(user: current_user, squad: @squad).save!
 
     render json: @squad
     # redirect_to edit_squad(@squad)
@@ -33,6 +33,58 @@ class SquadController < ApplicationController
     @squadmember = Squadmember.new
 
     authorize @squad
+  end
+
+  def member_choose_venue
+    @squad = Squad.find(params[:id])
+    @squadmember = @squad.squadmembers.find(params[:squad_member_id])
+
+    authorize @squadmember
+  end
+
+  def member_confirm_venue
+    @squad = Squad.find(params[:id])
+    @squadmember = @squad.squadmembers.find(params[:squad_member_id])
+
+    authorize @squadmember
+
+    @squadmember.squadchosenvenue_id = params[:squadchosenvenue_id].to_i
+    @squadmember.save!
+
+    if true #passed validations
+      render json: { squad: @squad, squadmembers: @squad.squadmembers, status: venue_progess_ready? }
+    else
+      render json: '????'
+    end
+  end
+
+  def choose_venue_status
+    @squad = Squad.find(params[:id])
+    @squadmember = @squad.squadmembers.find_by(user: current_user)
+    authorize @squadmember
+
+    render json: { squad: @squad, squadmembers: @squad.squadmembers, status: venue_progess_ready? }
+  end
+
+  def member_choose_contribution
+    @squad = Squad.find(params[:id])
+    @squadmember = @squad.squadmembers.find(params[:squad_member_id])
+    @squadChosenVenue = find_squad_chosen_venue
+
+    authorize @squadmember
+  end
+
+  def member_confirm_contribution
+    @squad = Squad.find(params[:id])
+    @squadmember = @squad.squadmembers.find(params[:squad_member_id])
+
+    authorize @squadmember
+
+     @squadmember.contribution = params[:contribution].to_i
+     @squadmember.will_be_present = true
+     @squadmember.save!
+
+     render json: @squad
   end
 
   #AJAX REQUESTS
@@ -56,7 +108,7 @@ class SquadController < ApplicationController
 
     @squad = Squad.find(params[:id]) #TODO : something along those lines
     authorize @squad
-    @squadmember = Squadmember.new(user: user, squad: @squad, squadchosenvenue: @squad.squadchosenvenues.first, contribution: 0) #TODO : something along those lines
+    @squadmember = Squadmember.new(user: user, squad: @squad, contribution: 0) #TODO : something along those lines
     @squadmember.save!
     respond_to do |format|
       format.js
@@ -165,4 +217,28 @@ class SquadController < ApplicationController
     return contribution
 
   end
+
+  def venue_progess_ready?
+    #todo : calculate if more then half of people have voted yet
+
+    member_count = @squad.squadmembers.count
+    member_critial_count = (@squad.squadmembers.count/2.to_f).ceil
+    members_have_not_chosen = []
+
+    member_count_have_chosen_venue = 0
+
+    @squad.squadmembers.each do |squadmember|
+      if squadmember.squadchosenvenue_id.nil?
+        members_have_not_chosen << squadmember
+      else
+        member_count_have_chosen_venue += 1
+      end
+    end
+
+    return { ready: member_critial_count == member_count_have_chosen_venue, missing_cnt: member_critial_count - member_count_have_chosen_venue, waiting_for: members_have_not_chosen }
+  end
+
+
+
+
 end

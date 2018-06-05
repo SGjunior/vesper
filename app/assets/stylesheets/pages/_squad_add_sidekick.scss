@@ -51,9 +51,9 @@
 }
 
 #checkout-sidekicks-btn {
- position: fixed;
- bottom: 20px;
- right: 20px;
+ // position: fixed;
+ // bottom: 20px;
+ // right: 20px;
 }
 
 .squad-wrapper {
@@ -104,3 +104,41 @@
   padding: 5px;
 }
 
+.add-sidekick-right {
+/*  height: 675px;
+  overflow: auto;
+  display: flex;
+  flex-direction: column; */
+  justify-content: space-between;
+  max-height: 100%;
+  overflow: auto;
+}
+
+.fancy-h3 {
+  font-size: 42px;
+  font-family: 'Megrim' !important;
+  color: white;
+}
+
+.fancy-h3:hover {
+  color: white;
+}
+.fancy-h3:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #000;
+  visibility: hidden;
+  -webkit-transform: scaleX(0);
+  transform: scaleX(0);
+  -webkit-transition: all 0.3s ease-in-out 0s;
+  transition: all 0.3s ease-in-out 0s;
+}
+
+.checkout-button-container {
+  justify-content: flex-end;
+  display: flex;
+}

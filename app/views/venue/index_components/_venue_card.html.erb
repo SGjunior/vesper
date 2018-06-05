@@ -16,7 +16,6 @@
   <!-- <div class="gradient-overlay"></div> -->
   <div class="color-overlay"></div>
   <div class="card-info">
-  <!-- Raised button with ripple -->
   <%= link_to venue_path(venue.id), remote: true, data: {method: 'get' } do %>
     <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" data-venue-id="<%= venue.id %>" onclick="openNav()">
     Info

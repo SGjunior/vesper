@@ -1,20 +1,22 @@
+<div class="contribution-head">
+  <%= render 'shared/package-cards' %>
+</div>
+
 <div class="contribution-wrapper">
     <%= render 'squad/edit-components/contribution-input' %>
 </div>
 
 <div class="squad-wrapper">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-xs-12 col-sm-10 col-sm-offset-1">
-        <div class="squad-container">
+  <div class="row">
+  <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3">
 
-          <%= render 'squad/edit-components/squad-member-card' %>
-        </div>
-      </div>
+    <div class="squad-container">
+
+      <%= render 'squad/edit-components/squad-member-card' %>
+    </div>
     </div>
   </div>
 </div>
-
 
 
 <%= link_to squad_path(@squad.id) do %>
@@ -22,3 +24,8 @@
     <i class="material-icons">arrow_right</i>
   </button>
 <% end %>
+
+<!-- DEBUG INFO -->
+<p> Chosen venue : <%= @squadChosenVenue.venue.name %></p>
+<!-- DEBUG INFO -->
+

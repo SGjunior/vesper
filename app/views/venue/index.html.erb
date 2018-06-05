@@ -2,7 +2,7 @@
   <!-- <div class="app mdl-shadow--2dp"> -->
     <div class="index-wrapper">
       <div class="row">
-        <div class="col-xs-12  col-sm-10 col-sm-offset-1">
+        <div class="col-xs-12 col-sm-10 col-sm-offset-1">
           <div class="container">
             <div class="row">
               <div class="main-index" id="main">
@@ -37,13 +37,8 @@
         <% #render 'venue/index_components/venue_card', venue: @Venues.sample() %>
     <% # end %>
 
-    <!-- FAB button with ripple -->
-   <button id="proceed-to-create-squad-btn" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" style="margin-left: 10px; margin-right: 20px;">
-    <i class="material-icons">arrow_right</i>
-  </button>
-</div>
 
-<div id="shOverlay" class="overlay">
+  <div id="shOverlay" class="overlay">
 
   <!-- Button to close the overlay navigation -->
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -54,7 +49,19 @@
   </div>
 
 </div>
+  </button>
 
+  <div class="svg-wrapper">
+      <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
+        <rect id="shape" height="40" width="150" />
+        <div id="text">
+          <a id="proceed-to-create-squad-btn" href=""><span class="spot"></span>
+            <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </svg>
+    </div>
+</div>
 
 
 <script>
@@ -145,7 +152,7 @@ venuesSelectBtns.forEach((btn) => {
 
       // console.log(selectedVenueEl);
 
-      selectedVenueEl.remove();
+      selectedVenueEl.parentElement.remove();
 
       venuesChosenContainer.prepend(selectedVenueEl)
 
