@@ -14,7 +14,7 @@
 .navbar-wagon-brand a:hover {
   text-decoration: none !important;
   color: $mint !important;
-  z-index: 999;
+  z-index: 50;
 }
 
 /* Circular Logos */
@@ -30,7 +30,7 @@
   font-family: 'Megrim';
   padding: 8px;
   margin: 0 5px;
-  z-index: 999;
+  z-index: 50;
 
   transition: all 0.5s ease;
 
@@ -106,7 +106,7 @@
   box-shadow: 1px 1px 4px #E6E6E6;
   border-color: $mint;
   background: 0;
-  z-index: 999;
+  z-index: 50;
 }
 .navbar-wagon-dropdown-menu li > a {
   transition: color 0.3s ease;
@@ -146,10 +146,6 @@
 
 // EXPERIMENTING WITH SEARCH BARS
 
-// html {
-  // background-color: #E62878;
-  // font-family: "Lucida Grande","Lucida Sans Unicode", Tahoma, Sans-Serif;
-// }
 .search-bar {
   p {
     text-align: center;
