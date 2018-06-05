@@ -1,11 +1,16 @@
 
 
-<div class="col-xs-12 col-sm-10 col-sm-offset-1">
+<!-- <div class="col-xs-12 col-sm-10 col-sm-offset-1">
   <div class="contribution-head">
-    <h2><%= @squadTotalContribution %></h2>
-    <!-- <h5>Squad Gold</h5> -->
+    <h2><%# @squadTotalContribution %></h2>
+    <h5>Squad Gold</h5>
   </div>
-</div>
+</div> -->
+
+
+      <!-- <div id="container-lols" hidden style="z-index:1"> -->
+      <!-- <div id="animated-progress-container"style="z-index:1;"> -->
+
 
 
 
@@ -16,10 +21,12 @@
     <div class="contribution-inputs">
 
 
-      <div class="slidecontainer">
-        <input type="range" min="1" max="100" value="20" class="slider" id="myRange">
-        <p id="contribution-input"></p>
-      </div>
+
+      <h2 id="contribution-input" style="color: white;"></h2>
+      <!-- Default Slider -->
+      <input class="mdl-slider mdl-js-slider" type="range"
+        min="0" max="100" value="0" tabindex="0" id="mdl-slider" style="height: 500px !important">
+
 
 
       <!-- FAB button -->
@@ -54,36 +61,7 @@
 //  WORKING ON THE SLIDER
 
 
-
-
-
-
-
-
-
-
-
-
-if (document.getElementById('member-confirm-contribution-btn')) {
-
-
-
-
-
-
-
-
 //  WORKING ON THE SLIDER
-
-
-
-
-
-
-
-
-
-
 
 
 

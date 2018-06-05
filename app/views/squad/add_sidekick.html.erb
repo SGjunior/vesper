@@ -7,7 +7,8 @@
         <%= render 'squad/edit-components/build-squad-form' %>
         </div>
         <div class="body-content">
-        <div id="index-filters" class="mdl-layout__header-row mdl-shadow--2dp filters-stick" style="margin-top: 25px;">
+          <!-- SEARCH FILTERS -->
+        <div hidden id="index-filters" class="mdl-layout__header-row mdl-shadow--2dp filters-stick" style="margin-top: 25px;">
           <!-- <div class="mdl-layout-spacer"></div> -->
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable
                       mdl-textfield--floating-label mdl-textfield--align-right" style="position: absolute;right: 10px">
@@ -20,11 +21,12 @@
                      id="fixed-header-drawer-exp" placeholder=" Search . . .">
             </div>
           </div>
+          <!-- SEARCH FILTERS -->
         </div>
 
           <% User.all.each do |user| %>
             <% unless @squad.squadmembers.find_by(user: user) %>
-              <%= render 'squad/sidekick-components/squadmember-list-recent', user: user, squad: @squad %>
+              <%= render 'squad/sidekick-components/squadmember-list-recent', user: user, squad: @squad, options: 'add' %>
             <% end %>
           <% end %>
         </div>
@@ -44,9 +46,9 @@
         <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
           <rect id="shape" height="40" width="150" />
           <div id="text">
-            <a id="proceed-to-create-squad-btn" href=""><span class="spot"></span>
+            <!-- <a id="proceed-to-create-squad-btn" href=""><span class="spot"></span> -->
               <i class="fas fa-arrow-right"></i>
-            </a>
+            <!-- </a> -->
           </div>
         </svg>
       </div>

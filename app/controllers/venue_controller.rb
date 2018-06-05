@@ -39,7 +39,7 @@ class VenueController < ApplicationController
     @squad = Squad.new(user: current_user)
 
     @Venues = policy_scope(Venue).where.not(latitude: nil, longitude: nil).limit(50)
-
+    @searchBar = true;
     @markers = @Venues.map do |venue|
       {
         lat: venue.latitude,

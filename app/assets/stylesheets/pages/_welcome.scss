@@ -79,3 +79,32 @@
             transform: rotate(45deg);
       background-color: rgba(255,255,255,0);
 }
+
+
+#container-lols {
+  margin: 20px;
+  width: 50%;
+  height: 50%;
+  left: 0px !important;
+  float: left;
+  position: absolute;
+}
+
+// #container-lols2 {
+//   margin: 20px;
+//   width: 400px;
+//   height: 400px;
+// }
+
+// #container-lols2 svg path {
+//   fill: none;
+//   /*stroke: #000;*/
+//   stroke-linecap: round;
+//   stroke-linejoin: round;
+//   transition: 0.2s;
+// }
+
+// #container-lols2 svg:hover path {
+//   d: path("M-215,3C-128,363 154,463 306,-29");
+//   /*stroke: gold;*/
+// }
