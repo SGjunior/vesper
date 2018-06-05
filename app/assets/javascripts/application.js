@@ -3,7 +3,7 @@
 //= require jquery_ujs
 //= require jquery.slick
 
-$(document).ready(function(){
+function initializeSlick() {
   $('.venue-social-pictures').slick({
     dots: true,
     infinite: true,
@@ -11,5 +11,9 @@ $(document).ready(function(){
     fade: true,
     cssEase: 'linear'
   });
+}
+
+$(document).ready(function(){
+  initializeSlick();
 });
 

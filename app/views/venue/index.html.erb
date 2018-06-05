@@ -37,10 +37,19 @@
         <%#render 'venue/index_components/venue_card', venue: @Venues.sample() %>
     <%# end %>
 
-    <!-- FAB button with ripple -->
- <!--   <button id="proceed-to-create-squad-btn" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" style="margin-left: 10px; margin-right: 20px;">
-    <i class="material-icons">arrow_right</i>
-  </button> -->
+
+  <div id="shOverlay" class="overlay">
+
+  <!-- Button to close the overlay navigation -->
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+  <!-- Overlay content -->
+  <div class="overlay-content">
+    <%# render partial: "/venue/index_components/show-partial", locals: {venue: venue } %>
+  </div>
+
+</div>
+  </button>
 
   <div class="svg-wrapper">
       <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
@@ -52,11 +61,20 @@
         </div>
       </svg>
     </div>
-
 </div>
 
 
 <script>
+  function openNav() {
+    document.getElementById("shOverlay").style.width = "100%";
+
+}
+
+/* Close when someone clicks on the "x" symbol inside the overlay */
+  function closeNav() {
+      document.getElementById("shOverlay").style.width = "0%";
+  }
+
   const proceedButton = document.getElementById('proceed-to-create-squad-btn');
 
   proceedButton.addEventListener('click', (event) => {

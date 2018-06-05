@@ -1,0 +1,54 @@
+.show-container{
+  height: 100vh;
+  background-color: $black;
+  color: white;
+}
+
+.drawer {
+  margin-left: 35px;
+  margin-right: 35px;
+  margin-bottom: 75px;
+  margin-top: 55px;
+}
+
+.venue-background {
+  min-height: 100vh;
+  /* clip-path: polygon(0 0, 100% 0, 100% 48%, 0 90%); */
+  background-image:
+    linear-gradient(-225deg, rgba(0,101,168,0.4) 0%, rgba(0,36,61,0.6) 50%),
+    /* linear-gradient(to right, rgba(73,155,234,1) 0%, rgba(32,124,229,1) 100%), */
+    <% 15.times do %>
+      linear-gradient(350deg, $black, rgba(255,0,0,0) 40%),
+    <% end %>
+    linear-gradient(350deg, $black, rgba(255,0,0,0) 40%),
+    url('https://images.unsplash.com/photo-1519111887837-a48ccf9edc00?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6e0f38f79ded4dee16fd71841a0f12e6&auto=format&fit=crop&w=1500&q=80');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#venue-info {
+  margin-top: 15px;
+}
+
+.align-content-center {
+  justify-content: center;
+}
+
+.venue-social-pictures {
+/*   top: -345px;
+  left: 315px; */
+}
+
+.venue-social-pictures img {
+  height: 300px;
+  /* width: 500px; */
+  min-width: 100%;
+}
+
+@media only screen and (max-width: 600px) {
+  .drawer {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
