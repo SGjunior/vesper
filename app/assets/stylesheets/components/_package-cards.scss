@@ -25,6 +25,9 @@ section {
   overflow: hidden;
   -webkit-transition : -webkit-filter 750ms linear;
   z-index: 2;
+
+  -webkit-transition: width 2s, height 2s, background-color 2s, -webkit-transform 2s;
+  transition: width 2s, height 2s, background-color 2s, transform 2s;
 }
 
 .package-card:hover {
@@ -135,4 +138,8 @@ section {
 .grayscale {
     -webkit-filter: grayscale(90%); /* Safari 6.0 - 9.0 */
     filter: grayscale(90%);
+}
+
+.current-package {
+  transform: scale(1.1);
 }

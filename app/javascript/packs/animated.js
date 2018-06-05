@@ -108,31 +108,47 @@ if (document.querySelector('.banner-main')) {
             thirdPackageCard.classList.add('grayscale');
           }
           firstPackageCard.style.zIndex = 2;
-
+          firstPackageCard.style.zIndex = 2;
+          secondPackageCard.style.zIndex = 2;
+          firstPackageCard.classList.remove('current-package');
 
         } else if ( this.value < 63) {
           if (((this.value /25) - 1.2) < 1) {
             bar.animate(1);
             bar2.animate((this.value /25) - 1.2);
             bar3.animate(0);
+            firstPackageCard.classList.add('current-package');
             firstPackageCard.classList.remove('grayscale');
+            secondPackageCard.classList.remove('current-package');
+            secondPackageCard.classList.add('grayscale');
             thirdPackageCard.classList.add('grayscale');
+            thirdPackageCard.classList.remove('current-package');
           }
-          firstPackageCard.style.zIndex = 1;
 
         } else {
           if (((this.value /25) - 2.4) < 1) {
             bar3.animate((this.value /25) - 2.4);
+            firstPackageCard.style.zIndex = 1;
+            secondPackageCard.classList.add('current-package');
+            thirdPackageCard.classList.remove('current-package');
+            thirdPackageCard.classList.add('grayscale');
           }
 
           if (this.value > 90) {
+            thirdPackageCard.classList.add('current-package');
             thirdPackageCard.classList.remove('grayscale');
             bar3.animate(1);
+            firstPackageCard.style.zIndex = 1;
+            secondPackageCard.style.zIndex = 1;
+            secondPackageCard.classList.remove('current-package');
+
           }
           bar.animate(1);
           bar2.animate(1);
           firstPackageCard.classList.remove('grayscale');
+          firstPackageCard.classList.remove('current-package');
           secondPackageCard.classList.remove('grayscale');
+
         }
 
         // if ((this.value /100) < 0.30) {
