@@ -1,25 +1,33 @@
 <div class="index-wrapper">
 <!-- DEBUG INFO -->
-<div hidden>
-  <p style="color: white; margin-top: 50px;">Current user : <%= current_user.id %></p>
-  <ul>
-    <% @squad.squadmembers.each do |member| %>
-      <li style="color: white">user : <%= member.user.id %> | member : <%= member.id %> | venue : <%= member.squadchosenvenue_id %></li>
-    <% end %>
-  </ul>
+<!-- <div hidden> -->
+  <div hidden>
+    <p style="color: white; margin-top: 50px;">Current user : <%= current_user.id %> | <%= current_user.first_name %></p>
+    <ul>
+      <% @squad.squadmembers.each do |member| %>
+        <li style="color: white">user : <%= member.user.id %> | member : <%= member.id %> | venue : <%= member.squadchosenvenue_id %></li>
+      <% end %>
+    </ul>
 
-  <ul>
-    <% @squad.squadchosenvenues.each do |cvenue| %>
-      <li style="color: white"> cvenue.id = <%= cvenue.id %> | <%= cvenue.venue.name %></li>
-    <% end %>
-  </ul>
-  <!-- DEBUG INFO -->
-</div>
-  <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
-    <div class="chosen-float-overlay edit-venues" style="margin-top: 5vh;">
-      <%= render 'squad/edit-components/chosen-venues-vote-card' %>
+    <ul>
+      <% @squad.squadchosenvenues.each do |cvenue| %>
+        <li style="color: white"> cvenue.id = <%= cvenue.id %> | <%= cvenue.venue.name %></li>
+      <% end %>
+    </ul>
+    <!-- DEBUG INFO -->
+  </div>
+  <div class="hidden-xs col-md-2">
+    <div class="display-squad">
+      <% @squad.squadmembers.each do |squadmember| %>
+        <%= render 'squad/sidekick-components/squadmember-list-recent', user: squadmember.user, squad: @squad, options: 'question' %>
+      <% end %>
     </div>
   </div>
+    <div class="col-xs-12 col-sm-10 col-md-8">
+      <div class="chosen-float-overlay edit-venues" style="margin-top: 5vh;">
+        <%= render 'squad/edit-components/chosen-venues-vote-card' %>
+      </div>
+    </div>
 </div>
 
 
@@ -144,7 +152,42 @@ const terminateSelectionState = () => {
   // remove the proceed btn
 }
 
+document.addEventListener("DOMContentLoaded", function(event) {
+  if (<%= @squad.squadmembers.find_by(user: current_user).squadchosenvenue_id.nil?%>) {
+    console.log('has not yet chosen a venue');
+  } else {
+    console.log('has chosen a venue, waiting on his friends');
+    terminateSelectionState();
+    setTimeout((event) => { waitingForSquad(); }, 500);
+
+  }
+});
+
+const waitingForSquad = () => {
+  setInterval(function(){
+    console.log('initializing fetch');
+    fetchVenueStatus();
+    console.log('done updating');
+
+  }, 1000);
+}
+
+
 const displayStatus = (data) => {
+  data.squadmembers.forEach((squadmember) => {
+    if (squadmember.squadchosenvenue_id != null) {
+
+      const memberClosedEl = document.querySelector(`[member-closed='${squadmember.user_id}']`);
+      const memberOpenEl = document.querySelector(`[member-open='${squadmember.user_id}']`);
+
+      $(`[member-closed='${squadmember.user_id}']`).fadeOut();
+      $(`[member-open='${squadmember.user_id}']`).delay(500).fadeIn();
+
+      // fade out lock
+      // fade in lock_open
+
+    }
+  });
   // show locked btn | unlock
   // display people that have yet to rsvp / how many are we still missing
 
@@ -169,25 +212,4 @@ const displayStatus = (data) => {
     statusDisplayEl.innerHTML = `Missing votes : ${data.status.missing_cnt}; waiting for : ${data.status.waiting_for}`
   }
 }
-
-document.addEventListener("DOMContentLoaded", function(event) {
-  if (<%= @squad.squadmembers.find_by(user: current_user).squadchosenvenue_id.nil?%>) {
-    console.log('has not yet chosen a venue');
-  } else {
-    console.log('has chosen a venue, waiting on his friends');
-    terminateSelectionState();
-    setTimeout((event) => { waitingForSquad(); }, 500);
-
-  }
-});
-
-const waitingForSquad = () => {
-  setInterval(function(){
-    console.log('initializing fetch');
-    fetchVenueStatus();
-    console.log('done updating');
-
-  }, 1000);
-}
-
 </script>
