@@ -169,3 +169,29 @@ hr{
 
   }
 }
+
+.card-info {
+  a {
+    text-decoration: none;
+    color: white;
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  .fas {
+    font-size: 3em;
+    opacity: 0.8;
+    transition: 0.3s ease;
+  }
+
+  .fas:hover {
+    opacity: 1;
+  }
+
+  .fa-hand-paper {
+    text-shadow: 0 0 10px rgba(124,255,203,.6), 0 0 40px rgba(124,255,203,.7);
+  }
+
+}
