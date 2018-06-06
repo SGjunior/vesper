@@ -1,3 +1,10 @@
+.progress-btn-container {
+  position: fixed;
+  bottom: 20px;
+  right: 5px;
+  z-index: 9999;
+}
+
 .awesome-button {
 background: #222;
 display: inline-block;

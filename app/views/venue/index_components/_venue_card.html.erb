@@ -1,5 +1,22 @@
 <div class="col-xs-12 col-sm-6 col-md-4">
-<div class="blog-card spring-fever mdl-shadow--2dp" data-venue-id="<%= venue.id %>">
+<!-- <div class="blog-card spring-fever mdl-shadow--2dp" data-venue-id="<%= venue.id %>"> -->
+
+<!-- !!!!!!!!!!!!!!!!!!!!!!!! REVERT THIS BEFORE PUSHING TO HEROKU BACK TO 666 !!!!!!!!!!!!!!!! -->
+<div class="blog-card mdl-shadow--2dp" data-venue-id="<%= venue.id %>"
+  style="background:
+    url('<%= cl_image_path "bar-datcha-bar-datcha" %>') no-repeat center;
+
+    /*filter: contrast(120%);*/
+    /*-webkit-filter: contrast(120%);*/
+    -webkit-filter: saturate(1.5) contrast(120%);
+    -webkit-box-shadow:4.5px 4.5px 5px -1px rgba(124, 255, 203, 0.2) ;
+    -moz-box-shadow:4.5px 4.5px 5px -1px rgba(124, 255, 203, 0.2) ;
+    box-shadow:4.5px 4.5px 5px -1px rgba(124, 255, 203, 0.2) ;
+    ">
+<!-- cl_image_path venue.photo -->
+
+
+
   <div class="title-content">
     <h3><%= venue.name %></h3>
     <div class="intro">★★★</div>
@@ -14,7 +31,7 @@
   </div> -->
   <!-- overlays -->
   <!-- <div class="gradient-overlay"></div> -->
-  <div class="color-overlay"></div>
+  <!-- <div class="color-overlay"></div> -->
   <div class="card-info">
   <%= link_to venue_path(venue.id), remote: true, data: {method: 'get' } do %>
     <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" data-venue-id="<%= venue.id %>" onclick="openNav()">
