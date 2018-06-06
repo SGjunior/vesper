@@ -7,7 +7,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 
   // background-color: #030027;
   // background-blend-mode: overlay;
@@ -16,17 +17,26 @@
   // filter: yellow(100%) hue-rotate(90deg) saturate(400%);
 }
 .banner-main h1 {
-  font-size: 60px;
+  font-size: 64px;
   font-weight: bold;
   letter-spacing: 30px !important;
-
   text-shadow: 0px 1px rgba(0, 0, 0, 0.2);
   font-family: 'Megrim';
+
 }
-.banner-main p {
-  font-size: 25px;
-  font-weight: lighter;
+.banner-main h2 {
+  font-size: 30px;
+  font-weight: 800 !important;
+  letter-spacing: 1px !important;
   color: rgb(255, 255, 255);
   opacity: 0.6;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.banner-content {
+  transform: translate(-50%, -50%);
+  position: absolute;
+  left: 50%;
+  top: 50%;
 }
