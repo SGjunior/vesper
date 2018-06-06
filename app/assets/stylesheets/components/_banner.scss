@@ -20,10 +20,24 @@
   font-size: 64px;
   font-weight: bold;
   letter-spacing: 30px !important;
-  text-shadow: 0px 1px rgba(0, 0, 0, 0.2);
   font-family: 'Megrim';
-
+  color: rgba(255,255,255,1);
+  text-decoration: normal;
+  text-align: center;
+  -o-text-overflow: clip;
+  text-overflow: clip;
+  white-space: pre;
+  text-shadow: 0 0 10px rgba(255,255,255,1) , 0 0 20px rgba(255,255,255,1) , 0 0 30px rgba(255,255,255,1) , 0 0 40px #7CFFCB , 0 0 70px #7CFFCB , 0 0 80px #7CFFCB , 0 0 100px #7CFFCB ;
+  -webkit-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
+  -moz-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
+  -o-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
+  transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
 }
+
+.button-backgrounds:hover .banner-main {
+  text-shadow: 0 0 10px rgba(255,255,255,1) , 0 0 20px rgba(255,255,255,1) , 0 0 30px rgba(255,255,255,1) , 0 0 40px #B32E78 , 0 0 70px #B32E78 , 0 0 80px #B32E78 , 0 0 100px #B32E78 ;
+}
+
 .banner-main h2 {
   font-size: 30px;
   font-weight: 800 !important;
