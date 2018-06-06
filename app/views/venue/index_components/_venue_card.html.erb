@@ -23,8 +23,8 @@
 
   <div class="title-content">
     <h3><strong><%= venue.name %></strong></h3>
-    <div class="intro">★★★</div>
-    <div class="intro">$$$</div>
+    <div class="intro"><%= '★' * venue.rating.to_i  %></div>
+    <div class="intro"><%= '$' * venue.pricing.to_i  %></div>
   </div>
 
   <!-- <div class="utility-info">
@@ -38,10 +38,12 @@
   <!-- <div class="color-overlay"></div> -->
   <div class="card-info">
     <ul>
-  <%= link_to venue_path(venue.id), remote: true, data: {method: 'get' } do %>
-    <li><i class="fas fa-info-circle" data-venue-id="<%= venue.id %>" onclick="openNav()">
-    </i></li>
-  <% end %>
+      <li>
+    <%= link_to venue_path(venue.id), remote: true, data: {method: 'get' } do %>
+      <i class="fas fa-info-circle" data-venue-id="<%= venue.id %>" onclick="openNav()">
+      </i>
+    <% end %>
+    </li>
 
   <!-- Raised button with ripple -->
     <li><i class="fas fa-hand-paper select-venue-btn" style="cursor: pointer" data-venue-id="<%= venue.id %>">
