@@ -171,6 +171,10 @@ hr{
 
 .chosen-venue-card {
   transform: none;
+
+  .card-close-btn {
+    visibility: visible !important;
+  }
 }
 @media screen and (max-width: 600px) {
   .blog-card {
@@ -201,7 +205,7 @@ hr{
     li {
       // margin: 0 auto;
       margin-left: 0 !important;
-      padding-left: 0 !important;
+      padding-left: 0;
       margin-top: 25px;
     }
 
@@ -223,6 +227,16 @@ hr{
 
 }
 
+
 #chosen-card {
   min-height: 335px !important;
+}
+
+.card-close-btn {
+  margin-bottom: 6.5em;
+  padding-left: 100% !important;
+  visibility: hidden;
+  &:hover {
+    cursor: pointer;
+  }
 }
