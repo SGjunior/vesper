@@ -31,6 +31,17 @@
     </div>
 </div>
 
+  <div id="shOverlay" class="overlay">
+
+      <!-- Button to close the overlay navigation -->
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+      <!-- Overlay content -->
+      <div class="overlay-content">
+        <%# render partial: "/venue/index_components/show-partial", locals: {venue: venue } %>
+      </div>
+
+  </div>
 
 <div class="row">
   <div class="col-xs-12">
@@ -89,6 +100,17 @@
 
 
 <script>
+
+  /* add show overlay */
+  function openNav() {
+      document.getElementById("shOverlay").style.width = "100%";
+
+    }
+
+  /* Close when someone clicks on the "x" symbol inside the overlay */
+  function closeNav() {
+    document.getElementById("shOverlay").style.width = "0%";
+  }
 
 if (document.getElementById('member-confirm-venue-btn')) {
 
