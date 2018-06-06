@@ -152,9 +152,6 @@ venuesSelectBtns.forEach((btn) => {
       const selectedVenueInnerHTML = selectedVenueEl.innerHTML
 
 
-
-
-      selectedVenueEl.classList.add('chosen-venue-card')
       $(selectedVenueEl.parentElement).fadeOut();
 
       setTimeout(() => {
@@ -167,7 +164,7 @@ venuesSelectBtns.forEach((btn) => {
 
         $(selectedVenueEl).fadeIn();
         venuesChosenContainer.prepend(selectedVenueEl);
-
+        selectedVenueEl.classList.add('chosen-venue-card')
       }, 450);
 
     } else {
@@ -175,6 +172,36 @@ venuesSelectBtns.forEach((btn) => {
     }
   });
 });
+
+const venuesContainer = document.querySelector('.venues');
+const venuesRemoveBtns = document.querySelectorAll('.card-close-btn');
+
+venuesRemoveBtns.forEach((btn) => {
+  btn.addEventListener('click', (event) => {
+
+      const venueId = event.currentTarget.attributes['data-venue-id'];
+      const selectedVenueEl = event.currentTarget.parentElement.parentElement.parentElement
+      const selectedVenueInnerHTML = selectedVenueEl.innerHTML
+
+
+      $(selectedVenueEl).fadeOut();
+
+      setTimeout(() => {
+        selectedVenueEl.classList.remove('chosen-venue-card')
+        selectedVenueEl.remove();
+
+      }, 350);
+
+      setTimeout(() => {
+
+        $(selectedVenueEl).fadeIn();
+        venuesContainer.prepend(selectedVenueEl);
+
+      }, 450);
+
+  });
+});
+
 
 
 
