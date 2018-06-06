@@ -1,7 +1,7 @@
 <div class="card-index mdl-card mdl-shadow--2dp">
   <%= link_to venue_path(venue.id) do %>
   <% if venue.photo.nil? %>
-  <div class="card-index-picture mdl-card__title" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('https://images.unsplash.com/photo-1486307358651-0e65d426a51c?ixlib=rb-0.3.5&s=479e11c5ee02903101cbd0f3bcd8fdff&auto=format&fit=crop&w=1050&q=80');">
+  <div class="card-index-picture mdl-card__title" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('https://images.unsplash.com/photo-1433785069405-791b480d0a62?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=0d2aba0f49fe8f83145dc66957c5791b&auto=format&fit=crop&w=1189&q=80');">
     <% else %>
     <div class="card-index-picture mdl-card__title" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)),
     url('<%= cl_image_path listing.photo, height: 300, width: 400, crop: :fill %>')">
