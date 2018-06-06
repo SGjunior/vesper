@@ -1,4 +1,6 @@
 
+<div class="container">
+  <div class="row">
 <div class="index-wrapper">
 <!-- DEBUG INFO -->
 <!-- <div hidden> -->
@@ -17,15 +19,15 @@
     </ul>
     <!-- DEBUG INFO -->
   </div>
-  <div class="hidden-xs col-md-2">
+  <div class="hidden-xs col-md-3">
     <div class="display-squad">
       <% @squad.squadmembers.each do |squadmember| %>
         <%= render 'squad/sidekick-components/squadmember-list-recent', user: squadmember.user, squad: @squad, options: 'question' %>
       <% end %>
     </div>
   </div>
-    <div class="col-xs-12 col-sm-10 col-md-8">
-      <div class="chosen-float-overlay edit-venues" style="margin-top: 5vh;">
+    <div class="col-xs-12 col-sm-10 col-md-9">
+      <div class="row" style="margin-top: 20vh;">
         <%= render 'squad/edit-components/chosen-venues-vote-card' %>
       </div>
     </div>
@@ -93,6 +95,8 @@
       <%# end %> -->
     </div>
   </div>
+</div>
+</div>
 </div>
 <!-- FAB button -->
 
