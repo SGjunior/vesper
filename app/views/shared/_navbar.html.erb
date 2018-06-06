@@ -51,7 +51,7 @@
     <!-- Design inspired by: https://dribbble.com/shots/1992789 -->
     <div class="search-bar" style="padding-top: 28px; padding-right: 30px;">
       <form>
-        <input type="text" />
+        <input id="search-bar-input" type="text" />
         <div class="after"></div>
         <input type="submit" />
       </form>
@@ -156,7 +156,48 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 });
 
-document.addEventListener("DOMContentLoaded", function(event) {
+document.addEventListener('DOMContentLoaded', (event) => {
+
+const venues = document.querySelectorAll('.col-xs-12.col-sm-6.col-md-4 .blog-card.mdl-shadow--2dp');
+const searchBar = document.getElementById('search-bar-input');
+
+const filterResults = () => {
+
+    const searchValue = searchBar.value.toLowerCase();
+
+    // console.log(venues);
+    venues.forEach((venue) => {
+      const venueName = venue.attributes['data-venue-name'].value.toLowerCase();
+      if (venueName.indexOf(searchValue) !== -1) {
+        if (venue.classList.contains('chosen-venue-card')) {
+          console.log('card is chosen, we cant remove it');
+        } else {
+          venue.parentElement.classList.remove('hidden');
+        }
+
+      } else {
+        if (venue.classList.contains('chosen-venue-card')) {
+          console.log('card is chosen, we cant remove it');
+        } else {
+          venue.parentElement.classList.add('hidden');
+        }
+      }
+    });
+
+    console.log(searchValue);
+}
+
+
+  if (searchBar) {
+    searchBar.addEventListener('input', (event) => {
+      filterResults();
+    });
+  };
+
+
+
+
+// document.addEventListener("DOMContentLoaded", function(event) {
   // EXPERIMENTING WITH THE SEARCHBAR
 
   var s = $('input'),
@@ -205,6 +246,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
       {
         if (f.hasClass('open')) {
           s.val('');
+          // s.trigger('input');
+          filterResults();
+          // var event = new Event('input');
+          // s.dispatchEvent(event);
+
           f.addClass('close');
           f.removeClass('open');
           setTimeout(function(){

@@ -151,14 +151,24 @@ venuesSelectBtns.forEach((btn) => {
       const selectedVenueEl = event.currentTarget.parentElement.parentElement.parentElement.parentElement
       const selectedVenueInnerHTML = selectedVenueEl.innerHTML
 
-      // console.log(selectedVenueEl);
 
-      selectedVenueEl.parentElement.remove();
 
-      venuesChosenContainer.prepend(selectedVenueEl)
 
-      // console.log(selectedVenueEl);
       selectedVenueEl.classList.add('chosen-venue-card')
+      $(selectedVenueEl.parentElement).fadeOut();
+
+      setTimeout(() => {
+
+        selectedVenueEl.parentElement.remove();
+
+      }, 350);
+
+      setTimeout(() => {
+
+        $(selectedVenueEl).fadeIn();
+        venuesChosenContainer.prepend(selectedVenueEl);
+
+      }, 450);
 
     } else {
       alert('you already have 3 cards in your deck!');
@@ -170,6 +180,7 @@ venuesSelectBtns.forEach((btn) => {
 
 
 // LOGIC TO ADD A SELECTED VENUE ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 
 
 
