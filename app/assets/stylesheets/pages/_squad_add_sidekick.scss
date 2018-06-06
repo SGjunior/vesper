@@ -99,9 +99,37 @@
 }
 
 #add-button {
-  background: $mint;
+  position: relative;
+  background: linear-gradient($mint, $black);
+  -webkit-border-radius:50px;
+  -moz-border-radius:50px;
+  border-radius:50%;
+  height: 3em;
+  width: 3em;
+  z-index: 7;
+}
+
+#add-button:after {
+  position: absolute;
+  display: block;
+  height: 2.6em;
+  width: 2.6em;
+  top: 3px;
+  left: 3px;
+  content: "";
+  background-color: #fff;
   border-radius: 50%;
-  padding: 5px;
+  overflow: hidden;
+  z-index: -12;
+}
+
+#add-button i {
+  position: absolute;
+  z-index: 66;
+  color: $mint;
+  font-size: 2.6em;
+  top: 4px;
+  left: 3.7px;
 }
 
 .add-sidekick-right {
