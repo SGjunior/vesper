@@ -1,7 +1,10 @@
 <% @squad.squadchosenvenues.each do |venue| %>
 <% chosen_venue = Venue.find(venue.venue_id) %>
 
-<div class="blog-card spring-fever mdl-shadow--2dp" data-venue-id="<%= chosen_venue.id %>">
+
+<div class="col-xs-6 col-md-4 col-xs-offset-3 col-md-offset-0">
+<div class="blog-card spring-fever mdl-shadow--2dp" data-venue-id="<%= chosen_venue.id %>" id="chosen-card">
+
   <div class="title-content">
     <h3><%= chosen_venue.name %></h3>
     <!-- <div class="intro">★★★</div> -->
@@ -31,7 +34,7 @@
 
   </div><!-- /.card-info -->
 </div><!-- /.blog-card -->
-
+</div>
 <% end %>
 
 
