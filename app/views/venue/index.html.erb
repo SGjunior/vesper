@@ -46,7 +46,6 @@
   </div>
 
 </div>
-  <!-- </button> -->
 
   <div class="svg-wrapper">
       <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
@@ -75,6 +74,7 @@
   const proceedButton = document.getElementById('proceed-to-create-squad-btn');
 
   proceedButton.addEventListener('click', (event) => {
+    event.preventDefault();
 
     const chosenVenues = document.querySelectorAll('.chosen-venue-card');
 
