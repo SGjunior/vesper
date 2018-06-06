@@ -46,15 +46,23 @@
 <div class="row">
   <div class="col-xs-12">
     <div style="margin: 50px auto !important; width: 500px; text-align: center;">
-        <h4 id="status-display" style="display: none;"></h4>
+        <h4 id="status-display" class="message-waiting-venue-choose"style="display: none;"></h4>
       <!-- Raised button -->
+
+    </div>
+  </div>
+</div>
+<!-- FAB button -->
+
+      <div class="progress-btn-container">
       <div class="svg-wrapper" id="member-confirm-venue-btn">
         <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
           <rect id="shape" height="40" width="150" />
           <div id="text">
-            <a class="mint" href=""><span class="spot"></span>
-              <i class="fas fa-arrow-right"></i>
-            </a>
+            <div class="mint">
+              <!-- <i class="fas fa-arrow-right"></i> -->
+              Confirm
+            </<div></div>>
           </div>
         </svg>
       </div>
@@ -63,9 +71,9 @@
         <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
           <rect id="shape" height="40" width="150" />
           <div id="text">
-            <a class="mint" href=""><span class="spot"></span>
-              <i class="fas fa-arrow-right"></i>
-            </a>
+            <div class="mint" href="">
+              <i class="material-icons">lock</i>
+            </div>
           </div>
         </svg>
       </div>
@@ -74,10 +82,10 @@
         <div class="svg-wrapper" id="member-proceed-venue-btn" style="display: none;">
           <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
             <rect id="shape" height="40" width="150" />
-            <div id="text mint">
-              <!-- <a class="mint" href=""><span class="spot"></span> -->
+            <div id="text">
+              <div class="mint">
                 <i class="fas fa-arrow-right"></i>
-              <!-- </a> -->
+              </div>
             </div>
           </svg>
         </div>
@@ -92,11 +100,6 @@
       </button>
       <%# end %> -->
     </div>
-  </div>
-</div>
-<!-- FAB button -->
-
-
 
 
 <script>
@@ -237,9 +240,20 @@ const displayStatus = (data) => {
       const memberClosedEl = document.querySelector(`[member-closed='${squadmember.user_id}']`);
       const memberOpenEl = document.querySelector(`[member-open='${squadmember.user_id}']`);
 
+      const chosenVenueCardInfo = document.querySelector(`[data-chosenvenue-id='${squadmember.squadchosenvenue_id}']`);
+
+      console.log(`[data-chosenvenue-id='${squadmember.squadchosenvenue_id}']`);
+      console.log(chosenVenueCardInfo);
+
       $(`[member-closed='${squadmember.user_id}']`).fadeOut();
       $(`[member-open='${squadmember.user_id}']`).delay(500).fadeIn();
 
+
+      if (chosenVenueCardInfo.querySelector(`[data-user-id='${squadmember.user_id}']`)) {
+        console.log('gaby is already present');
+      } else {
+        chosenVenueCardInfo.prepend(memberOpenEl.parentElement.parentElement.querySelector('img').cloneNode());
+      }
       // fade out lock
       // fade in lock_open
 
@@ -266,7 +280,7 @@ const displayStatus = (data) => {
   } else {
     $('#member-proceed-venue-btn').fadeOut();
     $('#member-locked-venue-btn').delay(500).fadeIn();
-    statusDisplayEl.innerHTML = `Missing votes : ${data.status.missing_cnt}; waiting for : ${data.status.waiting_for}`
+    statusDisplayEl.innerHTML = `${data.status.missing_cnt} more vote to go!`;
   }
 }
 </script>

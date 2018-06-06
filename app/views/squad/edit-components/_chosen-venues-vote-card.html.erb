@@ -1,13 +1,14 @@
 <% @squad.squadchosenvenues.each do |venue| %>
 <% chosen_venue = Venue.find(venue.venue_id) %>
 
-
 <div class="blog-card spring-fever mdl-shadow--2dp" data-venue-id="<%= chosen_venue.id %>">
   <div class="title-content">
     <h3><%= chosen_venue.name %></h3>
     <!-- <div class="intro">★★★</div> -->
     <div class="intro"><%= '★' * chosen_venue.rating.to_i  %></div>
     <div class="intro"><%= '$' * chosen_venue.pricing.to_i  %></div>
+    <div class="intro squad-votes" data-chosenvenue-id="<%= chosen_venue.id %>"></div>
+
   </div>
 
   <!-- <div class="color-overlay"></div> -->
@@ -16,7 +17,7 @@
 
     <ul>
       <li>
-        <%= link_to venue_path(venue.id), remote: true, data: {method: 'get' } do %>
+        <%= link_to venue_path(chosen_venue.id), remote: true, data: {method: 'get' } do %>
         <i class="fas fa-info-circle" data-venue-id="<%= venue.id %>" onclick="openNav()">
         </i>
         <% end %>
