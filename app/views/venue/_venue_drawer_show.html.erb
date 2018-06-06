@@ -21,9 +21,9 @@
               <div class="row">
                   <div class="col-xs-12"><body><i class="fas fa-glass-martini"></i> <%= venue.description %> </body></div>
                   <div class="col-xs-12"><p><i class="fas fa-music"></i> <%= venue.music_genre %> </p></div>
-                  <div class="col-xs-6"><p><% venue.pricing.times do %>
+                  <div class="col-xs-6"><p> <!-- # venue.pricing.times do %> -->
                     <i class="fas fa-dollar-sign"></i>
-                  <% end %>
+                   <!-- # end %> -->
                   </p></div>
 
                   <div class="col-xs-6"><p><% 3.times do  %>
