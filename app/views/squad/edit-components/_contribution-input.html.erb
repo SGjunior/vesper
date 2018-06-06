@@ -33,7 +33,7 @@
 <!--       <button id="member-confirm-contribution-btn" class="mdl-button mdl-js-button mdl-button--fab" style="float: right">
         <i class="material-icons">arrow_right</i>
       </button> -->
-      <%= link_to squad_path(@squad.id), class: "under-svg-button" do %>
+      <%= link_to squad_path(@squad.id), { class: "under-svg-button", id: 'member-confirm-contribution-btn' } do %>
         <div class="svg-wrapper" id="proceed-to-create-squad-btn">
           <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
             <rect id="shape" height="40" width="150" />
