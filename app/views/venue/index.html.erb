@@ -1,54 +1,51 @@
 
-  <!-- <div class="app mdl-shadow--2dp"> -->
-    <div class="index-wrapper">
-      <div class="row">
-        <div class="col-xs-12 col-sm-10 col-sm-offset-1">
-          <div class="container">
-            <div class="row">
-              <div class="main-index" id="main">
-                <div class="venues">
+  <div class="index-wrapper">
+      <!-- <div class="col-xs-12 col-sm-10 col-sm-offset-1"> -->
+        <div class="container">
+          <div class="row">
+            <div class="main-index" id="main">
+              <div class="venues">
 
-                  <!-- Generate the cards in here -->
-                    <% @Venues.each do |venue| %>
-                      <%= render 'venue/index_components/venue_card', venue: venue %>
-                    <% end %>
-                </div>
+                <!-- Generate the cards in here -->
+                <% @Venues.each do |venue| %>
+                <%= render 'venue/index_components/venue_card', venue: venue %>
+                <% end %>
               </div>
             </div>
           </div>
-
-
-          <!-- Generate the map in here -->
-          <div class="map" hidden>
-            <div id="map" data-markers="<%= @markers.to_json %>"></div>
-          </div>
         </div>
-      </div>
-    </div>
-  <!-- </div> -->
 
-<!-- STICKY DECK BAR -->
-<div class="venues-chosen">
-  <!-- generating chosen venues for now -->
+
+        <!-- Generate the map in here -->
+        <div class="map" hidden>
+          <div id="map" data-markers="<%= @markers.to_json %>"></div>
+        </div>
+      <!-- </div> -->
+  </div>
+
+  <!-- STICKY DECK BAR -->
+  <div class="venues-chosen">
+    <!-- generating chosen venues for now -->
     <%# 3.times do %>
-        <%#render 'venue/index_components/venue_card', venue: @Venues.sample() %>
+    <%#render 'venue/index_components/venue_card', venue: @Venues.sample() %>
     <%# end %>
 
 
-  <div id="shOverlay" class="overlay">
+    <div id="shOverlay" class="overlay">
 
-  <!-- Button to close the overlay navigation -->
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <!-- Button to close the overlay navigation -->
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 
-  <!-- Overlay content -->
-  <div class="overlay-content">
-    <%# render partial: "/venue/index_components/show-partial", locals: {venue: venue } %>
+      <!-- Overlay content -->
+      <div class="overlay-content">
+        <%# render partial: "/venue/index_components/show-partial", locals: {venue: venue } %>
+      </div>
+
+    </div>
   </div>
 
-</div>
-  <!-- </button> -->
-
-  <div class="svg-wrapper">
+  <div class="progress-btn-container">
+    <div class="svg-wrapper">
       <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
         <rect id="shape" height="40" width="150" />
         <div id="text">
@@ -58,68 +55,78 @@
         </div>
       </svg>
     </div>
-</div>
+  </div>
 
 
-<script>
-  function openNav() {
-    document.getElementById("shOverlay").style.width = "100%";
 
-}
 
-/* Close when someone clicks on the "x" symbol inside the overlay */
-  function closeNav() {
+
+
+
+
+
+
+
+  <script>
+    function openNav() {
+      document.getElementById("shOverlay").style.width = "100%";
+
+    }
+
+    /* Close when someone clicks on the "x" symbol inside the overlay */
+    function closeNav() {
       document.getElementById("shOverlay").style.width = "0%";
-  }
+    }
 
-  const proceedButton = document.getElementById('proceed-to-create-squad-btn');
+    const proceedButton = document.getElementById('proceed-to-create-squad-btn');
 
-  proceedButton.addEventListener('click', (event) => {
+    proceedButton.addEventListener('click', (event) => {
+      event.preventDefault();
 
-    const chosenVenues = document.querySelectorAll('.chosen-venue-card');
+      const chosenVenues = document.querySelectorAll('.chosen-venue-card');
 
-    console.log(chosenVenues);
+      console.log(chosenVenues);
 
-    if (chosenVenues.length < 3 ) {
-      alert(`You only have ${chosenVenues.length} venues selected`);
-    } else {
-      <% if user_signed_in? %>
+      if (chosenVenues.length < 3 ) {
+        alert(`You only have ${chosenVenues.length} venues selected`);
+      } else {
+        <% if user_signed_in? %>
 
           // Send ajax request to the controller + redirect to new page
           sendAjaxCreateRequest(chosenVenues);
           // wait for the answer?
           // redirect to squad#edit
 
-      <% else %>
+          <% else %>
         // redirect to sign_in page
         window.location.href = '/users/sign_in'
-      <% end %>
-    }
+        <% end %>
+      }
 
 
-  });
-
-  sendAjaxCreateRequest = (chosenVenues) => {
-
-    const authToken = document.querySelector('meta[name="csrf-token"]').content
-    const createUrl = '/squad';
-
-    let chosenVenuesArr = []
-
-    chosenVenues.forEach((venue) => {
-      chosenVenuesArr.push(venue.getAttribute("data-venue-id"));
     });
 
-    fetch('/squad', {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Requested-With': 'XMLHttpRequest',
-        'X-CSRF-Token': authToken
-      },
-      body: JSON.stringify({ chosenVenues: chosenVenuesArr }),
-      credentials: 'same-origin'
-    })
+    sendAjaxCreateRequest = (chosenVenues) => {
+
+      const authToken = document.querySelector('meta[name="csrf-token"]').content
+      const createUrl = '/squad';
+
+      let chosenVenuesArr = []
+
+      chosenVenues.forEach((venue) => {
+        chosenVenuesArr.push(venue.getAttribute("data-venue-id"));
+      });
+
+      fetch('/squad', {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Requested-With': 'XMLHttpRequest',
+          'X-CSRF-Token': authToken
+        },
+        body: JSON.stringify({ chosenVenues: chosenVenuesArr }),
+        credentials: 'same-origin'
+      })
       .then((response) => response.json())
       .then((data) => {
         // window.location.href = `/squad/${data['id']}/edit`
@@ -127,7 +134,7 @@
         // console.log(data['id']);
       })
       .catch(console.error);
-  }
+    }
 
 
 // LOGIC TO ADD A SELECTED VENUE ----------------------------

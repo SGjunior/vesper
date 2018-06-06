@@ -13,14 +13,27 @@ $txt-color:   #DCE3E7;
   min-height: 300px !important;
   max-height: 400px !important;
   margin: 20px auto;
-  flex-basis: calc(30% - 15px);
+  flex-basis: calc(30% - 30px);
   overflow: hidden;
   border-radius: 20px;
   text-align: center;
   position: relative;
+  -webkit-transition: transform 1s; /* Safari */
+  transition: transform 1s;
+  transform: skewY(4deg);
+
+  // background: linear-gradient(red, yellow);
+  // background: linear-gradient(rgba(0,255,255,0), rgba(255,255,255,1));
+  // background: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1));
+
+  &:hover {
+    transform: none;
+    // transform: skewY(0deg);
+    transform: scale(1.1);
+  }
 
   &.spring-fever{
-    background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1765/bg-blog-card.jpg') no-repeat center;
+    background: url('https://images.unsplash.com/photo-1433785069405-791b480d0a62?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=0d2aba0f49fe8f83145dc66957c5791b&auto=format&fit=crop&w=1189&q=80') no-repeat center;
   }
 
   .color-overlay{
@@ -58,8 +71,8 @@ $txt-color:   #DCE3E7;
       }
     }
     .color-overlay{
-      background: rgba(3, 0, 39, 0.6);
-      z-index: 9;
+      // background: rgba(3, 0, 39, 0.6);
+      // z-index: 9;
     }
   }
 }
@@ -141,5 +154,18 @@ hr{
     &.date{
       background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1765/icon-calendar.svg') no-repeat 0 .1em;
     }
+  }
+}
+
+
+@media screen and (max-width: 600px) {
+  .blog-card {
+    // transform: scale(0.7);
+  }
+  .chosen-venue-card {
+    transform: scale(0.7, 0,7);
+    margin-left: 2px !important;
+    margin-right: 2px !important;
+
   }
 }
