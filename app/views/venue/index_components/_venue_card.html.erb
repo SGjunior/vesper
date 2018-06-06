@@ -33,16 +33,16 @@
   <!-- <div class="gradient-overlay"></div> -->
   <!-- <div class="color-overlay"></div> -->
   <div class="card-info">
+    <ul>
   <%= link_to venue_path(venue.id), remote: true, data: {method: 'get' } do %>
-    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" data-venue-id="<%= venue.id %>" onclick="openNav()">
-    Info
-    </button>
+    <li><i class="fas fa-info-circle" data-venue-id="<%= venue.id %>" onclick="openNav()">
+    </i></li>
   <% end %>
 
   <!-- Raised button with ripple -->
-    <button class="select-venue-btn mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" data-venue-id="<%= venue.id %>">
-      Select
-    </button>
+    <li><i class="fas fa-hand-paper" style="cursor: pointer" data-venue-id="<%= venue.id %>">
+    </i></li>
+    </ul>
   </div><!-- /.card-info -->
 </div><!-- /.blog-card -->
 </div>
