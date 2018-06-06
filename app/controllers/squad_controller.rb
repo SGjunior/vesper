@@ -42,6 +42,11 @@ class SquadController < ApplicationController
     authorize @squadmember
   end
 
+  def index
+    policy_scope(User) #miscreant
+    @dont_render_footer = true
+  end
+
   def member_confirm_venue
     @squad = Squad.find(params[:id])
     @squadmember = @squad.squadmembers.find(params[:squad_member_id])
@@ -237,8 +242,3 @@ class SquadController < ApplicationController
 
     return { ready: member_critial_count == member_count_have_chosen_venue, missing_cnt: member_critial_count - member_count_have_chosen_venue, waiting_for: members_have_not_chosen }
   end
-
-
-
-
-end

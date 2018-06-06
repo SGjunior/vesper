@@ -1,0 +1,24 @@
+  .footer {
+      // background:-webkit-linear-gradient(180deg, rgb(27, 90, 114) 0%, rgb(16, 51, 66) 95%);
+      // background:-o-linear-gradient(180deg, rgb(27, 90, 114) 0%, rgb(16, 51, 66) 95%);
+    color: rgba(0,0,0,0.3);
+  }
+  .footer-links {
+    display: flex;
+    align-items: center;
+  }
+  .footer-links a {
+    color: black;
+    opacity: 0.15;
+    padding: 0px 10px;
+  }
+  .footer-links a:hover {
+    color: #1B5A72;
+    opacity: 1;
+  }
+  .footer .fa-heart {
+    color: #D23333;
+  }
+  .fixed-bottom {
+
+  }

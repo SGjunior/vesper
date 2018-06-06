@@ -45,11 +45,11 @@ cursor: pointer;
   font-size: 20px;
 }
 
-#proceed-to-create-squad-btn .fas {
+.proceed-btn {
   color: $mint;
   font-size: 1.1em;
-
 }
+
 /*
   This is where we define the fill, color, thickness,
   and stroke pattern of the SVG when there is no hover.

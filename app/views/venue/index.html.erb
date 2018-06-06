@@ -46,7 +46,7 @@
       <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
         <rect id="shape" height="40" width="150" />
         <div id="text">
-          <a id="proceed-to-create-squad-btn" href=""><span class="spot"></span>
+          <a class="proceed-btn"><span class="spot"></span>
             <i class="fas fa-arrow-right"></i>
           </a>
         </div>
@@ -57,7 +57,7 @@
 
 
 <script>
-  const proceedButton = document.getElementById('proceed-to-create-squad-btn');
+  const proceedButton = document.querySelector('.proceed-btn');
 
   proceedButton.addEventListener('click', (event) => {
 
@@ -125,7 +125,7 @@ const venuesSelectBtns = document.querySelectorAll('.select-venue-btn');
 venuesSelectBtns.forEach((btn) => {
   btn.addEventListener('click', (event) => {
     const chosenVenues = document.querySelectorAll('.chosen-venue-card');
-
+    console.log("clicked!")
     if (chosenVenues.length < 3 ) {
 
       const venueId = event.currentTarget.attributes['data-venue-id'];
