@@ -50,13 +50,26 @@ cursor: pointer;
   margin-left: 5px;
   margin-right: 5px;
   font-size: 20px;
+
+  cursor: pointer;
 }
 
-#proceed-to-create-squad-btn .fas {
+
+
+// #proceed-to-create-squad-btn .fas {
+//   color: $mint;
+//   font-size: 1.1em;
+// }
+
+.mint {
   color: $mint;
   font-size: 1.1em;
 
+  i {
+    margin-top: 3px;
+  }
 }
+
 /*
   This is where we define the fill, color, thickness,
   and stroke pattern of the SVG when there is no hover.
@@ -83,10 +96,10 @@ cursor: pointer;
 }
 
 #text a {
-  color: white;
+  // color: white;
   text-decoration: none;
   font-weight: 100;
-  font-size: 1.1em;
+  // font-size: 1.1em;
 }
 /*
     Changing the shape on hover. I change the color of the stroke,
