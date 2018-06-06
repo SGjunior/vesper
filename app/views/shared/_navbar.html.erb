@@ -161,7 +161,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 const venues = document.querySelectorAll('.col-xs-12.col-sm-6.col-md-4 .blog-card.mdl-shadow--2dp');
 const searchBar = document.getElementById('search-bar-input');
 
-const filterResults = () => {
+const filterResultsVenues = () => {
 
     const searchValue = searchBar.value.toLowerCase();
 
@@ -188,9 +188,33 @@ const filterResults = () => {
 }
 
 
+const friends = document.querySelectorAll('.squadmember-list-container');
+
+const filterResultsFriends = () => {
+
+    const searchValue = searchBar.value.toLowerCase();
+
+    // console.log(venues);
+    friends.forEach((friend) => {
+      const friendName = friend.attributes['data-friend-name'].value.toLowerCase();
+      if (friendName.indexOf(searchValue) !== -1) {
+        friend.classList.remove('hidden');
+      } else {
+        friend.classList.add('hidden');
+      }
+    });
+
+    console.log(searchValue);
+}
+
+
   if (searchBar) {
     searchBar.addEventListener('input', (event) => {
-      filterResults();
+      if (window.location.href.match(/\/venue$/)) {
+        filterResultsVenues();
+      } else {
+        filterResultsFriends();
+      }
     });
   };
 
@@ -247,7 +271,11 @@ const filterResults = () => {
         if (f.hasClass('open')) {
           s.val('');
           // s.trigger('input');
-          filterResults();
+          if (window.location.href.match(/\/venue$/)) {
+            filterResultsVenues();
+          } else {
+            filterResultsFriends();
+          };
           // var event = new Event('input');
           // s.dispatchEvent(event);
 
