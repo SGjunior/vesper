@@ -25,14 +25,26 @@
       <h2 id="contribution-input" style="color: white;"></h2>
       <!-- Default Slider -->
       <input class="mdl-slider mdl-js-slider" type="range"
-        min="0" max="100" value="0" tabindex="0" id="mdl-slider" style="height: 500px !important">
+        min="0" max="100" value="0" tabindex="0" id="mdl-slider" style="height: 50px !important">
 
 
 
       <!-- FAB button -->
-      <button id="member-confirm-contribution-btn" class="mdl-button mdl-js-button mdl-button--fab" style="float: right">
+<!--       <button id="member-confirm-contribution-btn" class="mdl-button mdl-js-button mdl-button--fab" style="float: right">
         <i class="material-icons">arrow_right</i>
-      </button>
+      </button> -->
+      <%= link_to squad_path(@squad.id), class: "under-svg-button" do %>
+        <div class="svg-wrapper" id="proceed-to-create-squad-btn">
+          <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
+            <rect id="shape" height="40" width="150" />
+            <div id="text">
+              <div class="mint" href=""><span class="spot"></span>
+                <i class="fas fa-arrow-right"></i>
+              </div>
+            </div>
+          </svg>
+        </div>
+      <% end %>
 
     </div>
   </div>
