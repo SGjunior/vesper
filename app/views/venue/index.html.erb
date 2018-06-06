@@ -45,7 +45,7 @@
   </div>
 
 
-<!--   <div class="progress-btn-container"> -->                   
+  <div class="progress-btn-container">
   <div class="svg-wrapper" id="proceed-to-create-squad-btn">
     <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
       <rect id="shape" height="40" width="150" />
@@ -57,7 +57,7 @@
     </svg>
   </div>
 </div>
-<!-- </div> -->
+</div>
 
 
 
@@ -148,7 +148,7 @@ venuesSelectBtns.forEach((btn) => {
     if (chosenVenues.length < 3 ) {
 
       const venueId = event.currentTarget.attributes['data-venue-id'];
-      const selectedVenueEl = event.currentTarget.parentElement.parentElement
+      const selectedVenueEl = event.currentTarget.parentElement.parentElement.parentElement.parentElement
       const selectedVenueInnerHTML = selectedVenueEl.innerHTML
 
       // console.log(selectedVenueEl);
