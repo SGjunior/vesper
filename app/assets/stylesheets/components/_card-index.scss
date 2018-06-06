@@ -6,7 +6,9 @@
 // $card-height: 500px;
 $txt-color:   #DCE3E7;
 
-
+// .blog-card:after {
+// background: linear-gradient(to left bottom, rgba(5, 25, 55, 0.9), rgba(17, 23, 58, 0.8), rgba(31, 18, 60, 0.7), rgba(44, 11, 58, 0.6), rgba(56, 0, 54, 0.5));
+// }
 .blog-card{
   // width: $card-width;
   // height: $card-height;
@@ -183,13 +185,26 @@ hr{
 }
 
 .card-info {
+  position: absolute;
+  bottom: 25px;
   a {
     text-decoration: none;
     color: white;
   }
 
   ul {
+    bottom: 0px;
     list-style: none;
+      margin-left: 0 !important;
+      padding-left: 0 !important;
+
+    li {
+      // margin: 0 auto;
+      margin-left: 0 !important;
+      padding-left: 0 !important;
+      margin-top: 25px;
+    }
+
   }
 
   .fas {
