@@ -7,4 +7,6 @@ class User < ApplicationRecord
   has_many :squads
   has_many :squadmembers
 
+  mount_uploader :photo, PhotoUploader
+
 end

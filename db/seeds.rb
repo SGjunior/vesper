@@ -118,106 +118,102 @@ if false
   end
 end
 
+users = [
 User.new(
     first_name: 'MG',
     last_name:  'Ayoub',
     email: "qwerty@gmail.com",
-    photo: 'MG_Avatar',
     phone_number: "514-321-4321",
     address: Faker::Address.full_address,
     password: 'qwerty'
-  ).save!
+  ),
 
 User.new(
     first_name: 'Simon',
     last_name:  'Guertin',
     email: "qwerty2@gmail.com",
-    photo: 'Simon_Avatar',
     phone_number: "514-321-4321",
     address: Faker::Address.full_address,
     password: 'qwerty'
-  ).save!
+  ),
 
 User.new(
     first_name: 'V',
     last_name:  'Sadasivan',
     email: "qwerty3@gmail.com",
-    photo: 'V_Avatar',
     phone_number: "514-321-4321",
     address: Faker::Address.full_address,
     password: 'qwerty'
-  ).save!
+  ),
 
 User.new(
     first_name: 'Gaelle',
     last_name:  'Londonoz',
     email: "qwerty4@gmail.com",
-    photo: 'Gaelle_Avatar',
     phone_number: "514-321-4321",
     address: Faker::Address.full_address,
     password: 'qwerty'
-  ).save!
+  ),
 
 User.new(
     first_name: 'Neal',
     last_name:  'Sutaria',
     email: "qwerty5@gmail.com",
-    photo: 'Neal_Avatar',
     phone_number: "514-321-4321",
     address: Faker::Address.full_address,
     password: 'qwerty'
-  ).save!
+  ),
 
 User.new(
     first_name: 'Michael',
     last_name:  'Lepecq',
     email: "qwerty6@gmail.com",
-    photo: 'Michael_Avatar',
     phone_number: "514-321-4321",
     address: Faker::Address.full_address,
     password: 'qwerty'
-  ).save!
+  ),
 
 User.new(
     first_name: 'Jack',
     last_name:  'Gaarkeuken',
     email: "qwerty7@gmail.com",
-    photo: 'Jack_Avatar',
     phone_number: "514-321-4321",
     address: Faker::Address.full_address,
     password: 'qwerty'
-  ).save!
+  ),
 
 User.new(
     first_name: 'Leo',
     last_name:  'Marshall',
     email: "qwerty8@gmail.com",
-    photo: 'Leo_Avatar',
     phone_number: "514-321-4321",
     address: Faker::Address.full_address,
     password: 'qwerty'
-  ).save!
+  ),
 
 User.new(
     first_name: 'Linming',
     last_name:  'Ye',
     email: "qwerty9@gmail.com",
-    photo: 'Li_Avatar',
     phone_number: "514-321-4321",
     address: Faker::Address.full_address,
     password: 'qwerty'
-  ).save!
-
+  ),
 
 User.new(
     first_name: 'Adam',
     last_name:  'Frej',
     email: "qwerty10@gmail.com",
-    photo: 'Adam_Avatar',
     phone_number: "514-321-4321",
     address: Faker::Address.full_address,
     password: 'qwerty'
-  ).save!
+  ),
+]
+
+users.each do |user|
+  user.remote_photo_url = Cloudinary::Utils.cloudinary_url  "#{user.first_name}_Avatar"
+  user.save!
+end
 
 # puts "done calling APIs"
 
@@ -390,7 +386,12 @@ venue_attributes = [
 
 # 5.times do
 venue_attributes.each do |venue_attributes_hash|
+  venue_attributes_hash_photo = Cloudinary::Utils.cloudinary_url  "#{venue_attributes_hash["photo"]}"
+  venue_attributes_hash.delete("photo")
+
   venue = Venue.new(venue_attributes_hash)
+  venue.remote_photo_url = venue_attributes_hash_photo
+
     # name: venue_attributes_hash[:name],
     # description: venue_attributes_hash[:description],
     # # description: 'Lorem ipsum dolor sit amet, ut amet arcu, a vel. Bibendum enim curabitur, tincidunt congue consectetuer, nunc in. Wisi wisi, vitae taciti tempor. Massa est, arcu integer, vulputate velit eu.',
