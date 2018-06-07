@@ -20,7 +20,7 @@
       <% end %>
     </div>
     <div class="col-xs-12 col-sm-6">
-      <h2 class="contribution-cash contribution-total" id="contribution-total"></h2>
+      <h2 class="contribution-cash contribution-total" id="contribution-total">0</h2>
     </div>
   </div>
 
@@ -181,11 +181,11 @@ const submittedMemberContributionChoice = () => {
 
 const waitingForSquadContribution = () => {
   setInterval(function(){
-    console.log('initializing fetch');
+    // console.log('initializing fetch');
     fetchContributionStatus();
-    console.log('done updating');
+    // console.log('done updating');
 
-  }, 1000);
+  }, 200);
 }
 
 document.addEventListener('DOMContentLoaded', (event) => {
@@ -222,10 +222,17 @@ const fetchContributionStatus = () => {
 
 }
 
+const contributionTotalEl = document.getElementById('contribution-total');
 const displayStatusContribution = (data) => {
+  let currentUser = <%= current_user.id %>;
+  let currentUserVoted = false
   let contributionTotal = 0;
   data.squadmembers.forEach((squadmember) => {
-    if (squadmember.contribution != 0) {
+
+    if (squadmember.contribution != 0 && squadmember.contribution != null) {
+      if (squadmember.user_id == currentUser) {
+        currentUserVoted = true;
+      }
 
       contributionTotal += squadmember.contribution
 
@@ -234,11 +241,18 @@ const displayStatusContribution = (data) => {
       $(`[member-closed='${squadmember.user_id}']`).fadeOut();
 
       $(`[data-contribution-user-id='${squadmember.user_id}']`).delay(500).fadeIn();
-      document.querySelector(`[data-contribution-user-id='${squadmember.user_id}']`).innerHTML = `${squadmember.contribution}<sup>$</sup>`
+      document.querySelector(`[data-contribution-user-id='${squadmember.user_id}']`).innerHTML = `<sup>$</sup>${squadmember.contribution}`
     }
   });
 
-  document.getElementById('contribution-total').innerHTML = contributionTotal;
+  if (currentUserVoted) {
+    console.log('already voted');
+  } else {
+    contributionTotal += parseInt(document.getElementById('contribution-input').innerHTML);
+  }
+  if (contributionTotalEl.innerHTML != contributionTotal) {
+    contributionTotalEl.innerHTML = contributionTotal;
+  }
 }
 
 
