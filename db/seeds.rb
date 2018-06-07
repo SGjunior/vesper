@@ -117,10 +117,60 @@ array_of_clubs.each do |club|
 end
 
 User.create(
-    first_name: 'Jean',
-    last_name:  'Giroux',
+    first_name: 'MG',
+    last_name:  'Ayoub',
     email: "qwerty@gmail.com",
-    photo: 'https://avatars2.githubusercontent.com/u/5466297?s=460&v=4',
+    photo: 'MG_Avatar',
+    phone_number: "514-321-4321",
+    address: Faker::Address.full_address,
+    password: 'qwerty'
+  )
+
+User.create(
+    first_name: 'Simon',
+    last_name:  'Guertin',
+    email: "qwerty2@gmail.com",
+    photo: 'Simon_Avatar',
+    phone_number: "514-321-4321",
+    address: Faker::Address.full_address,
+    password: 'qwerty'
+  )
+
+User.create(
+    first_name: 'V',
+    last_name:  'Sadasivan',
+    email: "qwerty3@gmail.com",
+    photo: 'V_Avatar',
+    phone_number: "514-321-4321",
+    address: Faker::Address.full_address,
+    password: 'qwerty'
+  )
+
+User.create(
+    first_name: 'Gaelle',
+    last_name:  'Londonoz',
+    email: "qwerty3@gmail.com",
+    photo: 'Gaelle_Avatar',
+    phone_number: "514-321-4321",
+    address: Faker::Address.full_address,
+    password: 'qwerty'
+  )
+
+User.create(
+    first_name: 'Neal',
+    last_name:  'Sutaria',
+    email: "qwerty3@gmail.com",
+    photo: 'Neal_Avatar',
+    phone_number: "514-321-4321",
+    address: Faker::Address.full_address,
+    password: 'qwerty'
+  )
+
+User.create(
+    first_name: 'Michael',
+    last_name:  'Lepecq',
+    email: "qwerty3@gmail.com",
+    photo: 'Michael_Avatar',
     phone_number: "514-321-4321",
     address: Faker::Address.full_address,
     password: 'qwerty'
@@ -128,24 +178,44 @@ User.create(
 
 User.create(
     first_name: 'Jack',
-    last_name:  'Gaark',
-    email: "qwerty2@gmail.com",
-    photo: 'https://avatars2.githubusercontent.com/u/5466297?s=460&v=4',
+    last_name:  'Gaarkeuken',
+    email: "qwerty3@gmail.com",
+    photo: 'Jack_Avatar',
     phone_number: "514-321-4321",
     address: Faker::Address.full_address,
     password: 'qwerty'
   )
 
 User.create(
-    first_name: 'Adam',
-    last_name:  'Epstein',
+    first_name: 'Leo',
+    last_name:  'Marshall',
     email: "qwerty3@gmail.com",
-    photo: 'https://avatars2.githubusercontent.com/u/5466297?s=460&v=4',
+    photo: 'Leo_Avatar',
     phone_number: "514-321-4321",
     address: Faker::Address.full_address,
     password: 'qwerty'
   )
 
+User.create(
+    first_name: 'Linming',
+    last_name:  'Ye',
+    email: "qwerty3@gmail.com",
+    photo: 'Li_Avatar',
+    phone_number: "514-321-4321",
+    address: Faker::Address.full_address,
+    password: 'qwerty'
+  )
+
+
+User.create(
+    first_name: 'Adam',
+    last_name:  'Frej',
+    email: "qwerty3@gmail.com",
+    photo: 'Adam_Avatar',
+    phone_number: "514-321-4321",
+    address: Faker::Address.full_address,
+    password: 'qwerty'
+  )
 
 puts "done calling APIs"
 
@@ -171,12 +241,178 @@ end
 
 venue_attributes = [
   {
-    name: "Martin's Club",
-    description: "Whatever",
-    music_genre: "brazilian",
-    address: "123 not fake",
+    name: "Datcha",
+    description: "Underground DJ's in small intimate venue",
+    music_genre: "electro",
+    address: "98 ave Laurier",
     # latitude: (45.5017 + rand() - rand()),
     # longitude: (rand() - 73.5673 - rand()),
+    photo: 'bar-datcha-bar-datcha',
+    capacity: 100,
+    pricing: 2,
+    instagram_handle: 'https://www.instagram.com/beachclubmtl/'
+  }
+]
+
+venue_attributes = [
+  {
+    name: "Velvet",
+    description: "Club in plush velvet decor in the Old Port",
+    music_genre: "dance/electro",
+    address: "426 St Gabriel",
+    # latitude: (45.5017 + rand() - rand()),
+    # longitude: (rand() - 73.5673 - rand()),
+    photo: 'Velvet_club',
+    capacity: 100,
+    pricing: 3,
+    instagram_handle: 'https://www.instagram.com/beachclubmtl/'
+  }
+]
+
+venue_attributes = [
+  {
+    name: "LaVoute",
+    description: "New club venue in an old bank, very elegant",
+    music_genre: "dance/hip-hop",
+    address: "360 St Jacques",
+    # latitude: (45.5017 + rand() - rand()),
+    # longitude: (rand() - 73.5673 - rand()),
+    photo: 'LaVoute_club',
+    capacity: 100,
+    pricing: 3,
+    instagram_handle: 'https://www.instagram.com/beachclubmtl/'
+  }
+]
+
+venue_attributes = [
+  {
+    name: "Loic",
+    description: "Old bank turned wine bar in a relaxed atmosphere",
+    music_genre: "rock/dance",
+    address: "5001 Notre Dame",
+    # latitude: (45.5017 + rand() - rand()),
+    # longitude: (rand() - 73.5673 - rand()),
+    photo: 'Loic_club',
+    capacity: 100,
+    pricing: 2,
+    instagram_handle: 'https://www.instagram.com/beachclubmtl/'
+  }
+]
+
+venue_attributes = [
+  {
+    name: "Thursday's",
+    description: "Classic bar/nightclub establishment in Montreal",
+    music_genre: "rock",
+    address: "1449 Crescent St",
+    # latitude: (45.5017 + rand() - rand()),
+    # longitude: (rand() - 73.5673 - rand()),
+    photo: 'Thursdays_club',
+    capacity: 100,
+    pricing: 2,
+    instagram_handle: 'https://www.instagram.com/beachclubmtl/'
+  }
+]
+
+venue_attributes = [
+  {
+    name: "Ping-Pong",
+    description: "Fun venue, beer, board games and ping-pong",
+    music_genre: "rock/dance",
+    address: "5788 St Laurent",
+    # latitude: (45.5017 + rand() - rand()),
+    # longitude: (rand() - 73.5673 - rand()),
+    photo: 'Ping pong_club',
+    capacity: 100,
+    pricing: 2,
+    instagram_handle: 'https://www.instagram.com/beachclubmtl/'
+  }
+]
+
+venue_attributes = [
+  {
+    name: "Henrietta",
+    description: "Beautiful wine bar with good bites",
+    music_genre: "brazilian/bosa nova",
+    address: "115 Ave Laurier",
+    # latitude: (45.5017 + rand() - rand()),
+    # longitude: (rand() - 73.5673 - rand()),
+    photo: 'Henrietta_club',
+    capacity: 100,
+    pricing: 2,
+    instagram_handle: 'https://www.instagram.com/beachclubmtl/'
+  }
+]
+
+venue_attributes = [
+  {
+    name: "Bar Le Ritz",
+    description: "Indie rock venue, cheap drinks",
+    music_genre: "varied music",
+    address: "179 Rue Jean Talon",
+    # latitude: (45.5017 + rand() - rand()),
+    # longitude: (rand() - 73.5673 - rand()),
+    photo: 'Bar Le Ritz_club',
+    capacity: 100,
+    pricing: 1,
+    instagram_handle: 'https://www.instagram.com/beachclubmtl/'
+  }
+]
+
+venue_attributes = [
+  {
+    name: "Bord'elle",
+    description: "Supper club with elegant design",
+    music_genre: "dance/hip hip-hop",
+    address: "390 St Jacques",
+    # latitude: (45.5017 + rand() - rand()),
+    # longitude: (rand() - 73.5673 - rand()),
+    photo: 'Bordelle_club',
+    capacity: 100,
+    pricing: 3,
+    instagram_handle: 'https://www.instagram.com/beachclubmtl/'
+  }
+]
+
+venue_attributes = [
+  {
+    name: "2 Pierrots",
+    description: "Local francophone artists rock venue",
+    music_genre: "francophone artists",
+    address: "104 St Paul",
+    # latitude: (45.5017 + rand() - rand()),
+    # longitude: (rand() - 73.5673 - rand()),
+    photo: '2pierrots_club',
+    capacity: 100,
+    pricing: 2,
+    instagram_handle: 'https://www.instagram.com/beachclubmtl/'
+  }
+]
+
+venue_attributes = [
+  {
+    name: "Mayfair",
+    description: "Club venue in vitorian tea venue",
+    music_genre: "dance/hip-hop",
+    address: "451 Rue Rachel",
+    # latitude: (45.5017 + rand() - rand()),
+    # longitude: (rand() - 73.5673 - rand()),
+    photo: 'Mayfair_club',
+    capacity: 100,
+    pricing: 2,
+    instagram_handle: 'https://www.instagram.com/beachclubmtl/'
+  }
+]
+
+venue_attributes = [
+  {
+    name: "Chez Serge",
+    description: "Fun western bar with a riding bull",
+    music_genre: "rock dance",
+    address: "5301 St Laurent",
+    # latitude: (45.5017 + rand() - rand()),
+    # longitude: (rand() - 73.5673 - rand()),
+    photo: 'Chez serge_club',
     capacity: 100,
     pricing: 2,
     instagram_handle: 'https://www.instagram.com/beachclubmtl/'
