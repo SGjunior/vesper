@@ -5,7 +5,7 @@ import ProgressBar from 'progressbar.js'
 
 document.addEventListener("DOMContentLoaded", function(event) {
 
-if (document.querySelector('.banner-main')) {
+  if (document.querySelector('.banner-main')) {
 
     // setInterval(function(){
 
@@ -77,7 +77,7 @@ if (document.querySelector('.banner-main')) {
       // }, 2000);
       if (document.getElementById('mdl-slider')) {
 
-      const packageCards = document.querySelectorAll('.package-card');
+        const packageCards = document.querySelectorAll('.package-card');
       // console.log(packageCards);
       const firstPackageCard = packageCards[0]
       const secondPackageCard = packageCards[1]
@@ -89,8 +89,11 @@ if (document.querySelector('.banner-main')) {
 
       var slider = document.getElementById("mdl-slider");
       var output = document.getElementById("contribution-input");
-      output.innerHTML = slider.value; // Display the default slider value
+      if (output) {
+        output.innerHTML = slider.value; // Display the default slider value
+      }
 
+    if (slider) {
       // Update the current slider value (each time you drag the slider handle)
       slider.oninput = function() {
 
@@ -166,6 +169,7 @@ if (document.querySelector('.banner-main')) {
         //   }
         // }
       }
-  }
     }
+  }
+}
 });

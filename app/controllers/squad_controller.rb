@@ -81,10 +81,14 @@ class SquadController < ApplicationController
 
     authorize @squadmember
 
-    @squadmember.contribution = params[:contribution].to_i
-    @squadmember.will_be_present = true
-    @squadmember.save!
+    if params[:currentaction] != 'status'
+      # binding.pry
+      @squadmember.contribution = params[:contribution].to_i
+      @squadmember.will_be_present = true
+      @squadmember.save!
 
+    end
+    # binding.pry
     render json: { squad: @squad, squadmembers: @squad.squadmembers, status: contribution_progess_ready? }
   end
 
