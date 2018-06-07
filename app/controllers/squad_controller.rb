@@ -17,6 +17,7 @@ class SquadController < ApplicationController
 
     @squad.save!
 
+    # binding.pry
 
     params[:chosenVenues].each do |venue_id|
       Squadchosenvenue.new(squad: @squad, venue_id: venue_id).save!

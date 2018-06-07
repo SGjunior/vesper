@@ -93,83 +93,151 @@ document.addEventListener("DOMContentLoaded", function(event) {
         output.innerHTML = slider.value; // Display the default slider value
       }
 
-    if (slider) {
-      // Update the current slider value (each time you drag the slider handle)
-      slider.oninput = function() {
+      // ATTEMPT AT FIXING EVERYTHIN :
 
-        output.innerHTML = this.value;
-        // console.log(this.value /100);
-        if (this.value < 33) {
-          if ((this.value /25) < 1) {
-            bar.animate(this.value /25);
-            bar2.animate(0);
-            bar3.animate(0);
-            firstPackageCard.classList.add('grayscale');
-            secondPackageCard.classList.add('grayscale');
-            thirdPackageCard.classList.add('grayscale');
-          }
-          firstPackageCard.style.zIndex = 2;
-          firstPackageCard.style.zIndex = 2;
-          secondPackageCard.style.zIndex = 2;
-          firstPackageCard.classList.remove('current-package');
+    const firstBreak = 90;
+    const secondBreak = 180;
+    const thirdBreak = 270;
+    const contributionTotalEl = document.getElementById('contribution-total');
+    let contributionTotal = 0;
+    let animationValue = 0;
+    // Update the current slider value (each time you drag the slider handle)
+    slider.oninput = function() {
 
-        } else if ( this.value < 63) {
-          if (((this.value /25) - 1.2) < 1) {
-            bar.animate(1);
-            bar2.animate((this.value /25) - 1.2);
-            bar3.animate(0);
-            secondPackageCard.style.zIndex = 2;
-            firstPackageCard.classList.add('current-package');
-            firstPackageCard.classList.remove('grayscale');
-            secondPackageCard.classList.remove('current-package');
-            secondPackageCard.classList.add('grayscale');
-            thirdPackageCard.classList.add('grayscale');
-            thirdPackageCard.classList.remove('current-package');
-          }
+      output.innerHTML = this.value;
 
-        } else {
-          if (((this.value /25) - 2.4) < 1) {
-            bar3.animate((this.value /25) - 2.4);
-            firstPackageCard.style.zIndex = 1;
-            secondPackageCard.style.zIndex = 2;
-            secondPackageCard.classList.add('current-package');
-            thirdPackageCard.classList.remove('current-package');
-            thirdPackageCard.classList.add('grayscale');
-          }
+    }
+    // $basketAmount.bind("DOMSubtreeModified", versandkosten);
+    $('#contribution-total').bind("DOMSubtreeModified",function(){
+      // console.log('fired');
+      contributionTotal = parseInt(contributionTotalEl.innerHTML);
 
-          if (this.value > 90) {
-            thirdPackageCard.classList.add('current-package');
-            thirdPackageCard.classList.remove('grayscale');
-            bar3.animate(1);
-            firstPackageCard.style.zIndex = 1;
-            secondPackageCard.style.zIndex = 1;
-            secondPackageCard.classList.remove('current-package');
+      animationValue = contributionTotal / 270;
+      console.log(animationValue);
+      // console.log(contributionTotal);
 
-          }
+      // console.log(this.value /100);
+      if (contributionTotal < 90) {
+        if ((animationValue /25) < 1) {
+          bar.animate(contributionTotal /90);
+          bar2.animate(0);
+          bar3.animate(0);
+          firstPackageCard.classList.add('grayscale');
+          secondPackageCard.classList.add('grayscale');
+          thirdPackageCard.classList.add('grayscale');
+        }
+        firstPackageCard.style.zIndex = 2;
+        firstPackageCard.style.zIndex = 2;
+        secondPackageCard.style.zIndex = 2;
+        firstPackageCard.classList.remove('current-package');
+
+      } else if ( contributionTotal < 180) {
+        if (((animationValue /25) - 1.2) < 1) {
           bar.animate(1);
-          bar2.animate(1);
+          bar2.animate((contributionTotal - 90) /90);
+          bar3.animate(0);
+          secondPackageCard.style.zIndex = 2;
+          firstPackageCard.classList.add('current-package');
           firstPackageCard.classList.remove('grayscale');
-          firstPackageCard.classList.remove('current-package');
-          secondPackageCard.classList.remove('grayscale');
-
+          secondPackageCard.classList.remove('current-package');
+          secondPackageCard.classList.add('grayscale');
+          thirdPackageCard.classList.add('grayscale');
+          thirdPackageCard.classList.remove('current-package');
         }
 
-        // if ((this.value /100) < 0.30) {
-        //   bar2.animate(this.value /25);
-        //   console.log(this.value /25);
-        // } else if ((this.value /100) < 0.60){
-        //   if ((this.value /25 - 0.30) <= 1) {
-        //     bar.animate(this.value /25 - 0.30);
-        //     console.log(this.value /25 - 0.30);
-        //   }
-        // } else {
-        //   if ((this.value /25 - 0.60) <= 1) {
-        //     bar3.animate(this.value /25 - 0.60);
-        //     console.log(this.value /25 - 0.60);
-        //   }
-        // }
+      } else {
+        if ((animationValue - 2.4) < 1) {
+          // console.log('doing both');
+          bar3.animate((contributionTotal - 180) /90);
+          firstPackageCard.style.zIndex = 1;
+          secondPackageCard.style.zIndex = 2;
+          secondPackageCard.classList.add('current-package');
+          thirdPackageCard.classList.remove('current-package');
+          thirdPackageCard.classList.add('grayscale');
+        }
+
+        if (contributionTotal >= 270) {
+          thirdPackageCard.classList.add('current-package');
+          thirdPackageCard.classList.remove('grayscale');
+          bar3.animate(1);
+          firstPackageCard.style.zIndex = 1;
+          secondPackageCard.style.zIndex = 1;
+          secondPackageCard.classList.remove('current-package');
+
+        }
+        bar.animate(1);
+        bar2.animate(1);
+        firstPackageCard.classList.remove('grayscale');
+        firstPackageCard.classList.remove('current-package');
+        secondPackageCard.classList.remove('grayscale');
+
       }
-    }
+    })
+
+    // ATTEMPT AT FIXING EVERYTHIN
+
+    // if (slider) {
+    //   // Update the current slider value (each time you drag the slider handle)
+    //   slider.oninput = function() {
+
+    //     output.innerHTML = this.value;
+    //     // console.log(this.value /100);
+    //     if (this.value < 33) {
+    //       if ((this.value /25) < 1) {
+    //         bar.animate(this.value /25);
+    //         bar2.animate(0);
+    //         bar3.animate(0);
+    //         firstPackageCard.classList.add('grayscale');
+    //         secondPackageCard.classList.add('grayscale');
+    //         thirdPackageCard.classList.add('grayscale');
+    //       }
+    //       firstPackageCard.style.zIndex = 2;
+    //       firstPackageCard.style.zIndex = 2;
+    //       secondPackageCard.style.zIndex = 2;
+    //       firstPackageCard.classList.remove('current-package');
+
+    //     } else if ( this.value < 63) {
+    //       if (((this.value /25) - 1.2) < 1) {
+    //         bar.animate(1);
+    //         bar2.animate((this.value /25) - 1.2);
+    //         bar3.animate(0);
+    //         secondPackageCard.style.zIndex = 2;
+    //         firstPackageCard.classList.add('current-package');
+    //         firstPackageCard.classList.remove('grayscale');
+    //         secondPackageCard.classList.remove('current-package');
+    //         secondPackageCard.classList.add('grayscale');
+    //         thirdPackageCard.classList.add('grayscale');
+    //         thirdPackageCard.classList.remove('current-package');
+    //       }
+
+    //     } else {
+    //       if (((this.value /25) - 2.4) < 1) {
+    //         bar3.animate((this.value /25) - 2.4);
+    //         firstPackageCard.style.zIndex = 1;
+    //         secondPackageCard.style.zIndex = 2;
+    //         secondPackageCard.classList.add('current-package');
+    //         thirdPackageCard.classList.remove('current-package');
+    //         thirdPackageCard.classList.add('grayscale');
+    //       }
+
+    //       if (this.value > 90) {
+    //         thirdPackageCard.classList.add('current-package');
+    //         thirdPackageCard.classList.remove('grayscale');
+    //         bar3.animate(1);
+    //         firstPackageCard.style.zIndex = 1;
+    //         secondPackageCard.style.zIndex = 1;
+    //         secondPackageCard.classList.remove('current-package');
+
+    //       }
+    //       bar.animate(1);
+    //       bar2.animate(1);
+    //       firstPackageCard.classList.remove('grayscale');
+    //       firstPackageCard.classList.remove('current-package');
+    //       secondPackageCard.classList.remove('grayscale');
+
+    //     }
+    //   }
+    // }
   }
 }
 });

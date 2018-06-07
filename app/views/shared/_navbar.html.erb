@@ -135,21 +135,28 @@ document.addEventListener("DOMContentLoaded", function(event) {
     const currentKey = getKeyByValue(pages, value);
 
     if (currentKey > 3) {
-      document.querySelector(`[element-handle="3.1"]`).classList.add('done');
+      if (document.querySelector(`[element-handle="3.1"]`)) {
+        document.querySelector(`[element-handle="3.1"]`).classList.add('done');
+      }
     }
 
     if (location.match(value)) {
-
-      displayTaskMessage.innerHTML = instructions[currentKey]
+      if (displayTaskMessage) {
+        displayTaskMessage.innerHTML = instructions[currentKey]
+      }
       setTimeout((event) => {
       console.log('we matched the value');
-      matchingEl.classList.add('current');
+      if (matchingEl) {
+        matchingEl.classList.add('current');
+      }
       }, 400);
 
       return true;
     } else {
       setTimeout((event) => {
-        matchingEl.classList.add('done');
+        if (matchingEl) {
+          matchingEl.classList.add('done');
+        }
       }, 50);
     }
 
@@ -217,7 +224,7 @@ const filterResultsFriends = () => {
         filterResultsFriends();
       }
     });
-  };
+
 
 
 
@@ -288,6 +295,6 @@ const filterResultsFriends = () => {
         }
       }
   });
-
+  };
 });
 </script>
