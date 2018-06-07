@@ -10,7 +10,7 @@ Package.destroy_all #done
 Squadmember.destroy_all
 Squadchosenvenue.destroy_all
 Squad.destroy_all
-Venue.destroy_all
+
 User.destroy_all #done
 
 
@@ -26,97 +26,99 @@ def convert_yelp_pricing_to_integer(yelp_price)
   end
 end
 
-
-require 'json'
-require 'open-uri'
-require 'net/http'
-
-
-puts "calling yelp API"
-
-uri = URI("https://api.yelp.com/v3/businesses/search?location=montreal&categories=danceclubs&limit=50")
-
-request = Net::HTTP::Get.new(uri)
-request["Authorization"] = "Bearer #{ENV['YELP_API_KEY']}"
-http = Net::HTTP.new(uri.hostname, uri.port)
-http.use_ssl = true
-response = http.start { |http| http.request(request) }
-results = JSON.parse(response.body)
-
-array_of_businesess = results["businesses"]
-array_of_businesess.each do |business|
-  venue = Venue.new(
-    name: business["name"],
-    longitude: business["coordinates"]["longitude"],
-    latitude: business["coordinates"]["latitude"],
-    address: business["location"]["address1"],
-    description: business["categories"].map { |c| c["title"] }.join(" - "),
-    music_genre: 'lorem_ipsum',
-    rating: business["rating"],
-    remote_photo_url: business["image_url"],
-    review_count: business["review_count"],
-    pricing: convert_yelp_pricing_to_integer(business["price"])
-  )
-  venue.save!
+if false
+  Venue.destroy_all
+  require 'json'
+  require 'open-uri'
+  require 'net/http'
 
 
-  4.times do
-    package = Package.new(
-      name: Faker::Beer.name,
-      price: rand(140..600),
-      description: 'Lorem ipsum dolor sit amet, ut amet arcu, a vel. Bibendum enim curabitur, tincidunt congue consectetuer, nunc in. Wisi wisi, vitae taciti tempor. Massa est, arcu integer, vulputate velit eu.',
-      available_per_night: rand(2..8),
-      venue: venue
+  puts "calling yelp API"
+
+  uri = URI("https://api.yelp.com/v3/businesses/search?location=montreal&categories=danceclubs&limit=50")
+
+  request = Net::HTTP::Get.new(uri)
+  request["Authorization"] = "Bearer #{ENV['YELP_API_KEY']}"
+  http = Net::HTTP.new(uri.hostname, uri.port)
+  http.use_ssl = true
+  response = http.start { |http| http.request(request) }
+  results = JSON.parse(response.body)
+
+  array_of_businesess = results["businesses"]
+  array_of_businesess.each do |business|
+    venue = Venue.new(
+      name: business["name"],
+      longitude: business["coordinates"]["longitude"],
+      latitude: business["coordinates"]["latitude"],
+      address: business["location"]["address1"],
+      description: business["categories"].map { |c| c["title"] }.join(" - "),
+      music_genre: 'lorem_ipsum',
+      rating: business["rating"],
+      remote_photo_url: business["image_url"],
+      review_count: business["review_count"],
+      pricing: convert_yelp_pricing_to_integer(business["price"])
     )
+    venue.save!
 
-    package.save!
+
+    4.times do
+      package = Package.new(
+        name: Faker::Beer.name,
+        price: rand(140..600),
+        description: 'Lorem ipsum dolor sit amet, ut amet arcu, a vel. Bibendum enim curabitur, tincidunt congue consectetuer, nunc in. Wisi wisi, vitae taciti tempor. Massa est, arcu integer, vulputate velit eu.',
+        available_per_night: rand(2..8),
+        venue: venue
+      )
+
+      package.save!
+    end
+  end
+
+  #API FOR GOOGLE PLACES
+  # url = 'https://api.github.com/users/ssaunier'
+  # user_serialized = open(url).read
+  # user = JSON.parse(user_serialized)
+
+  # puts "#{user['name']} - #{user['bio']}"
+
+  puts "calling google places"
+
+  uri = URI("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=45.5017,-73.5673&radius=1500&type=club&keyword=club&key=#{ENV['GOOGLE_PLACES_API_KEY']}")
+
+  request = Net::HTTP::Get.new(uri)
+  http = Net::HTTP.new(uri.hostname, uri.port)
+  http.use_ssl = true
+  response = http.start { |http| http.request(request) }
+  results = JSON.parse(response.body)
+
+  array_of_clubs = results["results"]
+
+  array_of_clubs.each do |club|
+    venue = Venue.new(
+      name: club["name"],
+      longitude: club["geometry"]["location"]["lng"],
+      latitude: club["geometry"]["location"]["lat"],
+      address: club["vicinity"],
+      description: 'lorem ipsum',
+      music_genre: 'lorem_ipsum'
+      )
+    venue.save!
+
+    4.times do
+      package = Package.new(
+        name: Faker::Beer.name,
+        price: rand(140..600),
+        description: 'Lorem ipsum dolor sit amet, ut amet arcu, a vel. Bibendum enim curabitur, tincidunt congue consectetuer, nunc in. Wisi wisi, vitae taciti tempor. Massa est, arcu integer, vulputate velit eu.',
+        available_per_night: rand(2..8),
+        venue: venue
+      )
+
+      package.save!
+    end
   end
 end
 
-#API FOR GOOGLE PLACES
-# url = 'https://api.github.com/users/ssaunier'
-# user_serialized = open(url).read
-# user = JSON.parse(user_serialized)
-
-# puts "#{user['name']} - #{user['bio']}"
-
-puts "calling google places"
-
-uri = URI("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=45.5017,-73.5673&radius=1500&type=club&keyword=club&key=#{ENV['GOOGLE_PLACES_API_KEY']}")
-
-request = Net::HTTP::Get.new(uri)
-http = Net::HTTP.new(uri.hostname, uri.port)
-http.use_ssl = true
-response = http.start { |http| http.request(request) }
-results = JSON.parse(response.body)
-
-array_of_clubs = results["results"]
-
-array_of_clubs.each do |club|
-  venue = Venue.new(
-    name: club["name"],
-    longitude: club["geometry"]["location"]["lng"],
-    latitude: club["geometry"]["location"]["lat"],
-    address: club["vicinity"],
-    description: 'lorem ipsum',
-    music_genre: 'lorem_ipsum'
-    )
-  venue.save!
-
-  4.times do
-    package = Package.new(
-      name: Faker::Beer.name,
-      price: rand(140..600),
-      description: 'Lorem ipsum dolor sit amet, ut amet arcu, a vel. Bibendum enim curabitur, tincidunt congue consectetuer, nunc in. Wisi wisi, vitae taciti tempor. Massa est, arcu integer, vulputate velit eu.',
-      available_per_night: rand(2..8),
-      venue: venue
-    )
-
-    package.save!
-  end
-end
-
-User.create(
+User.new(
     first_name: 'MG',
     last_name:  'Ayoub',
     email: "qwerty@gmail.com",
@@ -124,9 +126,9 @@ User.create(
     phone_number: "514-321-4321",
     address: Faker::Address.full_address,
     password: 'qwerty'
-  )
+  ).save!
 
-User.create(
+User.new(
     first_name: 'Simon',
     last_name:  'Guertin',
     email: "qwerty2@gmail.com",
@@ -134,9 +136,9 @@ User.create(
     phone_number: "514-321-4321",
     address: Faker::Address.full_address,
     password: 'qwerty'
-  )
+  ).save!
 
-User.create(
+User.new(
     first_name: 'V',
     last_name:  'Sadasivan',
     email: "qwerty3@gmail.com",
@@ -144,100 +146,100 @@ User.create(
     phone_number: "514-321-4321",
     address: Faker::Address.full_address,
     password: 'qwerty'
-  )
+  ).save!
 
-User.create(
+User.new(
     first_name: 'Gaelle',
     last_name:  'Londonoz',
-    email: "qwerty3@gmail.com",
+    email: "qwerty4@gmail.com",
     photo: 'Gaelle_Avatar',
     phone_number: "514-321-4321",
     address: Faker::Address.full_address,
     password: 'qwerty'
-  )
+  ).save!
 
-User.create(
+User.new(
     first_name: 'Neal',
     last_name:  'Sutaria',
-    email: "qwerty3@gmail.com",
+    email: "qwerty5@gmail.com",
     photo: 'Neal_Avatar',
     phone_number: "514-321-4321",
     address: Faker::Address.full_address,
     password: 'qwerty'
-  )
+  ).save!
 
-User.create(
+User.new(
     first_name: 'Michael',
     last_name:  'Lepecq',
-    email: "qwerty3@gmail.com",
+    email: "qwerty6@gmail.com",
     photo: 'Michael_Avatar',
     phone_number: "514-321-4321",
     address: Faker::Address.full_address,
     password: 'qwerty'
-  )
+  ).save!
 
-User.create(
+User.new(
     first_name: 'Jack',
     last_name:  'Gaarkeuken',
-    email: "qwerty3@gmail.com",
+    email: "qwerty7@gmail.com",
     photo: 'Jack_Avatar',
     phone_number: "514-321-4321",
     address: Faker::Address.full_address,
     password: 'qwerty'
-  )
+  ).save!
 
-User.create(
+User.new(
     first_name: 'Leo',
     last_name:  'Marshall',
-    email: "qwerty3@gmail.com",
+    email: "qwerty8@gmail.com",
     photo: 'Leo_Avatar',
     phone_number: "514-321-4321",
     address: Faker::Address.full_address,
     password: 'qwerty'
-  )
+  ).save!
 
-User.create(
+User.new(
     first_name: 'Linming',
     last_name:  'Ye',
-    email: "qwerty3@gmail.com",
+    email: "qwerty9@gmail.com",
     photo: 'Li_Avatar',
     phone_number: "514-321-4321",
     address: Faker::Address.full_address,
     password: 'qwerty'
-  )
+  ).save!
 
 
-User.create(
+User.new(
     first_name: 'Adam',
     last_name:  'Frej',
-    email: "qwerty3@gmail.com",
+    email: "qwerty10@gmail.com",
     photo: 'Adam_Avatar',
     phone_number: "514-321-4321",
     address: Faker::Address.full_address,
     password: 'qwerty'
-  )
+  ).save!
 
-puts "done calling APIs"
+# puts "done calling APIs"
 
 
-10.times do
+# 10.times do
 
-  first_name = Faker::Name.first_name
-  last_name = Faker::Name.last_name
+#   first_name = Faker::Name.first_name
+#   last_name = Faker::Name.last_name
 
-  user = User.new(
-    first_name: first_name,
-    last_name:  last_name,
-    email: "#{first_name[0]}#{last_name}@gmail.com",
-    photo: 'https://avatars2.githubusercontent.com/u/5466297?s=460&v=4',
-    phone_number: "514-321-4321",
-    address: Faker::Address.full_address,
-    password: 'qwerty'
-  )
+#   user = User.new(
+#     first_name: first_name,
+#     last_name:  last_name,
+#     email: "#{first_name[0]}#{last_name}@gmail.com",
+#     photo: 'https://avatars2.githubusercontent.com/u/5466297?s=460&v=4',
+#     phone_number: "514-321-4321",
+#     address: Faker::Address.full_address,
+#     password: 'qwerty'
+#   )
 
-  user.save!
+#   user.save!
 
-end
+# end
 
 venue_attributes = [
   {
@@ -250,11 +252,8 @@ venue_attributes = [
     photo: 'bar-datcha-bar-datcha',
     capacity: 100,
     pricing: 2,
-    instagram_handle: 'https://www.instagram.com/beachclubmtl/'
-  }
-]
-
-venue_attributes = [
+    instagram_handle: 'https://www.instagram.com/datcha/'
+  },
   {
     name: "Velvet",
     description: "Club in plush velvet decor in the Old Port",
@@ -265,11 +264,8 @@ venue_attributes = [
     photo: 'Velvet_club',
     capacity: 100,
     pricing: 3,
-    instagram_handle: 'https://www.instagram.com/beachclubmtl/'
-  }
-]
-
-venue_attributes = [
+    instagram_handle: 'https://www.instagram.com/velvet/'
+  },
   {
     name: "LaVoute",
     description: "New club venue in an old bank, very elegant",
@@ -280,11 +276,8 @@ venue_attributes = [
     photo: 'LaVoute_club',
     capacity: 100,
     pricing: 3,
-    instagram_handle: 'https://www.instagram.com/beachclubmtl/'
-  }
-]
-
-venue_attributes = [
+    instagram_handle: 'https://www.instagram.com/lavoute/'
+  },
   {
     name: "Loic",
     description: "Old bank turned wine bar in a relaxed atmosphere",
@@ -295,11 +288,8 @@ venue_attributes = [
     photo: 'Loic_club',
     capacity: 100,
     pricing: 2,
-    instagram_handle: 'https://www.instagram.com/beachclubmtl/'
-  }
-]
-
-venue_attributes = [
+    instagram_handle: 'https://www.instagram.com/loic/'
+  },
   {
     name: "Thursday's",
     description: "Classic bar/nightclub establishment in Montreal",
@@ -310,11 +300,8 @@ venue_attributes = [
     photo: 'Thursdays_club',
     capacity: 100,
     pricing: 2,
-    instagram_handle: 'https://www.instagram.com/beachclubmtl/'
-  }
-]
-
-venue_attributes = [
+    instagram_handle: 'https://www.instagram.com/thursdays/'
+  },
   {
     name: "Ping-Pong",
     description: "Fun venue, beer, board games and ping-pong",
@@ -325,11 +312,8 @@ venue_attributes = [
     photo: 'Ping pong_club',
     capacity: 100,
     pricing: 2,
-    instagram_handle: 'https://www.instagram.com/beachclubmtl/'
-  }
-]
-
-venue_attributes = [
+    instagram_handle: 'https://www.instagram.com/ping-pong/'
+  },
   {
     name: "Henrietta",
     description: "Beautiful wine bar with good bites",
@@ -340,11 +324,8 @@ venue_attributes = [
     photo: 'Henrietta_club',
     capacity: 100,
     pricing: 2,
-    instagram_handle: 'https://www.instagram.com/beachclubmtl/'
-  }
-]
-
-venue_attributes = [
+    instagram_handle: 'https://www.instagram.com/henrietta/'
+  },
   {
     name: "Bar Le Ritz",
     description: "Indie rock venue, cheap drinks",
@@ -355,11 +336,8 @@ venue_attributes = [
     photo: 'Bar Le Ritz_club',
     capacity: 100,
     pricing: 1,
-    instagram_handle: 'https://www.instagram.com/beachclubmtl/'
-  }
-]
-
-venue_attributes = [
+    instagram_handle: 'https://www.instagram.com/barleritz/'
+  },
   {
     name: "Bord'elle",
     description: "Supper club with elegant design",
@@ -370,11 +348,8 @@ venue_attributes = [
     photo: 'Bordelle_club',
     capacity: 100,
     pricing: 3,
-    instagram_handle: 'https://www.instagram.com/beachclubmtl/'
-  }
-]
-
-venue_attributes = [
+    instagram_handle: 'https://www.instagram.com/bordelle/'
+  },
   {
     name: "2 Pierrots",
     description: "Local francophone artists rock venue",
@@ -385,11 +360,8 @@ venue_attributes = [
     photo: '2pierrots_club',
     capacity: 100,
     pricing: 2,
-    instagram_handle: 'https://www.instagram.com/beachclubmtl/'
-  }
-]
-
-venue_attributes = [
+    instagram_handle: 'https://www.instagram.com/2pierrots/'
+  },
   {
     name: "Mayfair",
     description: "Club venue in vitorian tea venue",
@@ -400,11 +372,8 @@ venue_attributes = [
     photo: 'Mayfair_club',
     capacity: 100,
     pricing: 2,
-    instagram_handle: 'https://www.instagram.com/beachclubmtl/'
-  }
-]
-
-venue_attributes = [
+    instagram_handle: 'https://www.instagram.com/Mayfair/'
+  },
   {
     name: "Chez Serge",
     description: "Fun western bar with a riding bull",
@@ -415,7 +384,7 @@ venue_attributes = [
     photo: 'Chez serge_club',
     capacity: 100,
     pricing: 2,
-    instagram_handle: 'https://www.instagram.com/beachclubmtl/'
+    instagram_handle: 'https://www.instagram.com/chezserge/'
   }
 ]
 
@@ -435,58 +404,59 @@ venue_attributes.each do |venue_attributes_hash|
 
   venue.save!
 
-  4.times do
+  # 4.times do
 
-    package = Package.new(
-      name: Faker::Beer.name,
-      price: rand(140..600),
-      description: 'Lorem ipsum dolor sit amet, ut amet arcu, a vel. Bibendum enim curabitur, tincidunt congue consectetuer, nunc in. Wisi wisi, vitae taciti tempor. Massa est, arcu integer, vulputate velit eu.',
-      available_per_night: rand(2..8),
-      venue: venue
-    )
+  #   package = Package.new(
+  #     name: Faker::Beer.name,
+  #     price: rand(140..600),
+  #     description: 'Lorem ipsum dolor sit amet, ut amet arcu, a vel. Bibendum enim curabitur, tincidunt congue consectetuer, nunc in. Wisi wisi, vitae taciti tempor. Massa est, arcu integer, vulputate velit eu.',
+  #     available_per_night: rand(2..8),
+  #     venue: venue
+  #   )
 
-    package.save!
+  #   package.save!
 
-  end
+  # end
 end
 
-3.times do
+# 3.times do
 
-  squad_leader = User.all.sample()
-  squad = Squad.new(
-    night_out: Faker::Date.forward(rand(2..5)),
-    user: squad_leader,
-    package_id: 0,
-    confirmed: false
-  )
+#   squad_leader = User.all.sample()
+#   squad = Squad.new(
+#     night_out: Faker::Date.forward(rand(2..5)),
+#     user: squad_leader,
+#     package_id: 0,
+#     confirmed: false
+#   )
 
-  squad.save!
+#   squad.save!
 
-  3.times do
+#   3.times do
 
-    squadchosenvenue = Squadchosenvenue.new(
-      squad: squad,
-      venue: Venue.all.sample()
-    )
-    squadchosenvenue.save!
-  end
+#     squadchosenvenue = Squadchosenvenue.new(
+#       squad: squad,
+#       venue: Venue.all.sample()
+#     )
+#     squadchosenvenue.save!
+#   end
 
-  Squadmember.new(
-    user: squad_leader,
-    squadchosenvenue: squad.squadchosenvenues.sample(),
-    will_be_present: true,
-    squad: squad,
-    contribution: rand(20..200)
-  ).save!
+#   squadmember = Squadmember.new(
+#     user: squad_leader,
+#     squadchosenvenue: squad.squadchosenvenues.sample(),
+#     will_be_present: true,
+#     squad: squad,
+#     contribution: rand(20..200)
+#   )
+#   squadmember.save!
 
-  rand(2..4).times do
-    squadmember = Squadmember.new(
-      user: User.all.sample(),
-      squadchosenvenue: squad.squadchosenvenues.sample(),
-      will_be_present: true,
-      squad: squad,
-      contribution: rand(20..200)
-    )
-    squadmember.save!
-  end
-end
+#   rand(2..4).times do
+#     squadmember = Squadmember.new(
+#       user: User.all.sample(),
+#       squadchosenvenue: squad.squadchosenvenues.sample(),
+#       will_be_present: true,
+#       squad: squad,
+#       contribution: rand(20..200)
+#     )
+#     squadmember.save!
+#   end
+# end
