@@ -1,5 +1,6 @@
 .selected-venue {
-  border:5px solid #02c3bd;
+  box-shadow: 0 0 10px rgba(255,255,255,1) , 0 0 20px rgba(255,255,255,1) , 0 0 70px #7CFFCB , 0 0 100px #7CFFCB !important;
+  transition: 0.5s all;
   transform: none;
   transform: scale(1.1);
     .color-overlay {
@@ -26,3 +27,4 @@
   letter-spacing: 2px;
   width: 100%;
 }
+
