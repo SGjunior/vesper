@@ -115,6 +115,7 @@ if (document.querySelector('.banner-main')) {
             bar.animate(1);
             bar2.animate((this.value /25) - 1.2);
             bar3.animate(0);
+            secondPackageCard.style.zIndex = 2;
             firstPackageCard.classList.add('current-package');
             firstPackageCard.classList.remove('grayscale');
             secondPackageCard.classList.remove('current-package');
@@ -127,6 +128,7 @@ if (document.querySelector('.banner-main')) {
           if (((this.value /25) - 2.4) < 1) {
             bar3.animate((this.value /25) - 2.4);
             firstPackageCard.style.zIndex = 1;
+            secondPackageCard.style.zIndex = 2;
             secondPackageCard.classList.add('current-package');
             thirdPackageCard.classList.remove('current-package');
             thirdPackageCard.classList.add('grayscale');

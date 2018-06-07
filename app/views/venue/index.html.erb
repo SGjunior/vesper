@@ -1,26 +1,26 @@
 
-  <div class="index-wrapper">
-      <!-- <div class="col-xs-12 col-sm-10 col-sm-offset-1"> -->
-        <div class="container side-shadows">
-          <div class="row">
-            <div class="main-index" id="main">
-              <div class="venues">
+<div class="index-wrapper">
+  <!-- <div class="col-xs-12 col-sm-10 col-sm-offset-1"> -->
+    <div class="container side-shadows">
+      <div class="row">
+        <div class="main-index" id="main">
+          <div class="venues">
 
-                <!-- Generate the cards in here -->
-                <% @Venues.each do |venue| %>
-                <%= render 'venue/index_components/venue_card', venue: venue %>
-                <% end %>
-              </div>
-            </div>
+            <!-- Generate the cards in here -->
+            <% @Venues.each do |venue| %>
+            <%= render 'venue/index_components/venue_card', venue: venue %>
+            <% end %>
           </div>
         </div>
+      </div>
+    </div>
 
 
-        <!-- Generate the map in here -->
-        <div class="map" hidden>
-          <div id="map" data-markers="<%= @markers.to_json %>"></div>
-        </div>
-      <!-- </div> -->
+    <!-- Generate the map in here -->
+    <div class="map" hidden>
+      <div id="map" data-markers="<%= @markers.to_json %>"></div>
+    </div>
+    <!-- </div> -->
   </div>
 
   <!-- STICKY DECK BAR -->
@@ -46,18 +46,18 @@
 
 
   <div class="progress-btn-container">
-  <div class="svg-wrapper" id="proceed-to-create-squad-btn">
-    <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
-      <rect id="shape" height="40" width="150" />
-      <div id="text">
-        <a class="mint" href=""><span class="spot"></span>
-          <i class="fas fa-arrow-right"></i>
-        </a>
-      </div>
-    </svg>
+    <div class="svg-wrapper" id="proceed-to-create-squad-btn">
+      <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
+        <rect id="shape" height="40" width="150" />
+        <div id="text">
+          <a class="mint" href=""><span class="spot"></span>
+            <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </svg>
+    </div>
   </div>
-</div>
-</div>
+  <!-- </div> -->
 
 
 
@@ -179,25 +179,25 @@ const venuesRemoveBtns = document.querySelectorAll('.card-close-btn');
 venuesRemoveBtns.forEach((btn) => {
   btn.addEventListener('click', (event) => {
 
-      const venueId = event.currentTarget.attributes['data-venue-id'];
-      const selectedVenueEl = event.currentTarget.parentElement.parentElement.parentElement
-      const selectedVenueInnerHTML = selectedVenueEl.innerHTML
+    const venueId = event.currentTarget.attributes['data-venue-id'];
+    const selectedVenueEl = event.currentTarget.parentElement.parentElement.parentElement
+    const selectedVenueInnerHTML = selectedVenueEl.innerHTML
 
 
-      $(selectedVenueEl).fadeOut();
+    $(selectedVenueEl).fadeOut();
 
-      setTimeout(() => {
-        selectedVenueEl.classList.remove('chosen-venue-card')
-        selectedVenueEl.remove();
+    setTimeout(() => {
+      selectedVenueEl.classList.remove('chosen-venue-card')
+      selectedVenueEl.remove();
 
-      }, 350);
+    }, 350);
 
-      setTimeout(() => {
+    setTimeout(() => {
 
-        $(selectedVenueEl).fadeIn();
-        venuesContainer.prepend(selectedVenueEl);
+      $(selectedVenueEl).fadeIn();
+      venuesContainer.prepend(selectedVenueEl);
 
-      }, 450);
+    }, 450);
 
   });
 });

@@ -5,6 +5,17 @@
 // console.log('test');
 
 
+
+
+<% if @squad.squadmembers.count > 1 %>
+  // const progressBtnOpen = document.querySelector('[data-handle="progress"]');
+  $('[data-handle="lock"]').fadeOut();
+  $('[data-handle="progress"]').delay(400).fadeIn();
+<% else %>
+  // const progressBtnLocked = document.querySelector('[data-handle="lock"]');
+
+<% end %>
+
 // data-recent-user-id
 const recentSquadmemberEl = document.querySelector('[data-recent-user-id="<%= @squadmember.user.id %>"')
 
@@ -17,7 +28,6 @@ const squadContainer = document.getElementById('squad-row');
 
 if (squadContainer) {
   squadContainer.insertAdjacentHTML('beforeend',"<%= j render 'squad/edit-components/new-squad-member-card' %>");
-
 
   $('[data-handle-squadmember="<%= @squadmember.user.id %>"]').delay(300).fadeIn(1000);
 }
