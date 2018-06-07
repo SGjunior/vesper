@@ -223,34 +223,22 @@ const fetchContributionStatus = () => {
 }
 
 const displayStatusContribution = (data) => {
+  let contributionTotal = 0;
   data.squadmembers.forEach((squadmember) => {
     if (squadmember.contribution != 0) {
 
-      // contribution-personnal
-      // contribution-total
+      contributionTotal += squadmember.contribution
 
-      // const memberClosedEl = document.querySelector(`[member-closed='${squadmember.user_id}']`);
-      // const memberOpenEl = document.querySelector(`[member-open='${squadmember.user_id}']`);
+      const memberClosedEl = document.querySelector(`[member-closed='${squadmember.user_id}']`);
 
-      // const chosenVenueCardInfo = document.querySelector(`[data-chosenvenue-id='${squadmember.squadchosenvenue_id}']`);
+      $(`[member-closed='${squadmember.user_id}']`).fadeOut();
 
-      // console.log(`[data-chosenvenue-id='${squadmember.squadchosenvenue_id}']`);
-      // console.log(chosenVenueCardInfo);
-
-      // $(`[member-closed='${squadmember.user_id}']`).fadeOut();
-      // $(`[member-open='${squadmember.user_id}']`).delay(500).fadeIn();
-
-
-      // if (chosenVenueCardInfo.querySelector(`[data-user-id='${squadmember.user_id}']`)) {
-      //   console.log('gaby is already present');
-      // } else {
-      //   chosenVenueCardInfo.prepend(memberOpenEl.parentElement.parentElement.querySelector('img').cloneNode());
-      // }
-      // fade out lock
-      // fade in lock_open
-
+      $(`[data-contribution-user-id='${squadmember.user_id}']`).delay(500).fadeIn();
+      document.querySelector(`[data-contribution-user-id='${squadmember.user_id}']`).innerHTML = `${squadmember.contribution}<sup>$</sup>`
     }
   });
+
+  document.getElementById('contribution-total').innerHTML = contributionTotal;
 }
 
 
