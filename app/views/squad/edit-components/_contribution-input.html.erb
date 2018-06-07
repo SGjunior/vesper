@@ -14,7 +14,7 @@
       <h2 class="contribution-cash contribution-personnal" id="contribution-input"></h2>
     </div>
     <div class="col-xs-12 col-sm-6">
-      <h2 class="contribution-cash contribution-total" id="contribution-input-total">100</h2>
+      <h2 class="contribution-cash contribution-total">100</h2>
     </div>
   </div>
 
@@ -44,6 +44,7 @@
 </div> -->
 
 <div class="progress-btn-container">
+
   <div class="svg-wrapper" id="member-confirm-contribution-btn">
     <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
       <rect id="shape" height="40" width="150" />
@@ -54,6 +55,7 @@
       </div>
     </svg>
   </div>
+
 </div>
 
 
@@ -80,7 +82,7 @@ const getContributionValue = () => {
 
   const contributionEl = document.getElementById('contribution-input');
   if (contributionEl.innerHTML != undefined) {
-    return contributionEl.value;
+    return contributionEl.innerHTML;
   } else {
     alert('please choose a contribution amount!');
   }
@@ -89,6 +91,8 @@ const getContributionValue = () => {
 const submitMemberContributionChoice = () => {
 
   const contributionValue = getContributionValue();
+  console.log('cont value : ');
+  console.log(contributionValue);
 
   if (contributionValue != undefined) {
 
@@ -98,9 +102,9 @@ const submitMemberContributionChoice = () => {
 
 }
 
-const sendAjaxPostMemberContributionChoice = (chosenVenueId, contributionValue) => {
-  const authToken = document.querySelector('meta[name="csrf-token"]').content
-  const url = '/squad/<%= @squad.id %>/<%= @squad.squadmembers.find_by(user: current_user).id %>/choosecontribution'
+const sendAjaxPostMemberContributionChoice = (contributionValue) => {
+  const authToken = document.querySelector('meta[name="csrf-token"]').content;
+  const url = '/squad/<%= @squad.id %>/<%= @squad.squadmembers.find_by(user: current_user).id %>/choosecontribution';
 
   fetch(url, {
     method: "POST",
@@ -109,21 +113,24 @@ const sendAjaxPostMemberContributionChoice = (chosenVenueId, contributionValue) 
       'X-Requested-With': 'XMLHttpRequest',
       'X-CSRF-Token': authToken
     },
-    body: JSON.stringify({
-      contribution: contributionValue
-    }),
+    body: JSON.stringify({ contribution: contributionValue }),
     credentials: 'same-origin'
   })
   .then((response) => response.json())
   .then((data) => {
-    window.location.href = `/squad/${data['id']}/edit`
+    // window.location.href = `/squad/${data['id']}/edit`
         // console.log(data['id']);
         console.log('hello');
+        console.log(data);
+
       })
   .catch(console.error);
 
 }
 
+const submittedMemberContributionChoice = () => {
+
+}
 
 
 </script>
