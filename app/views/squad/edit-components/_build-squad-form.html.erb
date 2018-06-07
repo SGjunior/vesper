@@ -1,4 +1,4 @@
-  <% if current_user.squads.second_to_last.squadmembers.count >= 1 %>
+  <% if !current_user.squads.second_to_last.nil? && current_user.squads.second_to_last.squadmembers.count >= 1 %>
     <h3 class="fancy-h3" style="text-align: center;">Recent Sidekicks</h3>
   <% end %>
   <% current_user.squads.second_to_last.squadmembers.each do |squadmember| %>
