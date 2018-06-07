@@ -26,7 +26,7 @@ def convert_yelp_pricing_to_integer(yelp_price)
   end
 end
 
-if false
+if true
   Venue.destroy_all
   require 'json'
   require 'open-uri'
@@ -61,14 +61,14 @@ if false
     venue.save!
 
 
-    4.times do
-      package = Package.new(
-        name: Faker::Beer.name,
-        price: rand(140..600),
-        description: 'Lorem ipsum dolor sit amet, ut amet arcu, a vel. Bibendum enim curabitur, tincidunt congue consectetuer, nunc in. Wisi wisi, vitae taciti tempor. Massa est, arcu integer, vulputate velit eu.',
-        available_per_night: rand(2..8),
-        venue: venue
-      )
+    # 4.times do
+    #   package = Package.new(
+    #     name: Faker::Beer.name,
+    #     price: rand(140..600),
+    #     description: 'Lorem ipsum dolor sit amet, ut amet arcu, a vel. Bibendum enim curabitur, tincidunt congue consectetuer, nunc in. Wisi wisi, vitae taciti tempor. Massa est, arcu integer, vulputate velit eu.',
+    #     available_per_night: rand(2..8),
+    #     venue: venue
+    #   )
 
       package.save!
     end
