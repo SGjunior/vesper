@@ -1,68 +1,91 @@
-
-
-<!-- <div class="col-xs-12 col-sm-10 col-sm-offset-1">
-  <div class="contribution-head">
-    <h2><%# @squadTotalContribution %></h2>
-    <h5>Squad Gold</h5>
-  </div>
-</div> -->
-
-
-      <!-- <div id="container-lols" hidden style="z-index:1"> -->
-      <!-- <div id="animated-progress-container"style="z-index:1;"> -->
-
-
-
-
-<!-- Numeric Textfield with Floating Label -->
-<% unless @squad.squadmembers.find_by(user: current_user).will_be_present %>
-<div class="row">
-  <div class="col-xs-12 col-sm-10 col-sm-offset-1">
-    <div class="contribution-inputs">
-
-
-
-      <h2 id="contribution-input" style="color: white;"></h2>
-      <!-- Default Slider -->
-      <input class="mdl-slider mdl-js-slider" type="range"
-        min="0" max="100" value="0" tabindex="0" id="mdl-slider" style="height: 50px !important">
-
-
-
-      <!-- FAB button -->
-<!--       <button id="member-confirm-contribution-btn" class="mdl-button mdl-js-button mdl-button--fab" style="float: right">
-        <i class="material-icons">arrow_right</i>
-      </button> -->
-      <%= link_to squad_path(@squad.id), { class: "under-svg-button", id: 'member-confirm-contribution-btn' } do %>
-        <div class="svg-wrapper" id="proceed-to-create-squad-btn">
-          <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
-            <rect id="shape" height="40" width="150" />
-            <div id="text">
-              <div class="mint" href=""><span class="spot"></span>
-                <i class="fas fa-arrow-right"></i>
-              </div>
-            </div>
-          </svg>
-        </div>
-      <% end %>
-
+<div class="body-contribution-container">
+  <!-- Column header -->
+  <div class="row">
+    <div class="col-xs-12 col-sm-6" style="z-index: 10">
+      <h2 class="contribution-header">Your contribution</h2>
+    </div>
+    <div class="col-xs-12 col-sm-6" style="z-index: 10">
+      <h2 class="contribution-header">Group total</h2>
     </div>
   </div>
+  <!-- calculated amounts -->
+  <div class="row">
+    <div class="col-xs-12 col-sm-6">
+      <h2 class="contribution-cash contribution-personnal" id="contribution-input"></h2>
+    </div>
+    <div class="col-xs-12 col-sm-6">
+      <h2 class="contribution-cash contribution-total">100</h2>
+    </div>
+  </div>
+
+  <%# unless @squad.squadmembers.find_by(user: current_user).will_be_present %>
+  <div class="slider-container">
+    <input class="mdl-slider mdl-js-slider" type="range"
+    min="0" max="100" value="25" tabindex="0" id="mdl-slider" style="height: 50px !important">
+  </div>
+  <%# end %>
 </div>
-<% end %>
+
+
+
+<!-- <div class="progress-btn-container">
+  <%#= link_to squad_path(@squad.id), { class: "under-svg-button", id: 'member-confirm-contribution-btn' } do %>
+  <div class="svg-wrapper" id="proceed-to-create-squad-btn">
+    <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
+      <rect id="shape" height="40" width="150" />
+      <div id="text">
+        <div class="mint" href="">
+          <i class="fas fa-arrow-right"></i>
+        </div>
+      </div>
+    </svg>
+  </div>
+  <%# end %>
+</div> -->
+
+<div class="progress-btn-container">
+    <% if @squad.squadmembers.find_by(user: current_user).contribution == 0  %>
+      <div class="svg-wrapper" id="member-confirm-contribution-btn">
+        <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
+          <rect id="shape" height="40" width="150" />
+          <div id="text">
+            <a class="mint" href=""><span class="spot"></span>
+              Confirm
+            </a>
+          </div>
+        </svg>
+      </div>
+    <% end %>
+
+    <div class="svg-wrapper" data-btn-confirm-contribution="waiting" style="display: none;">
+      <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
+        <rect id="shape" height="40" width="150" />
+        <div id="text">
+          <div class="mint">
+            <!-- <i class="fas fa-arrow-right"></i> -->
+            <i class="material-icons">lock</i>
+          </div>
+        </div>
+      </svg>
+    </div>
+
+    <div class="svg-wrapper" data-btn-confirm-contribution="checkout" style="display: none;">
+      <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
+        <rect id="shape" height="40" width="150" />
+        <div id="text">
+          <div class="mint">
+            <!-- <i class="fas fa-arrow-right"></i> -->
+            Checkout
+          </div>
+        </div>
+      </svg>
+    </div>
 
 
 
 
 
-
-
-
-
-
-
-
-
+</div>
 
 
 
@@ -74,10 +97,6 @@
 
 
 //  WORKING ON THE SLIDER
-
-
-
-
 
 
 if (document.getElementById('member-confirm-contribution-btn')) {
@@ -92,7 +111,7 @@ const getContributionValue = () => {
 
   const contributionEl = document.getElementById('contribution-input');
   if (contributionEl.innerHTML != undefined) {
-    return contributionEl.value;
+    return contributionEl.innerHTML;
   } else {
     alert('please choose a contribution amount!');
   }
@@ -101,6 +120,8 @@ const getContributionValue = () => {
 const submitMemberContributionChoice = () => {
 
   const contributionValue = getContributionValue();
+  console.log('cont value : ');
+  console.log(contributionValue);
 
   if (contributionValue != undefined) {
 
@@ -110,9 +131,9 @@ const submitMemberContributionChoice = () => {
 
 }
 
-const sendAjaxPostMemberContributionChoice = (chosenVenueId, contributionValue) => {
-  const authToken = document.querySelector('meta[name="csrf-token"]').content
-  const url = '/squad/<%= @squad.id %>/<%= @squad.squadmembers.find_by(user: current_user).id %>/choosecontribution'
+const sendAjaxPostMemberContributionChoice = (contributionValue) => {
+  const authToken = document.querySelector('meta[name="csrf-token"]').content;
+  const url = '/squad/<%= @squad.id %>/<%= @squad.squadmembers.find_by(user: current_user).id %>/choosecontribution';
 
   fetch(url, {
     method: "POST",
@@ -121,20 +142,95 @@ const sendAjaxPostMemberContributionChoice = (chosenVenueId, contributionValue) 
       'X-Requested-With': 'XMLHttpRequest',
       'X-CSRF-Token': authToken
     },
-    body: JSON.stringify({
-      contribution: contributionValue
-    }),
+    body: JSON.stringify({ contribution: contributionValue }),
     credentials: 'same-origin'
   })
   .then((response) => response.json())
   .then((data) => {
-    window.location.href = `/squad/${data['id']}/edit`
-        // console.log(data['id']);
-        console.log('hello');
+        waitingForSquadContribution();
       })
   .catch(console.error);
 
 }
+
+
+const submittedMemberContributionChoice = () => {
+
+  $('#member-confirm-contribution-btn').fadeOut();
+  $('.slider-container').delay(400).fadeOut();
+  $('[data-btn-confirm-contribution="waiting"]').delay(600).fadeIn();
+
+}
+
+
+const waitingForSquadContribution = () => {
+  setInterval(function(){
+    console.log('initializing fetch');
+    fetchContributionStatus();
+    console.log('done updating');
+
+  }, 1000);
+}
+
+document.addEventListener('DOMContentLoaded', (event) => {
+  console.log(<%= @squad.squadmembers.find_by(user: current_user).contribution %>)
+  <% if @squad.squadmembers.find_by(user: current_user).contribution == 0  %>
+    console.log('starting the loop');
+    submittedMemberContributionChoice();
+    setTimeout((event) => { waitingForSquadContribution(); }, 500);
+  <% end %>
+
+});
+
+const fetchContributionStatus = () => {
+  const authToken = document.querySelector('meta[name="csrf-token"]').content;
+  const url = '/squad/<%= @squad.id %>/<%= @squad.squadmembers.find_by(user: current_user).id %>/choosecontribution';
+
+  fetch(url, {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Requested-With': 'XMLHttpRequest',
+      'X-CSRF-Token': authToken
+    },
+    body: JSON.stringify({ empty: 'test' }),
+    credentials: 'same-origin'
+  })
+  .then((response) => response.json())
+  .then((data) => {
+      displayStatusContribution(data);
+      })
+  .catch(console.error);
+
+}
+
+const displayStatusContribution = (data) => {
+  // data.squadmembers.forEach((squadmember) => {
+  //   if (squadmember.squadchosenvenue_id != null) {
+
+  //     const memberClosedEl = document.querySelector(`[member-closed='${squadmember.user_id}']`);
+  //     const memberOpenEl = document.querySelector(`[member-open='${squadmember.user_id}']`);
+
+  //     const chosenVenueCardInfo = document.querySelector(`[data-chosenvenue-id='${squadmember.squadchosenvenue_id}']`);
+
+  //     console.log(`[data-chosenvenue-id='${squadmember.squadchosenvenue_id}']`);
+  //     console.log(chosenVenueCardInfo);
+
+  //     $(`[member-closed='${squadmember.user_id}']`).fadeOut();
+  //     $(`[member-open='${squadmember.user_id}']`).delay(500).fadeIn();
+
+
+  //     if (chosenVenueCardInfo.querySelector(`[data-user-id='${squadmember.user_id}']`)) {
+  //       console.log('gaby is already present');
+  //     } else {
+  //       chosenVenueCardInfo.prepend(memberOpenEl.parentElement.parentElement.querySelector('img').cloneNode());
+  //     }
+  //     // fade out lock
+  //     // fade in lock_open
+
+  //   }
+  };
+
 
 
 

@@ -1,3 +1,4 @@
+<!-- current card used for chosen venues select -->
 <% @squad.squadchosenvenues.each do |venue| %>
 <% chosen_venue = Venue.find(venue.venue_id) %>
 
@@ -26,9 +27,12 @@
         <% end %>
       </li>
 
+      <% if @squad.squadmembers.find_by(user: current_user).squadchosenvenue_id.nil?  %>
       <!-- Raised button with ripple -->
-      <li><i class="fas fa-hand-paper select-venue-btn" style="cursor: pointer" data-venue-id="<%= venue.id %>">
-      </i></li>
+        <li><i class="fas fa-hand-paper select-venue-btn" style="cursor: pointer" data-venue-id="<%= venue.id %>">
+        </i></li>
+
+      <% end %>
     </ul>
 
 
@@ -61,6 +65,9 @@
     });
 
     event.currentTarget.parentElement.parentElement.parentElement.parentElement.classList.add('selected-venue');
+
+    $('[data-btn-confirm-venue="first_step"]').fadeOut();
+    $('[data-btn-confirm-venue="second_step"]').delay(400).fadeIn();
 
   };
 

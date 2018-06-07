@@ -19,6 +19,8 @@
     </ul>
     <!-- DEBUG INFO -->
   </div>
+
+  <!-- actual code for the page  -->
   <div class="hidden-xs col-md-3">
     <div class="display-squad">
       <% @squad.squadmembers.each do |squadmember| %>
@@ -57,18 +59,30 @@
 <!-- FAB button -->
 
       <div class="progress-btn-container">
-      <div class="svg-wrapper" id="member-confirm-venue-btn">
+      <% if @squad.squadmembers.find_by(user: current_user).squadchosenvenue_id.nil?  %>
+      <div class="svg-wrapper" data-btn-confirm-venue="first_step">
         <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
           <rect id="shape" height="40" width="150" />
           <div id="text">
             <div class="mint">
               <!-- <i class="fas fa-arrow-right"></i> -->
-              Confirm
+              <i class="material-icons">lock</i>
             </div>
           </div>
         </svg>
       </div>
 
+      <div class="svg-wrapper" id="member-confirm-venue-btn" data-btn-confirm-venue="second_step" style="display: none;">
+        <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
+          <rect id="shape" height="40" width="150" />
+          <div id="text">
+            <div class="mint">
+              Confirm vote
+            </div>
+          </div>
+        </svg>
+      </div>
+      <% end %>
       <div class="svg-wrapper" id="member-locked-venue-btn" style="display: none;">
         <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
           <rect id="shape" height="40" width="150" />
@@ -149,8 +163,34 @@ const submitMemberVenueChoice = () => {
 
       sendAjaxPostMemberVenueChoice(chosenVenueId);
 
+      // delete the venue select btns
+      document.querySelectorAll('.blog-card .select-venue-btn').forEach((btn) => {
+        btn.remove();
+      });
+
+      // todo : update progress message + change class on active progress tab
+      const displayTaskMessage = document.querySelector('.display-task-message');
+      displayTaskMessage.innerHTML = "Let's wait for your friends to vote!"
+      document.querySelector('[element-handle="3"]').classList.remove('current');
+      document.querySelector('[element-handle="3"]').classList.add('done');
+      document.querySelector('[element-handle="3.1"]').classList.add('current');
     }
 }
+
+document.addEventListener('DOMContentLoaded', (event) => {
+<% unless @squad.squadmembers.find_by(user: current_user).squadchosenvenue_id.nil?  %>
+
+      const displayTaskMessage = document.querySelector('.display-task-message');
+      displayTaskMessage.innerHTML = "Let's wait for your friends to vote!"
+      setTimeout((event) => {
+        document.querySelector('[element-handle="3"]').classList.remove('current');
+        document.querySelector('[element-handle="3"]').classList.add('done');
+        document.querySelector('[element-handle="3.1"]').classList.add('current');
+      }, 400)
+
+
+<% end %>
+});
 
 const sendAjaxPostMemberVenueChoice = (chosenVenueId) => {
     const authToken = document.querySelector('meta[name="csrf-token"]').content

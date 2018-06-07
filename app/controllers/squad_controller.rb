@@ -81,11 +81,11 @@ class SquadController < ApplicationController
 
     authorize @squadmember
 
-     @squadmember.contribution = params[:contribution].to_i
-     @squadmember.will_be_present = true
-     @squadmember.save!
+    @squadmember.contribution = params[:contribution].to_i
+    @squadmember.will_be_present = true
+    @squadmember.save!
 
-     render json: @squad
+    render json: { squad: @squad, squadmembers: @squad.squadmembers, status: contribution_progess_ready? }
   end
 
   #AJAX REQUESTS
@@ -239,6 +239,25 @@ class SquadController < ApplicationController
     return { ready: member_critial_count == member_count_have_chosen_venue, missing_cnt: member_critial_count - member_count_have_chosen_venue, waiting_for: members_have_not_chosen }
   end
 
+  def contribution_progess_ready?
+    #todo : calculate if more then half of people have voted yet
+
+    member_count = @squad.squadmembers.count
+    member_critial_count = member_count
+    members_have_not_contributed = []
+
+    member_count_have_contributed = 0
+
+    @squad.squadmembers.each do |squadmember|
+      if squadmember.contribution == 0
+        members_have_not_contributed << squadmember
+      else
+        member_count_have_contributed += 1
+      end
+    end
+
+    return { ready: member_critial_count == member_count_have_contributed, missing_cnt: member_critial_count - member_count_have_contributed, waiting_for: members_have_not_contributed }
+  end
 
 
 
