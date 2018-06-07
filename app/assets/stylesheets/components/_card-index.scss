@@ -87,12 +87,10 @@ $txt-color:   #DCE3E7;
   // top: 0;
   // left: 0;
 }
-h3{
-  font-size: 20px;
-  font-weight: 500;
+.title-content h3{
   letter-spacing: 2px;
   color: white;
-  font-weight: 400 !important;
+  font-weight: 800 !important;
   font-family: 'Open Sans', sans-serif !important;
   // -webkit-font-smoothing: antialiased !important;
   // text-rendering: optimizeLegibility !important;
@@ -112,6 +110,7 @@ hr{
   border: 0;
   background: white;
 }
+
 .intro{
   margin: 5px auto;
   color: rgba(255, 255, 255, 0.6) !important;
