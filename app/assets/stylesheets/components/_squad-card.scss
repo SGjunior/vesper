@@ -8,6 +8,10 @@
   border-radius: 20px;
   margin: 10px;
   min-height: 355px;
+  -webkit-filter: saturate(1.5) contrast(120%);
+  -webkit-box-shadow:4.5px 4.5px 10px -2px rgba(124, 255, 203, 0.2) ;
+  -moz-box-shadow:4.5px 4.5px 10px -2px rgba(124, 255, 203, 0.2) ;
+  box-shadow:4.5px 4.5px 10px -2px rgba(124, 255, 203, 0.2) ;
 }
 
 .squad-member .member-avatar {
