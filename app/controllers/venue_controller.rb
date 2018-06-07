@@ -38,7 +38,8 @@ class VenueController < ApplicationController
   def index
     @squad = Squad.new(user: current_user)
 
-    @Venues = policy_scope(Venue).where.not(latitude: nil, longitude: nil).limit(50)
+    # @Venues = policy_scope(Venue).where.not(latitude: nil, longitude: nil).limit(50)
+    @Venues = policy_scope(Venue).limit(50)
     @searchBar = true;
     @markers = @Venues.map do |venue|
       {

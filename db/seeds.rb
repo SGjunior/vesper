@@ -26,8 +26,9 @@ def convert_yelp_pricing_to_integer(yelp_price)
   end
 end
 
-if true
-  Venue.destroy_all
+Venue.destroy_all
+if false
+
   require 'json'
   require 'open-uri'
   require 'net/http'
@@ -70,8 +71,8 @@ if true
     #     venue: venue
     #   )
 
-      package.save!
-    end
+    #   package.save!
+    # end
   end
 
   #API FOR GOOGLE PLACES
@@ -243,11 +244,13 @@ venue_attributes = [
     description: "Underground DJ's in small intimate venue",
     music_genre: "electro",
     address: "98 ave Laurier",
-    # latitude: (45.5017 + rand() - rand()),
-    # longitude: (rand() - 73.5673 - rand()),
+    latitude: (45.5017 + rand() - rand()),
+    longitude: (rand() - 73.5673 - rand()),
     photo: 'bar-datcha-bar-datcha',
+    remote_photo_url: Cloudinary::Utils.cloudinary_url('bar-datcha-bar-datcha'),
     capacity: 100,
     pricing: 2,
+    rating: 3,
     instagram_handle: 'https://www.instagram.com/datcha/'
   },
   {
@@ -255,11 +258,13 @@ venue_attributes = [
     description: "Club in plush velvet decor in the Old Port",
     music_genre: "dance/electro",
     address: "426 St Gabriel",
-    # latitude: (45.5017 + rand() - rand()),
-    # longitude: (rand() - 73.5673 - rand()),
+    latitude: (45.5017 + rand() - rand()),
+    longitude: (rand() - 73.5673 - rand()),
     photo: 'Velvet_club',
+    remote_photo_url: Cloudinary::Utils.cloudinary_url('Velvet_club'),
     capacity: 100,
     pricing: 3,
+    rating: 3,
     instagram_handle: 'https://www.instagram.com/velvet/'
   },
   {
@@ -267,11 +272,13 @@ venue_attributes = [
     description: "New club venue in an old bank, very elegant",
     music_genre: "dance/hip-hop",
     address: "360 St Jacques",
-    # latitude: (45.5017 + rand() - rand()),
-    # longitude: (rand() - 73.5673 - rand()),
+    latitude: (45.5017 + rand() - rand()),
+    longitude: (rand() - 73.5673 - rand()),
     photo: 'LaVoute_club',
+    remote_photo_url: Cloudinary::Utils.cloudinary_url('LaVoute_club'),
     capacity: 100,
     pricing: 3,
+    rating: 3,
     instagram_handle: 'https://www.instagram.com/lavoute/'
   },
   {
@@ -279,11 +286,13 @@ venue_attributes = [
     description: "Old bank turned wine bar in a relaxed atmosphere",
     music_genre: "rock/dance",
     address: "5001 Notre Dame",
-    # latitude: (45.5017 + rand() - rand()),
-    # longitude: (rand() - 73.5673 - rand()),
+    latitude: (45.5017 + rand() - rand()),
+    longitude: (rand() - 73.5673 - rand()),
     photo: 'Loic_club',
+    remote_photo_url: Cloudinary::Utils.cloudinary_url('Loic_club'),
     capacity: 100,
     pricing: 2,
+    rating: 3,
     instagram_handle: 'https://www.instagram.com/loic/'
   },
   {
@@ -291,11 +300,13 @@ venue_attributes = [
     description: "Classic bar/nightclub establishment in Montreal",
     music_genre: "rock",
     address: "1449 Crescent St",
-    # latitude: (45.5017 + rand() - rand()),
-    # longitude: (rand() - 73.5673 - rand()),
+    latitude: (45.5017 + rand() - rand()),
+    longitude: (rand() - 73.5673 - rand()),
     photo: 'Thursdays_club',
+    remote_photo_url: Cloudinary::Utils.cloudinary_url('Thursdays_club'),
     capacity: 100,
     pricing: 2,
+    rating: 3,
     instagram_handle: 'https://www.instagram.com/thursdays/'
   },
   {
@@ -303,11 +314,13 @@ venue_attributes = [
     description: "Fun venue, beer, board games and ping-pong",
     music_genre: "rock/dance",
     address: "5788 St Laurent",
-    # latitude: (45.5017 + rand() - rand()),
-    # longitude: (rand() - 73.5673 - rand()),
+    latitude: (45.5017 + rand() - rand()),
+    longitude: (rand() - 73.5673 - rand()),
     photo: 'Ping pong_club',
+    remote_photo_url: Cloudinary::Utils.cloudinary_url('Ping pong_club'),
     capacity: 100,
     pricing: 2,
+    rating: 3,
     instagram_handle: 'https://www.instagram.com/ping-pong/'
   },
   {
@@ -315,11 +328,13 @@ venue_attributes = [
     description: "Beautiful wine bar with good bites",
     music_genre: "brazilian/bosa nova",
     address: "115 Ave Laurier",
-    # latitude: (45.5017 + rand() - rand()),
-    # longitude: (rand() - 73.5673 - rand()),
+    latitude: (45.5017 + rand() - rand()),
+    longitude: (rand() - 73.5673 - rand()),
     photo: 'Henrietta_club',
+    remote_photo_url: Cloudinary::Utils.cloudinary_url('Henrietta_club'),
     capacity: 100,
     pricing: 2,
+    rating: 3,
     instagram_handle: 'https://www.instagram.com/henrietta/'
   },
   {
@@ -327,11 +342,13 @@ venue_attributes = [
     description: "Indie rock venue, cheap drinks",
     music_genre: "varied music",
     address: "179 Rue Jean Talon",
-    # latitude: (45.5017 + rand() - rand()),
-    # longitude: (rand() - 73.5673 - rand()),
+    latitude: (45.5017 + rand() - rand()),
+    longitude: (rand() - 73.5673 - rand()),
     photo: 'Bar Le Ritz_club',
+    remote_photo_url: Cloudinary::Utils.cloudinary_url('Bar Le Ritz_club'),
     capacity: 100,
     pricing: 1,
+    rating: 3,
     instagram_handle: 'https://www.instagram.com/barleritz/'
   },
   {
@@ -339,11 +356,13 @@ venue_attributes = [
     description: "Supper club with elegant design",
     music_genre: "dance/hip hip-hop",
     address: "390 St Jacques",
-    # latitude: (45.5017 + rand() - rand()),
-    # longitude: (rand() - 73.5673 - rand()),
+    latitude: (45.5017 + rand() - rand()),
+    longitude: (rand() - 73.5673 - rand()),
     photo: 'Bordelle_club',
+    remote_photo_url: Cloudinary::Utils.cloudinary_url('Bordelle_club'),
     capacity: 100,
     pricing: 3,
+    rating: 3,
     instagram_handle: 'https://www.instagram.com/bordelle/'
   },
   {
@@ -351,11 +370,13 @@ venue_attributes = [
     description: "Local francophone artists rock venue",
     music_genre: "francophone artists",
     address: "104 St Paul",
-    # latitude: (45.5017 + rand() - rand()),
-    # longitude: (rand() - 73.5673 - rand()),
+    latitude: (45.5017 + rand() - rand()),
+    longitude: (rand() - 73.5673 - rand()),
     photo: '2pierrots_club',
+    remote_photo_url: Cloudinary::Utils.cloudinary_url('2pierrots_club'),
     capacity: 100,
     pricing: 2,
+    rating: 3,
     instagram_handle: 'https://www.instagram.com/2pierrots/'
   },
   {
@@ -363,11 +384,13 @@ venue_attributes = [
     description: "Club venue in vitorian tea venue",
     music_genre: "dance/hip-hop",
     address: "451 Rue Rachel",
-    # latitude: (45.5017 + rand() - rand()),
-    # longitude: (rand() - 73.5673 - rand()),
+    latitude: (45.5017 + rand() - rand()),
+    longitude: (rand() - 73.5673 - rand()),
     photo: 'Mayfair_club',
+    remote_photo_url: Cloudinary::Utils.cloudinary_url('Mayfair_club'),
     capacity: 100,
     pricing: 2,
+    rating: 3,
     instagram_handle: 'https://www.instagram.com/Mayfair/'
   },
   {
@@ -375,50 +398,52 @@ venue_attributes = [
     description: "Fun western bar with a riding bull",
     music_genre: "rock dance",
     address: "5301 St Laurent",
-    # latitude: (45.5017 + rand() - rand()),
-    # longitude: (rand() - 73.5673 - rand()),
+    latitude: (45.5017 + rand() - rand()),
+    longitude: (rand() - 73.5673 - rand()),
     photo: 'Chez serge_club',
+    remote_photo_url: Cloudinary::Utils.cloudinary_url('Chez serge_club'),
     capacity: 100,
     pricing: 2,
+    rating: 3,
     instagram_handle: 'https://www.instagram.com/chezserge/'
   }
 ]
 
-# 5.times do
+# # 5.times do
 venue_attributes.each do |venue_attributes_hash|
-  venue_attributes_hash_photo = Cloudinary::Utils.cloudinary_url  "#{venue_attributes_hash["photo"]}"
-  venue_attributes_hash.delete("photo")
+#   venue_attributes_hash_photo = Cloudinary::Utils.cloudinary_url  "#{venue_attributes_hash["photo"]}"
+#   # venue_attributes_hash.delete("photo")
 
   venue = Venue.new(venue_attributes_hash)
-  venue.remote_photo_url = venue_attributes_hash_photo
+#   venue.remote_photo_url = venue_attributes_hash_photo
 
-    # name: venue_attributes_hash[:name],
-    # description: venue_attributes_hash[:description],
-    # # description: 'Lorem ipsum dolor sit amet, ut amet arcu, a vel. Bibendum enim curabitur, tincidunt congue consectetuer, nunc in. Wisi wisi, vitae taciti tempor. Massa est, arcu integer, vulputate velit eu.',
-    # latitude: (45.5017 + rand() - rand()),
-    # longitude: (rand() - 73.5673 - rand()),
-    # address: venue_attributes_hash[:address],
-    # capacity: [200, 400, 600].sample()  ,
-    # music_genre: Faker::Music.instrument,
-    # pricing: rand(1..3),
-    # instagram_handle: 'https://www.instagram.com/beachclubmtl/'
+#     # name: venue_attributes_hash[:name],
+#     # description: venue_attributes_hash[:description],
+#     # # description: 'Lorem ipsum dolor sit amet, ut amet arcu, a vel. Bibendum enim curabitur, tincidunt congue consectetuer, nunc in. Wisi wisi, vitae taciti tempor. Massa est, arcu integer, vulputate velit eu.',
+#     # latitude: (45.5017 + rand() - rand()),
+#     # longitude: (rand() - 73.5673 - rand()),
+#     # address: venue_attributes_hash[:address],
+#     # capacity: [200, 400, 600].sample()  ,
+#     # music_genre: Faker::Music.instrument,
+#     # pricing: rand(1..3),
+#     # instagram_handle: 'https://www.instagram.com/beachclubmtl/'
 
   venue.save!
-
-  # 4.times do
-
-  #   package = Package.new(
-  #     name: Faker::Beer.name,
-  #     price: rand(140..600),
-  #     description: 'Lorem ipsum dolor sit amet, ut amet arcu, a vel. Bibendum enim curabitur, tincidunt congue consectetuer, nunc in. Wisi wisi, vitae taciti tempor. Massa est, arcu integer, vulputate velit eu.',
-  #     available_per_night: rand(2..8),
-  #     venue: venue
-  #   )
-
-  #   package.save!
-
-  # end
 end
+#   # 4.times do
+
+#   #   package = Package.new(
+#   #     name: Faker::Beer.name,
+#   #     price: rand(140..600),
+#   #     description: 'Lorem ipsum dolor sit amet, ut amet arcu, a vel. Bibendum enim curabitur, tincidunt congue consectetuer, nunc in. Wisi wisi, vitae taciti tempor. Massa est, arcu integer, vulputate velit eu.',
+#   #     available_per_night: rand(2..8),
+#   #     venue: venue
+#   #   )
+
+#   #   package.save!
+
+#   # end
+# end
 
 # 3.times do
 
