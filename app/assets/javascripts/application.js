@@ -11,8 +11,19 @@ function initializeSlick() {
     fade: true,
     cssEase: 'linear'
   });
-}
 
+  $('.squad-details').slick({
+    dots: true,
+    infinite: true,
+    speed: 500,
+    fade: true,
+    cssEase: 'linear',
+    prevArrow: false,
+    nextArrow: false,
+    autoplay: true,
+    autoplaySpeed: 3000,
+  });
+}
 $(document).ready(function(){
   initializeSlick();
 });

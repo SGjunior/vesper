@@ -1,50 +1,90 @@
-<div class="app mdl-shadow--2dp">
-  <div class="main-index" id="main">
-    <p>Venue name : </p>
-    <h2><%= @squadChosenVenue.venue.name %></h2>
+<% venue =  @squadChosenVenue.venue %>
 
-    <hr>
+<div class="container">
+  <div class="row">
+    <h1>SQUAD CONFIRMATION</h1>
+  </div> <!-- title row -->
 
-      <h3>Squad members : </h3>
-      <% @squad.squadmembers.each do |squadmember| %>
-         <p><%= squadmember.user.first_name %> <%= squadmember.user.last_name %> / contribution : <%= squadmember.contribution %> $
-         </p>
-      <% end %>
+  <div class="row">
 
-    <hr>
-
-    <h3>Contribution Total : </h3>
-
-    <p><%= @squadTotalContribution %> $</p>
-
-    <hr>
-
-    <h3>Squad Chosen Package : </h3>
-    <% if @squad.package_id.nil? %>
-        <p id="chosen-package">Not chosen yet</p>
-    <% else %>
-    <%= raise %>
-        <p id="chosen-package"><%= Package.find(@squad.package_id).name %></p>
-    <% end %>
-
-
-    <!-- Raised button -->
-    <%= link_to squad_confirm_path(@squad.id), { method: :post, remote: true } do %>
-      <button class="mdl-button mdl-js-button mdl-button--raised">
-        confirm
-      </button>
-    <% end %>
-
-
-
-  </div>
-
-    <div class="map">
-      <h3>Packages :</h3>
-      <!-- TODO : List all the packages -->
-      <% @squadChosenVenue.venue.packages.each do |package| %>
-
-        <%= render 'squad/show_components/package_card', package: package, squad: @squad %>
-      <% end %>
+    <div class="col-xs-6 col-md-4 col-xs-offset-3 col-md-offset-0">
+<!--       <div class="squad-title">
+        <h2>SQUAD TITLE</h2>
+      </div> -->
+      <div class="squad-details">
+        <% @squad.squadmembers.each do |squadmember| %>
+        <div>
+         <%= render 'squad/show_components/squad-member-show-card', s_member: squadmember.user %>
+        </div>
+        <% end %>
+      </div>
     </div>
-</div>
+
+    <div class="col-xs-6 col-md-3 col-xs-offset-3 col-md-offset-1">
+        <div class="venue-details" style:"margin: auto; max-width: 300px">
+          <%= render 'squad/show_components/confirmed-venue-card', venue: venue %>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-md-4">
+      <div class="package-detail">
+        <%= render 'shared/final-package-card' %>
+      </div>
+    </div>
+
+  </div> <!--  info row end -->
+
+  <div class="row">
+    <div class="col-xs-4">
+      group contribution
+    </div>
+
+    <div class="col-xs-4">
+      personal contribution
+    </div>
+
+    <div class="col-xs-4">
+      total contribution
+    </div>
+
+  </div> <!-- contribution info -->
+</div> <!-- body end -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
