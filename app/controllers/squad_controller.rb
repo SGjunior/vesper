@@ -80,13 +80,12 @@ class SquadController < ApplicationController
     @squadmember = @squad.squadmembers.find(params[:squad_member_id])
 
     authorize @squadmember
-    # binding.pry
 
-     @squadmember.contribution = params[:contribution].to_i
-     @squadmember.will_be_present = true
-     @squadmember.save!
+    @squadmember.contribution = params[:contribution].to_i
+    @squadmember.will_be_present = true
+    @squadmember.save!
 
-     render json: { squad: @squad, squadmembers: @squad.squadmembers, status: contribution_progess_ready? }
+    render json: { squad: @squad, squadmembers: @squad.squadmembers, status: contribution_progess_ready? }
   end
 
   #AJAX REQUESTS
