@@ -208,6 +208,46 @@ User.new(
     address: Faker::Address.full_address,
     password: 'qwerty'
   ),
+User.new(
+    first_name: 'Chloe',
+    last_name:  'Baron',
+    email: "qwerty11@gmail.com",
+    phone_number: "514-321-4321",
+    address: Faker::Address.full_address,
+    password: 'qwerty'
+  ),
+User.new(
+    first_name: 'Joy',
+    last_name:  'Navi',
+    email: "qwerty12@gmail.com",
+    phone_number: "514-321-4321",
+    address: Faker::Address.full_address,
+    password: 'qwerty'
+  ),
+User.new(
+    first_name: 'Ben',
+    last_name:  'Frej',
+    email: "qwerty13@gmail.com",
+    phone_number: "514-321-4321",
+    address: Faker::Address.full_address,
+    password: 'qwerty'
+  ),
+User.new(
+    first_name: 'Francis',
+    last_name:  'Poitras',
+    email: "qwerty14@gmail.com",
+    phone_number: "514-321-4321",
+    address: Faker::Address.full_address,
+    password: 'qwerty'
+  ),
+User.new(
+    first_name: 'David',
+    last_name:  'Pare',
+    email: "qwerty15@gmail.com",
+    phone_number: "514-321-4321",
+    address: Faker::Address.full_address,
+    password: 'qwerty'
+  )
 ]
 
 users.each do |user|
