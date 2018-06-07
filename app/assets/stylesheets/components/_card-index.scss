@@ -79,6 +79,18 @@ $txt-color:   #DCE3E7;
   }
 }
 
+.blog-card::before {
+  content: '';
+  position: absolute;
+  bottom: -14px;
+  left: 0;
+  width: 100%;
+  height: 45%;
+  background: rgba(255, 255, 255, 0.1);
+  transform: skewY(15deg) scale(1.4);
+  pointer-events: none;
+}
+
 .title-content{
   text-align: center;
   margin: 0 auto;
