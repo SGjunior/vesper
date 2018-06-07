@@ -1,8 +1,50 @@
-<div class="container-fluid">
+<% venue =  @squadChosenVenue.venue %>
+
+<div class="container">
   <div class="row">
     <h1>SQUAD CONFIRMATION</h1>
-  </div>
-</div>
+  </div> <!-- title row -->
+
+  <div class="row">
+
+    <div class="col-xs-12 col-md-5">
+      <div class="squad-title">
+        <h2>SQUAD TITLE</h2>
+      </div>
+      <div class="squad-details">
+        details in here
+      </div>
+    </div>
+
+    <div class="col-xs-6 col-md-3 col-xs-offset-3 col-md-offset-0">
+        <div class="venue-details" style:"margin: auto; max-width: 300px">
+          <%= render 'squad/show_components/confirmed-venue-card', venue: venue %>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-md-4">
+      <div class="package-detail">
+        <%= render 'shared/final-package-card' %>
+      </div>
+    </div>
+
+  </div> <!--  info row end -->
+
+  <div class="row">
+    <div class="col-xs-4">
+      group contribution
+    </div>
+
+    <div class="col-xs-4">
+      personal contribution
+    </div>
+
+    <div class="col-xs-4">
+      total contribution
+    </div>
+
+  </div> <!-- contribution info -->
+</div> <!-- body end -->
 
 
 
@@ -40,14 +82,5 @@
 
 
 
-<!-- <h2><% #@squadChosenVenue.venue.name %></h2>
- <p><% # @squadTotalContribution %> $</p>
 
-    <hr>
 
-      <h3>Squad members : </h3>
-      <% # @squad.squadmembers.each do |squadmember| %>
-         <p><%= squadmember.user.first_name %> <%= squadmember.user.last_name %> / contribution : <%= squadmember.contribution %> $
-         </p>
-      <% # end %>
-      -->

@@ -239,3 +239,12 @@ hr{
     cursor: pointer;
   }
 }
+
+#confirmed-venue-card {
+  min-height: 390px !important;
+  transform: scale(1.1);
+  &:hover {
+    transform: scale(1.2) !important;
+    transition: 2s ease;
+  }
+}
