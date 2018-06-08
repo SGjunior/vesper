@@ -1,18 +1,29 @@
 <div class="drawer show-container">
-    <% unless venue.photo.nil? %>
 
     <div class="row" id="venue-info">
-    <div class="col-xs-12 col-md-6">
+    <div class="col-xs-12 col-sm-6">
       <div class="venue-background" style="');">
+    <% if venue.photo.nil? %>
+
 
         <% else %>
-        <div class="venue-background" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.4) 0%, rgba(0,36,61,0.6) 50%), url('<%= cl_image_path venue.photo %>')">
+        <div class="venue-background"
+        style="
+          max-height: 75vh;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-image: linear-gradient(-225deg, rgba(0,101,168,0.4) 0%, rgba(0,36,61,0.6) 50%),
+          url('<%= cl_image_path venue.photo %>')
+
+
+        ">
         <% end %>
 
 
           <div class="row">
-            <div class="col-xs-12 col-md-4">
-              <div class="align-content-center">
+            <div class="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2">
+              <div class="align-content-left">
                 <div class="row">
                   <div class="col-xs-12">
                     <h1><%= venue.name %>
@@ -20,18 +31,18 @@
                   </div>
                 </div> <!-- row 1 end -->
                 <div class="row">
-                    <div class="col-xs-12"><body><i class="fas fa-glass-martini"></i> <%= venue.description %> </body></div>
-                    <div class="col-xs-12"><p><i class="fas fa-music"></i> <%= venue.music_genre %> </p></div>
-                    <div class="col-xs-6"><p> <!-- # venue.pricing.times do %> -->
+                    <div class="col-xs-12"><p><i class="fas fa-music"></i> <%= venue.music_genre.capitalize %> </p></div>
+                    <div class="col-xs-12"><p><i class="fas fa-glass-martini"></i> <%= venue.description %></p></div>
+                    <div class="col-xs-6"><p> <% venue.pricing.times do %>
                       <i class="fas fa-dollar-sign"></i>
-                     <!-- # end %> -->
+                     <% end %>
                     </p></div>
                     <div class="col-xs-6"><p><% 3.times do  %>
                       <i class="fas fa-star"></i>
                     <% end %>
                     </p></div>
-                    <div class="col-xs-6"><p><i class="fas fa-fire"></i> <%= venue.review_count %> bookings</p></div>
-                    <div class="col-xs-6"><p><i class="fas fa-users"></i> <%= venue.capacity %> capacity</p></div>
+                    <div class="col-xs-6"><p><i class="fas fa-fire"></i> <%= venue.pricing * 3 %> bookings</p></div>
+                    <div class="col-xs-6"><p><i class="fas fa-users"></i> <%= venue.capacity + rand(0..100) %> capacity</p></div>
                 </div> <!-- row 2 end -->
 
               </div>
@@ -41,7 +52,7 @@
 
 
           <div class="row">
-            <div class="col-xs-8 col-xs-offset-2 col-md-6 col-md-offset-0">
+            <div class="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2">
               <div class="venue-social-pictures">
                 <div>
                   <%= cl_image_tag('bar-datcha-bar-kabinet')%>
@@ -63,5 +74,19 @@
   </div>
 </div>
 
+<style>
+  #venue-info h1{
+    font-family: 'Megrim';
+    font-size: 68px;
+    text-shadow: 0 0 10px rgba(255,255,255,1) , 0 0 20px rgba(255,255,255,1) , 0 0 30px rgba(255,255,255,1) , 0 0 40px #7CFFCB , 0 0 70px #7CFFCB , 0 0 80px #7CFFCB , 0 0 100px #7CFFCB ;
+    -webkit-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
+    -moz-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
+    -o-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
+    transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
+  }
 
+  #venue-info p {
+    font-size: 18px;
+  }
+</style>
 
