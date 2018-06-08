@@ -77,6 +77,7 @@
     </div>
 
     <div class="svg-wrapper" data-btn-confirm-contribution="checkout" style="display: none;">
+      <%= link_to squad_path(@squad.id) do %>
       <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
         <rect id="shape" height="40" width="150" />
         <div id="text">
@@ -86,6 +87,7 @@
           </div>
         </div>
       </svg>
+      <% end %>
     </div>
 
 
@@ -255,6 +257,9 @@ const displayStatusContribution = (data) => {
   }
   if (data.status.ready) {
     console.log(data.status.ready);
+      $('[data-btn-confirm-contribution="waiting"]').fadeOut();
+      $('[data-btn-confirm-contribution="checkout"]').delay(600).fadeIn();
+
 
 
   }
