@@ -1,4 +1,8 @@
+<div class="venue-contribution-floating-container">
+  <h2  class="glo-up"><%= @squadChosenVenue.venue.name %></h2>
+</div>
 <div class="hidden-xs squad-contribution-floating-container">
+
   <% @squad.squadmembers.each do |squadmember| %>
     <%= render 'squad/sidekick-components/squadmember-list-recent', user: squadmember.user, squad: @squad, options: 'question' %>
   <% end %>

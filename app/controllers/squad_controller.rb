@@ -201,14 +201,16 @@ class SquadController < ApplicationController
   def find_squad_chosen_venue
     vote_results = {}
     @squad.squadmembers.each do |squadmember|
-      if vote_results[squadmember.squadchosenvenue]
-        vote_results[squadmember.squadchosenvenue] += 1
-      else
-        vote_results[squadmember.squadchosenvenue] = 1
+      unless squadmember.squadchosenvenue_id.nil?
+        if vote_results[squadmember.squadchosenvenue_id]
+          vote_results[squadmember.squadchosenvenue_id] += 1
+        else
+          vote_results[squadmember.squadchosenvenue_id] = 1
+        end
       end
     end
     vote_result = vote_results.max_by{|k,v| v}
-    return vote_result[0]
+    return Squadchosenvenue.find(vote_result[0])
   end
 
   def find_squad_total_contribution

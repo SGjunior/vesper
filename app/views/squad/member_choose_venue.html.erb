@@ -49,7 +49,7 @@
 
 <div class="row">
   <div class="col-xs-12">
-    <div style="margin: 50px auto !important; width: 500px; text-align: center;">
+    <div style="margin: 50px auto !important; text-align: center;">
         <h4 id="status-display" class="message-waiting-venue-choose"style="display: none;"></h4>
       <!-- Raised button -->
 
@@ -76,7 +76,7 @@
         <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
           <rect id="shape" height="40" width="150" />
           <div id="text">
-            <div class="mint">
+            <div class="mint" style="font-size: 18px;">
               Confirm vote
             </div>
           </div>
@@ -286,7 +286,7 @@ const displayStatus = (data) => {
       const memberClosedEl = document.querySelector(`[member-closed='${squadmember.user_id}']`);
       const memberOpenEl = document.querySelector(`[member-open='${squadmember.user_id}']`);
 
-      const chosenVenueCardInfo = document.querySelector(`[data-venue-id='${squadmember.squadchosenvenue_id}']`);
+      const chosenVenueCardInfo = document.querySelector(`[data-chosenvenue-id='${squadmember.squadchosenvenue_id}']`);
       // console.log('-----------------------');
       // console.log(chosenVenueCardInfo);
       // console.log(`[data-chosenvenue-id='${squadmember.squadchosenvenue_id}']`);
