@@ -37,72 +37,68 @@
 
   <div class="row" style="margin-top: 25px">
     <div class="col-xs-6 col-md-4 col-xs-offset-3 col-md-offset-0 show-contributions">
-      <h3>Group Contribution:</h3>
-      <p><sup>$</sup>175</p>
+
+      <h3>Group Contribution</h3>
+      <p style="color: white !important; font-size: 28px;"><sup style="padding-right: 4px; font-size: 20px;">$</sup><%= @squadTotalContribution - @yourContribution %></p>
+      <!-- <p><sup>$</sup>175</p> -->
     </div>
 
     <div class="col-xs-6 col-md-3 col-xs-offset-3 col-md-offset-1 show-contributions">
-        <h3>Your Contribution:</h3>
-        <p><sup>$</sup>90</p>
+        <h3 style="color: #F90C78 !important;">Your Contribution</h3>
+        <p style="color: #F90C78 !important; font-size: 28px;"><sup style="padding-right: 4px; font-size: 20px;">$</sup><%= @yourContribution %></p>
     </div>
 
     <div class="col-xs-12 col-md-4 show-contributions">
-        <h3>Total Contribution:</h3>
-        <p><sup>$</sup>265</p>
+        <h3 style="color: #7CFFCB !important;">Total Contribution</h3>
+        <p class="glo-up-txt" style="color: white !important; font-size: 34px;"><sup style="padding-right: 4px; font-size: 20px;">$</sup><%= @squadTotalContribution %></p>
     </div>
 
   </div> <!-- contribution info -->
 </div> <!-- body end -->
 
+<div class="progress-btn-container">
+      <div class="svg-wrapper" id="qr-code">
+        <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
+          <rect id="shape" height="40" width="150" />
+          <div id="text">
+            <a class="mint" style="font-size: 15px;"><span class="spot"></span>
+              Get QR Code
+            </a>
+          </div>
+        </svg>
+      </div>
+</div>
 
+  <dialog class="mdl-dialog">
+    <h4 class="mdl-dialog__title" style="color: #030027  ">Gratz!</h4>
+    <div class="mdl-dialog__content">
+      <p style="font-size: 15px;">
+        Please present this code at the door
+      </p>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/QR_code_for_mobile_English_Wikipedia.svg/220px-QR_code_for_mobile_English_Wikipedia.svg.png" alt="">
+    </div>
+    <div class="mdl-dialog__actions">
+      <button type="button" class="mdl-button close">Close</button>
+      <!-- <button type="button" class="mdl-button">Disagree</button> -->
+    </div>
+  </dialog>
 
-
-
-
-
-<style>
-.show-title {
-  color: white;
-  letter-spacing: 3px;
-  font-family: 'Open Sans';
-  font-weight: 800;
-  font-size: 32px;
-}
-.show-contributions h3 {
-  font-family: 'Open Sans';
-  font-weight: 800;
-  font-size: 20px;
-  color: white !important;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-}
-
-
-</style>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+   <script>
+    var dialog = document.querySelector('dialog');
+    var showDialogButton = document.querySelector('#qr-code');
+    if (! dialog.showModal) {
+      dialogPolyfill.registerDialog(dialog);
+    }
+    // document.addEventListener('DOMContentLoaded', function() {
+    //   dialog.showModal();
+    // });
+    showDialogButton.addEventListener('click', (event) => {
+      dialog.showModal();
+    });
+    dialog.querySelector('.close').addEventListener('click', function() {
+      dialog.close();
+    });
+  </script>
 
 
 

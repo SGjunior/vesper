@@ -112,7 +112,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
                  1: /\/venue$/,
                  2: /\/squad\/[0-9]{1,}\/sidekicks$/,
                  3: /\/squad\/[0-9]{1,}\/[0-9]{1,}\/choosevenue$/,
-                 4: /\/squad\/[0-9]{1,}\/[0-9]{1,}\/choosecontribution$/
+                 4: /\/squad\/[0-9]{1,}\/[0-9]{1,}\/choosecontribution$/,
+                 5: /\/squad\/[0-9]{1,}$/
                 }
 
   const instructions = {
@@ -138,6 +139,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
       if (document.querySelector(`[element-handle="3.1"]`)) {
         document.querySelector(`[element-handle="3.1"]`).classList.add('done');
       }
+    }
+
+    if (currentKey == 5) {
+      document.querySelector(`[element-handle="4.1"]`).classList.add('done');
     }
 
     if (location.match(value)) {
