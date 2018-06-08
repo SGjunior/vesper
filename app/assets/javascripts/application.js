@@ -9,7 +9,11 @@ function initializeSlick() {
     infinite: true,
     speed: 500,
     fade: true,
-    cssEase: 'linear'
+    cssEase: 'linear',
+    prevArrow: false,
+    nextArrow: false,
+    autoplay: true,
+    autoplaySpeed: 1500,
   });
 
   $('.squad-details').slick({
