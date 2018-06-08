@@ -51,8 +51,30 @@ input[type=range]::-webkit-slider-thumb {
   overflow: scroll;
   z-index: 3 ;
 
-}
+  h2 {
+    font-family: 'Megrim';
+    // padding-left: 6em;
+  }
 
+}
+.venue-contribution-floating-container {
+
+  top: 6em;
+  left: 0.5em;
+  position: fixed;
+
+  max-height: 50vh;
+  overflow: scroll;
+  z-index: 3 ;
+  h2 {
+    font-family: 'Megrim';
+    color: white;
+    padding: 20px;
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+}
 
 
 
