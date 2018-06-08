@@ -209,6 +209,46 @@ User.new(
     address: Faker::Address.full_address,
     password: 'qwerty'
   ),
+User.new(
+    first_name: 'Chloe',
+    last_name:  'Baron',
+    email: "qwerty11@gmail.com",
+    phone_number: "514-321-4321",
+    address: Faker::Address.full_address,
+    password: 'qwerty'
+  ),
+User.new(
+    first_name: 'Joy',
+    last_name:  'Navi',
+    email: "qwerty12@gmail.com",
+    phone_number: "514-321-4321",
+    address: Faker::Address.full_address,
+    password: 'qwerty'
+  ),
+User.new(
+    first_name: 'Ben',
+    last_name:  'Frej',
+    email: "qwerty13@gmail.com",
+    phone_number: "514-321-4321",
+    address: Faker::Address.full_address,
+    password: 'qwerty'
+  ),
+User.new(
+    first_name: 'Francis',
+    last_name:  'Poitras',
+    email: "qwerty14@gmail.com",
+    phone_number: "514-321-4321",
+    address: Faker::Address.full_address,
+    password: 'qwerty'
+  ),
+User.new(
+    first_name: 'David',
+    last_name:  'Pare',
+    email: "qwerty15@gmail.com",
+    phone_number: "514-321-4321",
+    address: Faker::Address.full_address,
+    password: 'qwerty'
+  )
 ]
 
 users.each do |user|
@@ -381,7 +421,7 @@ venue_attributes = [
   },
   {
     name: "Mayfair",
-    description: "Club venue in vitorian tea venue",
+    description: "Club venue in victorian tea environment",
     music_genre: "dance/hip-hop",
     address: "451 Rue Rachel",
     latitude: (45.5017 + rand() - rand()),
@@ -391,7 +431,7 @@ venue_attributes = [
     capacity: 100,
     pricing: 2,
     rating: 3,
-    instagram_handle: 'https://www.instagram.com/Mayfair/'
+    instagram_handle: 'https://www.instagram.com/mayfair/'
   },
   {
     name: "Chez Serge",
@@ -406,7 +446,120 @@ venue_attributes = [
     pricing: 2,
     rating: 3,
     instagram_handle: 'https://www.instagram.com/chezserge/'
+  },
+  {
+    name: "Le Rouge Bar",
+    description: "The go to for big clubs, 2 floors of dance club music",
+    music_genre: "rock dance",
+    address: "7 Prince arthur",
+    latitude: (45.5017 + rand() - rand()),
+    longitude: (rand() - 73.5673 - rand()),
+    photo: 'Chez serge_club',
+    remote_photo_url: Cloudinary::Utils.cloudinary_url('Le rouge bar'),
+    capacity: 100,
+    pricing: 2,
+    rating: 3,
+    instagram_handle: 'https://www.instagram.com/lerougebar/'
+  },
+  {
+    name: "Bar Blizzarts",
+    description: "Small club with different nights, great music",
+    music_genre: "rock dance",
+    address: "3956 Blvd St Laurent",
+    latitude: (45.5017 + rand() - rand()),
+    longitude: (rand() - 73.5673 - rand()),
+    photo: 'Bar Blizzarts',
+    remote_photo_url: Cloudinary::Utils.cloudinary_url('Bar Blizzarts'),
+    capacity: 100,
+    pricing: 2,
+    rating: 3,
+    instagram_handle: 'https://www.instagram.com/barblizzarts/'
+  },
+  {
+    name: "La Porte Rouge",
+    description: "Great dance venue, fun vibes",
+    music_genre: "rock dance",
+    address: "1834 Mont-Royal Ave",
+    latitude: (45.5017 + rand() - rand()),
+    longitude: (rand() - 73.5673 - rand()),
+    photo: 'La Porte Rouge',
+    remote_photo_url: Cloudinary::Utils.cloudinary_url('La porte rouge'),
+    capacity: 100,
+    pricing: 2,
+    rating: 3,
+    instagram_handle: 'https://www.instagram.com/laporterouge/'
+  },
+  {
+    name: "BLVD44",
+    description: "hip-hop and rnb, great night out",
+    music_genre: "hip-hop/rnb",
+    address: "2108 St Laurent",
+    latitude: (45.5017 + rand() - rand()),
+    longitude: (rand() - 73.5673 - rand()),
+    photo: 'BLVD44',
+    remote_photo_url: Cloudinary::Utils.cloudinary_url('2108 St Laurent'),
+    capacity: 100,
+    pricing: 2,
+    rating: 3,
+    instagram_handle: 'https://www.instagram.com/blvd44/'
+  },
+  {
+    name: "Newspeak",
+    description: "The place for the underground DJs, great electro music",
+    music_genre: "electro",
+    address: "1403 St Elisabeth",
+    latitude: (45.5017 + rand() - rand()),
+    longitude: (rand() - 73.5673 - rand()),
+    photo: 'Newspeak',
+    remote_photo_url: Cloudinary::Utils.cloudinary_url('Newspeak'),
+    capacity: 100,
+    pricing: 2,
+    rating: 3,
+    instagram_handle: 'https://www.instagram.com/newspeak/'
+  },
+  {
+    name: "Cafe Campus",
+    description: "Fun university venue, 2 floors of dance club music",
+    music_genre: "rock dance",
+    address: "57 Prince arthur",
+    latitude: (45.5017 + rand() - rand()),
+    longitude: (rand() - 73.5673 - rand()),
+    photo: 'Cafe campus',
+    remote_photo_url: Cloudinary::Utils.cloudinary_url('Cafecampus'),
+    capacity: 100,
+    pricing: 2,
+    rating: 3,
+    instagram_handle: 'https://www.instagram.com/cafecampus/'
+  },
+  {
+    name: "Salon daome",
+    description: "Great DJ venue, small and comfy vibes",
+    music_genre: "electro",
+    address: "141 Mont-Royal",
+    latitude: (45.5017 + rand() - rand()),
+    longitude: (rand() - 73.5673 - rand()),
+    photo: 'Salon daome',
+    remote_photo_url: Cloudinary::Utils.cloudinary_url('Salon daome'),
+    capacity: 100,
+    pricing: 2,
+    rating: 3,
+    instagram_handle: 'https://www.instagram.com/salondamoe/'
+  },
+  {
+    name: "Ecole privee",
+    description: "Great dance/electro music, cool vibes",
+    music_genre: "hip-hop, electro",
+    address: "3500 St Laurent",
+    latitude: (45.5017 + rand() - rand()),
+    longitude: (rand() - 73.5673 - rand()),
+    photo: 'Ecole privee',
+    remote_photo_url: Cloudinary::Utils.cloudinary_url('Ecole privee'),
+    capacity: 100,
+    pricing: 2,
+    rating: 3,
+    instagram_handle: 'https://www.instagram.com/ecoleprivee/'
   }
+
 ]
 
 # # 5.times do
