@@ -11,13 +11,14 @@
 <!--       <div class="squad-title">
         <h2>SQUAD TITLE</h2>
       </div> -->
-      <div class="squad-details">
+      <!-- <div class="squad-details"> -->
         <% @squad.squadmembers.each do |squadmember| %>
+
         <div>
-         <%= render 'squad/show_components/squad-member-show-card', s_member: squadmember.user %>
+         <%= render 'squad/sidekick-components/squadmember-list-recent', user: squadmember.user, options: 'squad-show' %>
         </div>
         <% end %>
-      </div>
+      <!-- </div> -->
     </div>
 
     <div class="col-xs-6 col-md-3 col-xs-offset-3 col-md-offset-1">
