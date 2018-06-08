@@ -258,14 +258,14 @@ class SquadController < ApplicationController
     member_count_have_contributed = 0
 
     @squad.squadmembers.each do |squadmember|
-      if squadmember.contribution == 0
+      if squadmember.contribution == 0 || squadmember.contribution.nil?
         members_have_not_contributed << squadmember
       else
         member_count_have_contributed += 1
       end
     end
 
-    return { ready: member_critial_count == member_count_have_contributed, missing_cnt: member_critial_count - member_count_have_contributed, waiting_for: members_have_not_contributed }
+    return { ready: member_count == member_count_have_contributed, missing_cnt: member_critial_count - member_count_have_contributed, waiting_for: members_have_not_contributed }
   end
 
 
