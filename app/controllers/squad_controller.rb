@@ -231,8 +231,8 @@ class SquadController < ApplicationController
     #todo : calculate if more then half of people have voted yet
 
     member_count = @squad.squadmembers.count
-    # member_critial_count = (@squad.squadmembers.count/2.to_f).ceil
-    member_critial_count = member_count - 1
+    member_critial_count = (@squad.squadmembers.count/2.to_f).ceil
+    # member_critial_count = member_count - 1
     members_have_not_chosen = []
 
     member_count_have_chosen_venue = 0
@@ -245,7 +245,7 @@ class SquadController < ApplicationController
       end
     end
 
-    return { ready: member_critial_count == member_count_have_chosen_venue, missing_cnt: member_critial_count - member_count_have_chosen_venue, waiting_for: members_have_not_chosen }
+    return { ready: member_critial_count <= member_count_have_chosen_venue, missing_cnt: member_critial_count - member_count_have_chosen_venue, waiting_for: members_have_not_chosen }
   end
 
   def contribution_progess_ready?
