@@ -253,6 +253,11 @@ const displayStatusContribution = (data) => {
   if (contributionTotalEl.innerHTML != contributionTotal) {
     contributionTotalEl.innerHTML = contributionTotal;
   }
+  if (data.status.ready) {
+    console.log(data.status.ready);
+
+
+  }
 }
 
 

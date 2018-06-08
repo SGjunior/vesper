@@ -7,6 +7,13 @@
   border-bottom: 1px solid rgba(220,224,244,0.4);
   background-color: rgba(255,255,255,0.90) !important;
   border-radius: 15px;
+  // filter: grayscale(45%);
+  filter: brightness(0.7);
+  -webkit-transition : -webkit-filter 500ms linear;
+
+  &:hover {
+    filter: brightness(1);
+  }
 }
 
 .squadmember-recent-list-name {

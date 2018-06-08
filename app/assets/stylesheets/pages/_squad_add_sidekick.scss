@@ -69,9 +69,13 @@
 }
 
 .fancy-h3 {
-  font-size: 30px;
+  font-size: 18px;
+  text-align: left;
+  margin-left: 0px !important;
+  margin-bottom: 0px !important;
   font-family: 'Open Sans', sans-serif;
   color: white;
+  filter: brightness(0.5);
 }
 
 .fancy-3 {
