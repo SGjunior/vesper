@@ -136,6 +136,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
           bar.animate(1);
           bar2.animate((contributionTotal - 90) /90);
           bar3.animate(0);
+          firstPackageCard.style.zIndex = 2;
           secondPackageCard.style.zIndex = 2;
           firstPackageCard.classList.add('current-package');
           firstPackageCard.classList.remove('grayscale');

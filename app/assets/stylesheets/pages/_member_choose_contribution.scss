@@ -114,8 +114,20 @@ input[type=range]::-webkit-slider-thumb {
 }
 
 .contribution-cash {
-  margin: 0 auto !important;
+  // margin: 0 auto !important;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: auto;
+  margin-right: 0;
   font-size: 30px;
+}
+
+.total-mint {
+  color: $mint;
+}
+
+.total-pink {
+  color: $pink;
 }
 
 .contribution-total {
