@@ -13,14 +13,20 @@
   <!-- calculated amounts -->
   <div class="row">
     <div class="col-xs-12 col-sm-6">
+      <div class="div" style="display: flex;">
       <% if @squadmember.contribution != 0 && !@squadmember.contribution.nil? %>
         <h2 class="contribution-cash contribution-personnal"><%= @squadmember.contribution %></h2>
       <% else %>
         <h2 class="contribution-cash contribution-personnal" id="contribution-input"></h2>
       <% end %>
+      <span style="margin-right: auto; padding-left: 4px;" class="total-pink"> $</span>
+    </div>
     </div>
     <div class="col-xs-12 col-sm-6">
+      <div class="div" style="display: flex;">
       <h2 class="contribution-cash contribution-total" id="contribution-total">0</h2>
+      <span style="margin-right: auto; padding-left: 4px;" class="total-mint"> $</span>
+      </div>
     </div>
   </div>
 
@@ -77,6 +83,7 @@
     </div>
 
     <div class="svg-wrapper" data-btn-confirm-contribution="checkout" style="display: none;">
+      <%= link_to squad_path(@squad.id) do %>
       <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
         <rect id="shape" height="40" width="150" />
         <div id="text">
@@ -86,6 +93,7 @@
           </div>
         </div>
       </svg>
+      <% end %>
     </div>
 
 
@@ -255,6 +263,9 @@ const displayStatusContribution = (data) => {
   }
   if (data.status.ready) {
     console.log(data.status.ready);
+      $('[data-btn-confirm-contribution="waiting"]').fadeOut();
+      $('[data-btn-confirm-contribution="checkout"]').delay(600).fadeIn();
+
 
 
   }

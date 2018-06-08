@@ -1,4 +1,4 @@
-// console.log('test');
+
 import ProgressBar from 'progressbar.js'
 
 
@@ -113,7 +113,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
       contributionTotal = parseInt(contributionTotalEl.innerHTML);
 
       animationValue = contributionTotal / 270;
-      console.log(animationValue);
+      // console.log(animationValue);
       // console.log(contributionTotal);
 
       // console.log(this.value /100);
@@ -136,6 +136,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
           bar.animate(1);
           bar2.animate((contributionTotal - 90) /90);
           bar3.animate(0);
+          firstPackageCard.style.zIndex = 2;
           secondPackageCard.style.zIndex = 2;
           firstPackageCard.classList.add('current-package');
           firstPackageCard.classList.remove('grayscale');
