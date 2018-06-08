@@ -1,5 +1,4 @@
-meta_product_name: "Product Name"
-meta_title: "Product name - Product tagline"
-meta_description: "Relevant description"
-meta_image: ""                       # should exist in `app/assets/images/`
-twitter_account: "@product_twitter_account"
+meta_product_name: "Vesper"
+meta_title: "Fun should be planned!"
+meta_description: "Easily organize your night out with friends!"
+meta_image: "vesper.png"                       # should exist in `app/assets/images/`
