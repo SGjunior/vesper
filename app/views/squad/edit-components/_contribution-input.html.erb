@@ -14,18 +14,20 @@
   <div class="row">
     <div class="col-xs-12 col-sm-6">
       <div class="div" style="display: flex;">
+      <span style="margin-left: auto; padding-right: 4px;" class="total-pink"> $</span>
       <% if @squadmember.contribution != 0 && !@squadmember.contribution.nil? %>
         <h2 class="contribution-cash contribution-personnal"><%= @squadmember.contribution %></h2>
       <% else %>
         <h2 class="contribution-cash contribution-personnal" id="contribution-input"></h2>
       <% end %>
-      <span style="margin-right: auto; padding-left: 4px;" class="total-pink"> $</span>
+
     </div>
     </div>
     <div class="col-xs-12 col-sm-6">
       <div class="div" style="display: flex;">
+      <span style="margin-left: auto; padding-right: 4px;" class="total-mint"> $</span>
       <h2 class="contribution-cash contribution-total" id="contribution-total">0</h2>
-      <span style="margin-right: auto; padding-left: 4px;" class="total-mint"> $</span>
+
       </div>
     </div>
   </div>

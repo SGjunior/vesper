@@ -140,6 +140,7 @@ class SquadController < ApplicationController
     @squad = Squad.find(params[:id])
     @squadChosenVenue = find_squad_chosen_venue
     @squadTotalContribution = find_squad_total_contribution
+    @yourContribution = @squad.squadmembers.find_by(user: current_user).contribution
     # raise
     authorize @squad
   end
