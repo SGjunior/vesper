@@ -286,17 +286,22 @@ const displayStatus = (data) => {
       const memberClosedEl = document.querySelector(`[member-closed='${squadmember.user_id}']`);
       const memberOpenEl = document.querySelector(`[member-open='${squadmember.user_id}']`);
 
-      const chosenVenueCardInfo = document.querySelector(`[data-chosenvenue-id='${squadmember.squadchosenvenue_id}']`);
+      const chosenVenueCardInfo = document.querySelector(`[data-venue-id='${squadmember.squadchosenvenue_id}']`);
+      // console.log('-----------------------');
+      // console.log(chosenVenueCardInfo);
+      // console.log(`[data-chosenvenue-id='${squadmember.squadchosenvenue_id}']`);
+      // console.log('-----------------------');
 
-      console.log(`[data-chosenvenue-id='${squadmember.squadchosenvenue_id}']`);
-      console.log(chosenVenueCardInfo);
+      // console.log(`[data-chosenvenue-id='${squadmember.squadchosenvenue_id}']`);
+      // console.log(chosenVenueCardInfo);
 
       $(`[member-closed='${squadmember.user_id}']`).fadeOut();
       $(`[member-open='${squadmember.user_id}']`).delay(500).fadeIn();
 
+      // console.log(`[data-user-id='${squadmember.user_id}']`);
 
       if (chosenVenueCardInfo.querySelector(`[data-user-id='${squadmember.user_id}']`)) {
-        console.log('gaby is already present');
+        // console.log('gaby is already present');
       } else {
         chosenVenueCardInfo.prepend(memberOpenEl.parentElement.parentElement.querySelector('img').cloneNode());
       }
