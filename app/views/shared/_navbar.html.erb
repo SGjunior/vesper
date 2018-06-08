@@ -145,7 +145,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         displayTaskMessage.innerHTML = instructions[currentKey]
       }
       setTimeout((event) => {
-      console.log('we matched the value');
+      // console.log('we matched the value');
       if (matchingEl) {
         matchingEl.classList.add('current');
       }
@@ -178,21 +178,21 @@ const filterResultsVenues = () => {
       const venueName = venue.attributes['data-venue-name'].value.toLowerCase();
       if (venueName.indexOf(searchValue) !== -1) {
         if (venue.classList.contains('chosen-venue-card')) {
-          console.log('card is chosen, we cant remove it');
+          // console.log('card is chosen, we cant remove it');
         } else {
           venue.parentElement.classList.remove('hidden');
         }
 
       } else {
         if (venue.classList.contains('chosen-venue-card')) {
-          console.log('card is chosen, we cant remove it');
+          // console.log('card is chosen, we cant remove it');
         } else {
           venue.parentElement.classList.add('hidden');
         }
       }
     });
 
-    console.log(searchValue);
+    // console.log(searchValue);
 }
 
 
@@ -212,7 +212,7 @@ const filterResultsFriends = () => {
       }
     });
 
-    console.log(searchValue);
+    // console.log(searchValue);
 }
 
 

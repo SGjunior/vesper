@@ -1,4 +1,4 @@
-// console.log('test');
+
 import ProgressBar from 'progressbar.js'
 
 
@@ -113,7 +113,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
       contributionTotal = parseInt(contributionTotalEl.innerHTML);
 
       animationValue = contributionTotal / 270;
-      console.log(animationValue);
+      // console.log(animationValue);
       // console.log(contributionTotal);
 
       // console.log(this.value /100);
