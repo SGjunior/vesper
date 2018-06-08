@@ -139,7 +139,7 @@ User.new(
   ),
 
 User.new(
-    first_name: 'V',
+    first_name: 'Vasanth',
     last_name:  'Sadasivan',
     email: "qwerty3@gmail.com",
     phone_number: "514-321-4321",
@@ -454,8 +454,8 @@ venue_attributes = [
     address: "7 Prince arthur",
     latitude: (45.5017 + rand() - rand()),
     longitude: (rand() - 73.5673 - rand()),
-    photo: 'Chez serge_club',
-    remote_photo_url: Cloudinary::Utils.cloudinary_url('Le rouge bar'),
+    photo: 'Le rouge_bar',
+    remote_photo_url: Cloudinary::Utils.cloudinary_url('Le rouge_bar'),
     capacity: 100,
     pricing: 2,
     rating: 3,
@@ -468,27 +468,27 @@ venue_attributes = [
     address: "3956 Blvd St Laurent",
     latitude: (45.5017 + rand() - rand()),
     longitude: (rand() - 73.5673 - rand()),
-    photo: 'Bar Blizzarts',
-    remote_photo_url: Cloudinary::Utils.cloudinary_url('Bar Blizzarts'),
+    photo: 'Bar_Blizzarts',
+    remote_photo_url: "https://res.cloudinary.com/dw3kaeolx/image/upload/v1528469637/Bar_Blizzarts.jpg",
     capacity: 100,
     pricing: 2,
     rating: 3,
     instagram_handle: 'https://www.instagram.com/barblizzarts/'
   },
-  {
-    name: "La Porte Rouge",
-    description: "Great dance venue, fun vibes",
-    music_genre: "rock dance",
-    address: "1834 Mont-Royal Ave",
-    latitude: (45.5017 + rand() - rand()),
-    longitude: (rand() - 73.5673 - rand()),
-    photo: 'La Porte Rouge',
-    remote_photo_url: Cloudinary::Utils.cloudinary_url('La porte rouge'),
-    capacity: 100,
-    pricing: 2,
-    rating: 3,
-    instagram_handle: 'https://www.instagram.com/laporterouge/'
-  },
+  # {
+  #   name: "La Porte Rouge",
+  #   description: "Great dance venue, fun vibes",
+  #   music_genre: "rock dance",
+  #   address: "1834 Mont-Royal Ave",
+  #   latitude: (45.5017 + rand() - rand()),
+  #   longitude: (rand() - 73.5673 - rand()),
+  #   photo: 'La Porte Rouge',
+  #   remote_photo_url: Cloudinary::Utils.cloudinary_url('La porte rouge'),
+  #   capacity: 100,
+  #   pricing: 2,
+  #   rating: 3,
+  #   instagram_handle: 'https://www.instagram.com/laporterouge/'
+  # },
   {
     name: "BLVD44",
     description: "hip-hop and rnb, great night out",
@@ -497,7 +497,7 @@ venue_attributes = [
     latitude: (45.5017 + rand() - rand()),
     longitude: (rand() - 73.5673 - rand()),
     photo: 'BLVD44',
-    remote_photo_url: Cloudinary::Utils.cloudinary_url('2108 St Laurent'),
+    remote_photo_url: "https://res.cloudinary.com/dw3kaeolx/image/upload/v1528469782/BLVD44.jpg",
     capacity: 100,
     pricing: 2,
     rating: 3,
@@ -511,7 +511,7 @@ venue_attributes = [
     latitude: (45.5017 + rand() - rand()),
     longitude: (rand() - 73.5673 - rand()),
     photo: 'Newspeak',
-    remote_photo_url: Cloudinary::Utils.cloudinary_url('Newspeak'),
+    remote_photo_url: "https://res.cloudinary.com/dw3kaeolx/image/upload/v1528469969/Newspeak.jpg",
     capacity: 100,
     pricing: 2,
     rating: 3,
@@ -524,8 +524,8 @@ venue_attributes = [
     address: "57 Prince arthur",
     latitude: (45.5017 + rand() - rand()),
     longitude: (rand() - 73.5673 - rand()),
-    photo: 'Cafe campus',
-    remote_photo_url: Cloudinary::Utils.cloudinary_url('Cafecampus'),
+    photo: 'Cafe_campus',
+    remote_photo_url: "https://res.cloudinary.com/dw3kaeolx/image/upload/v1528470135/Cafe_campus.jpg",
     capacity: 100,
     pricing: 2,
     rating: 3,
@@ -538,8 +538,8 @@ venue_attributes = [
     address: "141 Mont-Royal",
     latitude: (45.5017 + rand() - rand()),
     longitude: (rand() - 73.5673 - rand()),
-    photo: 'Salon daome',
-    remote_photo_url: Cloudinary::Utils.cloudinary_url('Salon daome'),
+    photo: 'Salon_daome',
+    remote_photo_url: "https://res.cloudinary.com/dw3kaeolx/image/upload/v1528470315/Salon_daome.jpg",
     capacity: 100,
     pricing: 2,
     rating: 3,
@@ -552,8 +552,8 @@ venue_attributes = [
     address: "3500 St Laurent",
     latitude: (45.5017 + rand() - rand()),
     longitude: (rand() - 73.5673 - rand()),
-    photo: 'Ecole privee',
-    remote_photo_url: Cloudinary::Utils.cloudinary_url('Ecole privee'),
+    photo: 'Ecole_privee',
+    remote_photo_url: "https://res.cloudinary.com/dw3kaeolx/image/upload/v1528470420/Ecole_privee.jpg",
     capacity: 100,
     pricing: 2,
     rating: 3,
@@ -582,6 +582,7 @@ venue_attributes.each do |venue_attributes_hash|
 #     # instagram_handle: 'https://www.instagram.com/beachclubmtl/'
 
   venue.save!
+  puts "created #{venue.name}"
 end
 #   # 4.times do
 
