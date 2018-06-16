@@ -39,7 +39,7 @@
   <div class="card-info">
     <ul>
       <li class="card-close-btn">
-        <i class="fas fa-times" data-venue-id="<%= venue.id %>"></i>
+        <i class="fas fa-times" data-venue-id="<%= venue.id %>" style="color: #F90C78;"></i>
       <li>
     <%= link_to venue_path(venue.id), remote: true, data: {method: 'get' } do %>
       <i class="fas fa-info-circle" data-venue-id="<%= venue.id %>" onclick="openNav()">

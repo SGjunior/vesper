@@ -1,27 +1,75 @@
 <div class="container-sign-up-new">
+  <!-- <div class="login-form-wrapper"> -->
   <div class="row">
-<h2>Sign up</h2>
+    <!-- <div class="login-form"> -->
+          <!-- <div class="banner-main"> -->
+          <h1 class="glo-up devise-header" style="color: white;">Register</h1>
+          <!-- </div> -->
 
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= f.error_notification %>
+    <% resource.valid? %>
+    <% resource.errors.messages %>
 
-  <div class="form-inputs">
-    <%= f.input :email, required: true, autofocus: true %>
-    <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
-    <%= f.input :password_confirmation, required: true %>
-    <%= f.input :first_name, required: true %>
-    <%= f.input :last_name, required: true %>
-    <%= f.input :phone_number, required: true %>
-    <%= f.input :address, required: true %>
-    <%= f.input :photo %>
-    <%= f.input :photo_cache, as: :hidden %>
+    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <div class="row">
+      <div class="col-xs-12 col-sm-6">
+        <input class="fancy-input" type="email" value="" name="user[email]" id="user_email" placeholder="Email" autocomplete='email' onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'">
+
+        <input class="fancy-input password" type="password" name="user[password]" id="user_password" placeholder="Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'">
+
+        <input class="fancy-input password" type="password" name="user[password_confirmation]" id="user_password_confirmation" placeholder="Confirm Pwd" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Confirm Pwd'">
+      </div>
+      <div class="col-xs-12 col-sm-6">
+        <input class="fancy-input" required="required" type="text" name="user[first_name]" id="user_first_name" placeholder="firstName" onfocus="this.placeholder = ''" onblur="this.placeholder = 'firstName'" autocomplete='given-name'>
+
+        <input class="fancy-input" required="required" type="text" name="user[last_name]" id="user_last_name" placeholder="lastName" onfocus="this.placeholder = ''" onblur="this.placeholder = 'lastName'" autocomplete='family-name'>
+
+        <input class="fancy-input" required="required" aria-required="true" type="tel" name="user[phone_number]" id="user_phone_number" placeholder="Phone number" autocomplete='tel' onfocus="this.placeholder = ''" onblur="this.placeholder = 'Phone number'">
+      </div>
+    </div>
+      <div class="row">
+        <label class="fancy-input" style="margin-top: 1.5em">
+          Upload image
+          <span style="display:none;">
+            <%= f.input :photo %>
+          </span>
+        </label>
+        <span id="file_name_display">No File Chosen</span>
+      </div>
+
+
+      <%= f.input :photo_cache, as: :hidden %>
+
+
+
+      <div class="form-actions">
+        <input id="signup-input-btn" type="submit" name="commit" value="Sign up" class="fancy-input" data-disable-with="Sign up" style="background: white; color: #1B5A72; margin-top: 1em;">
+      </div>
+
+    <% end %>
+    <hr style="margin-top: 1.5em;">
+    <%= render "devise/shared/links" %>
   </div>
-
-  <div class="form-actions">
-    <%= f.button :submit, "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+<!-- </div> -->
+<!-- </div> -->
 </div>
-</div>
+
+<script>
+
+// todo : put in a js file
+let elInputListingPhoto = document.getElementById('user_photo');
+elInputListingPhoto.addEventListener('input', (event) => { uploadOnChange() });
+
+function uploadOnChange() {
+    var filename = elInputListingPhoto.value;
+    var lastIndex = filename.lastIndexOf("\\");
+    if (lastIndex >= 0) {
+        filename = filename.substring(lastIndex + 1);
+    }
+
+    if (filename == '') { filename = 'No File Chosen'; }
+
+    document.getElementById('file_name_display').innerHTML = filename;
+}
+
+
+</script>
