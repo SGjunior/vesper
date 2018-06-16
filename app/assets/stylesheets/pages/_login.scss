@@ -32,7 +32,7 @@
   }
 }
 
-input.fancy-input, a.fancy-input {
+input.fancy-input, a.fancy-input, label.fancy-input{
   display: block;
   appearance: none;
   outline: 0;
@@ -68,4 +68,24 @@ input.fancy-input, a.fancy-input {
       opacity: 1.0;
     }
   }
+}
+
+
+.container-sign-up-new {
+  width: 80%;
+  max-width: 600px;
+  margin: 20px auto;
+  max-height: calc(100vh - 70px);
+  // overflow: scroll;
+}
+
+.devise-header {
+ font-size: 48px;
+ font-weight: bold;
+ letter-spacing: 15px;
+ font-family: 'Megrim';
+ color: white;
+ text-align: center;
+ text-overflow: clip;
+ white-space: pre;
 }

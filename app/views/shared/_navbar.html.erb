@@ -81,12 +81,35 @@
 
     <!-- Avatar with dropdown menu -->
     <!-- <div class="navbar-wagon-item"> -->
-        <div element-handle="1"   class=" hidden-xs navbar-wagon-brand progress-nav medium">1</div>
-        <div element-handle="2"   class=" hidden-xs navbar-wagon-brand progress-nav medium">2</div>
-        <div element-handle="3"   class=" hidden-xs navbar-wagon-brand progress-nav medium">3</div>
-        <div element-handle="3.1" class=" hidden-xs navbar-wagon-brand progress-nav small"></div>
-        <div element-handle="4"   class=" hidden-xs navbar-wagon-brand progress-nav medium">4</div>
-        <div element-handle="4.1" class=" hidden-xs navbar-wagon-brand progress-nav small"></div>
+
+<!-- Multiline Tooltip -->
+
+
+        <div id="progress-item-1" element-handle="1"   class=" hidden-xs navbar-wagon-brand progress-nav medium">1</div>
+        <div class="mdl-tooltip mdl-shadow--2dp" for="progress-item-1">- You'll pick the 3 venues <br> Among those, democracy will decide where you're going!<br>- Hover over a card and select it
+        </div>
+        <div id="progress-item-2" element-handle="2"   class=" hidden-xs navbar-wagon-brand progress-nav medium">2</div>
+        <div class="mdl-tooltip mdl-shadow--2dp" for="progress-item-2">- Invite your friends, who's going out tonight?<br>- search or scroll
+        </div>
+        <div id="progress-item-3" element-handle="3"   class=" hidden-xs navbar-wagon-brand progress-nav medium">3</div>
+        <div class="mdl-tooltip mdl-shadow--2dp" for="progress-item-3">
+          - Let democracy win! <br>
+          - Hover over the cards to reveal the selection option
+        </div>
+        <div id="progress-item-3-1" element-handle="3.1" class=" hidden-xs navbar-wagon-brand progress-nav small"></div>
+        <div class="mdl-tooltip mdl-shadow--2dp" for="progress-item-3-1">
+          - Wait on your friends to RSVP
+        </div>
+        <div id="progress-item-4" element-handle="4"   class=" hidden-xs navbar-wagon-brand progress-nav medium">4</div>
+        <div class="mdl-tooltip mdl-shadow--2dp" for="progress-item-4">
+          - Pick a contribution amount <br>
+          - Vesper pools all your contribution and matches you to the best package. <br>
+          - Do not worry, if total contribution exceeds a package: you will only be charged as a proportion of your contribution to the total amount.
+        </div>
+        <div id="progress-item-4-1" element-handle="4.1" class=" hidden-xs navbar-wagon-brand progress-nav small"></div>
+        <div class="mdl-tooltip mdl-shadow--2dp" for="progress-item-4-1">
+          - Wait for your friends to contribute!
+        </div>
     <!-- </div> -->
     <% else %>
     <!-- Login link (when logged out) -->
@@ -105,7 +128,16 @@ function getKeyByValue(object, value) {
   return Object.keys(object).find(key => object[key] === value);
 }
 
+
+
+
 document.addEventListener("DOMContentLoaded", function(event) {
+  <% if user_signed_in? %>
+    progressBarExec();
+  <% end %>
+});
+
+const progressBarExec = () => {
   const displayTaskMessage = document.querySelector('.display-task-message');
   const location = window.location.href
   const pages = {
@@ -167,7 +199,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
   });
 
-});
+};
 
 document.addEventListener('DOMContentLoaded', (event) => {
 
