@@ -60,6 +60,7 @@
 
   &.progress-nav {
     opacity: 0.5;
+    cursor: pointer;
   }
 }
 
@@ -68,6 +69,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  a {
+    text-decoration: none;
+  }
+
 }
 
 .display-task-message {
@@ -417,4 +423,29 @@
 
 .mdl-tooltip {
   background-color: $black !important;
+}
+
+// other overides
+
+.fb-login-btn {
+  background-color: #4267B2;
+  padding: 5px 8px 3px 8px;
+  font-size: 14px;
+  text-align: center;
+  color: white !important;
+  text-decoration: none !important;
+  font-family: 'Helvetica';
+  border-radius: 3px;
+  max-width: 200px !important;
+  margin: 0px auto;
+  transition: all 0.4s ease;
+
+  i {
+    font-size: 20px;
+    color: white;
+  }
+
+  &:hover {
+    opacity: 0.8;
+  }
 }

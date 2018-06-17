@@ -8,7 +8,7 @@
 <% end -%>
 
 <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-  <a class="fancy-input" href="<%= new_password_path(resource_name) %>">Forgot your password?</a> />
+  <a class="fancy-input" href="<%= new_password_path(resource_name) %>">Forgot your password?</a>
 <% end -%>
 
 <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
@@ -21,7 +21,9 @@
 
 <% if devise_mapping.omniauthable? %>
   <% resource_class.omniauth_providers.each do |provider| %>
-    <%= link_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider) %><br />
+    <%= link_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider) %>
+    <!-- <br /> -->
+    <!-- <a class="fb-login-button" href="/users/auth/facebook">Sign in with Facebook</a> -->
   <% end %>
 <% end %>
 
