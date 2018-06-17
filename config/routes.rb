@@ -28,4 +28,6 @@ Rails.application.routes.draw do
 
   post 'squad/:id/squadmembers/:adding_user_id', to: 'squad#update', as: 'create_squadmember'
 
+  get 'privacy', to: 'venue#privacy'
+
 end
