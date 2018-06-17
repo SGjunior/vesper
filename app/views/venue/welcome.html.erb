@@ -1,3 +1,10 @@
+<script>
+  <% if user_signed_in? %>
+    window.location.href = '/venue'
+  <% end %>
+</script>
+
+
 
 <!-- adding banner to the top of the page -->
 <!-- <div id="banner-landing-main" class="banner-main" style="background-image: linear-gradient(-225deg, rgba(3,0,39, 0.6) 0%, rgba(3,0,39, 0.8) 50%), url('https://loremflickr.com/1200/900/venue');"> -->
@@ -8,8 +15,27 @@
     <h1 class="glo-up">Vesper</h1>
     <h2>FUN SHOULD BE PLANNED</h2>
 
+
+    <% if user_signed_in? %>
+
     <div class="button-backgrounds"><a id="browse-main-btn" class="welcome-button button1" href="/venue" style="bottom: 24px"></a></div>
+
+    <% else %>
+      <%= link_to omniauth_authorize_path(:user, :facebook) do %>
+        <div class="fb-login-btn mdl-shadow--2dp"><i class="fab fa-facebook-square"></i> Continue with Facebook</div>
+      <% end %>
+    <% end %>
+
+
+  <!-- <div class="button-backgrounds"> -->
+    <!-- <div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-use-continue-as="true"></div> -->
+
+  <!-- </div> -->
+
+
   </div>
+
+
 
 
   <div id="container-lols" hidden style="z-index:1">
@@ -42,9 +68,3 @@
   </div> -->
 </div>
 
-<script>
-  // $('.banner-content h1').document
-
-
-
-</script>

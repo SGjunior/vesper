@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
+
+  devise_for :users,
+    controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+
   get 'squadmember/create'
-  devise_for :users
+
   root to: 'venue#welcome'
 
   resources :venue, { except: [:destroy] }

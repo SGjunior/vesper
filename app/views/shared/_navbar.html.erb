@@ -5,6 +5,7 @@
     <div class="dropdown">
       <div class="navbar-wagon-brand dropdown-toggle glo-up-nav" id="navbar-wagon-menu" data-toggle="dropdown">
       V </div>
+
       <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
         <li>
           <%= link_to "/" do %>
@@ -27,8 +28,13 @@
           <% end %>
         </li>
       </ul>
+      <div class="navbar-wagon-item" style="z-index: 3; left: 7vw; top: 23px; position: fixed; padding: 0px;">
+        <% avatar_url = current_user.facebook_picture_url || cl_image_path( current_user.photo, { width: 100, height: 100, crop: 'thumb', gravity: 'face' }) || "http://placehold.it/30x30" %>
+        <%= image_tag avatar_url, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
+      </div>
     </div>
   </div>
+
   <% else %>
 
 
@@ -36,14 +42,15 @@
   V
   <% end %>
 
+
+
   <% end %>
 
   <div class="navbar-wagon-right">
-        <% if user_signed_in? %>
-
+    <% if user_signed_in? %>
 
     <!-- Right Navigation -->
-      <% unless @searchBar.nil? %>
+    <% unless @searchBar.nil? %>
 
 
 
@@ -65,7 +72,7 @@
 
 
 
-      <% end %>
+    <% end %>
 
 
 
@@ -82,81 +89,85 @@
     <!-- Avatar with dropdown menu -->
     <!-- <div class="navbar-wagon-item"> -->
 
-<!-- Multiline Tooltip -->
+      <!-- Multiline Tooltip -->
 
 
-        <div id="progress-item-1" element-handle="1"   class=" hidden-xs navbar-wagon-brand progress-nav medium">1</div>
-        <div class="mdl-tooltip mdl-shadow--2dp" for="progress-item-1">- You'll pick the 3 venues <br> Among those, democracy will decide where you're going!<br>- Hover over a card and select it
-        </div>
-        <div id="progress-item-2" element-handle="2"   class=" hidden-xs navbar-wagon-brand progress-nav medium">2</div>
-        <div class="mdl-tooltip mdl-shadow--2dp" for="progress-item-2">- Invite your friends, who's going out tonight?<br>- search or scroll
-        </div>
-        <div id="progress-item-3" element-handle="3"   class=" hidden-xs navbar-wagon-brand progress-nav medium">3</div>
-        <div class="mdl-tooltip mdl-shadow--2dp" for="progress-item-3">
-          - Let democracy win! <br>
-          - Hover over the cards to reveal the selection option
-        </div>
-        <div id="progress-item-3-1" element-handle="3.1" class=" hidden-xs navbar-wagon-brand progress-nav small"></div>
-        <div class="mdl-tooltip mdl-shadow--2dp" for="progress-item-3-1">
-          - Wait on your friends to RSVP
-        </div>
-        <div id="progress-item-4" element-handle="4"   class=" hidden-xs navbar-wagon-brand progress-nav medium">4</div>
-        <div class="mdl-tooltip mdl-shadow--2dp" for="progress-item-4">
-          - Pick a contribution amount <br>
-          - Vesper pools all your contribution and matches you to the best package. <br>
-          - Do not worry, if total contribution exceeds a package: you will only be charged as a proportion of your contribution to the total amount.
-        </div>
-        <div id="progress-item-4-1" element-handle="4.1" class=" hidden-xs navbar-wagon-brand progress-nav small"></div>
-        <div class="mdl-tooltip mdl-shadow--2dp" for="progress-item-4-1">
-          - Wait for your friends to contribute!
-        </div>
-    <!-- </div> -->
-    <% else %>
-    <!-- Login link (when logged out) -->
-    <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "navbar-wagon-item navbar-wagon-link" %>
-    <% end %>
+      <div id="progress-item-1" element-handle="1"   class=" hidden-xs navbar-wagon-brand progress-nav medium">1</div>
+      <div class="mdl-tooltip mdl-shadow--2dp" for="progress-item-1">- You'll pick the 3 venues <br> Among those, democracy will decide where you're going!<br>- Hover over a card and select it
+      </div>
+      <div id="progress-item-2" element-handle="2"   class=" hidden-xs navbar-wagon-brand progress-nav medium">2</div>
+      <div class="mdl-tooltip mdl-shadow--2dp" for="progress-item-2">- Invite your friends, who's going out tonight?<br>- search or scroll
+      </div>
+      <div id="progress-item-3" element-handle="3"   class=" hidden-xs navbar-wagon-brand progress-nav medium">3</div>
+      <div class="mdl-tooltip mdl-shadow--2dp" for="progress-item-3">
+        - Let democracy win! <br>
+        - Hover over the cards to reveal the selection option
+      </div>
+      <div id="progress-item-3-1" element-handle="3.1" class=" hidden-xs navbar-wagon-brand progress-nav small"></div>
+      <div class="mdl-tooltip mdl-shadow--2dp" for="progress-item-3-1">
+        - Wait on your friends to RSVP
+      </div>
+      <div id="progress-item-4" element-handle="4"   class=" hidden-xs navbar-wagon-brand progress-nav medium">4</div>
+      <div class="mdl-tooltip mdl-shadow--2dp" for="progress-item-4">
+        - Pick a contribution amount <br>
+        - Vesper pools all your contribution and matches you to the best package. <br>
+        - Do not worry, if total contribution exceeds a package: you will only be charged as a proportion of your contribution to the total amount.
+      </div>
+      <div id="progress-item-4-1" element-handle="4.1" class=" hidden-xs navbar-wagon-brand progress-nav small"></div>
+      <div class="mdl-tooltip mdl-shadow--2dp" for="progress-item-4-1">
+        - Wait for your friends to contribute!
+      </div>
+      <!-- </div> -->
+      <% else %>
+      <!-- Login link (when logged out) -->
+      <%#= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "navbar-wagon-item navbar-wagon-link" %>
+
+      <%= link_to omniauth_authorize_path(:user, :facebook) do %>
+        <div class="fb-login-btn mdl-shadow--2dp"><i class="fab fa-facebook-square"></i> Continue with Facebook</div>
+      <% end %>
+
+
+      <% end %>
+    </div>
+    <!-- Dropdown list appearing on mobile only -->
   </div>
 
-  <!-- Dropdown list appearing on mobile only -->
 
-</div>
+  <script>
 
-
-<script>
-
-function getKeyByValue(object, value) {
-  return Object.keys(object).find(key => object[key] === value);
-}
+    function getKeyByValue(object, value) {
+      return Object.keys(object).find(key => object[key] === value);
+    }
 
 
 
 
-document.addEventListener("DOMContentLoaded", function(event) {
-  <% if user_signed_in? %>
-    progressBarExec();
-  <% end %>
-});
+    document.addEventListener("DOMContentLoaded", function(event) {
+      <% if user_signed_in? %>
+      progressBarExec();
+      <% end %>
+    });
 
-const progressBarExec = () => {
-  const displayTaskMessage = document.querySelector('.display-task-message');
-  const location = window.location.href
-  const pages = {
-                 1: /\/venue$/,
-                 2: /\/squad\/[0-9]{1,}\/sidekicks$/,
-                 3: /\/squad\/[0-9]{1,}\/[0-9]{1,}\/choosevenue$/,
-                 4: /\/squad\/[0-9]{1,}\/[0-9]{1,}\/choosecontribution$/,
-                 5: /\/squad\/[0-9]{1,}$/
-                }
+    const progressBarExec = () => {
+      const displayTaskMessage = document.querySelector('.display-task-message');
+      const location = window.location.href
+      const pages = {
+       1: /\/venue$/,
+       2: /\/squad\/[0-9]{1,}\/sidekicks$/,
+       3: /\/squad\/[0-9]{1,}\/[0-9]{1,}\/choosevenue$/,
+       4: /\/squad\/[0-9]{1,}\/[0-9]{1,}\/choosecontribution$/,
+       5: /\/squad\/[0-9]{1,}$/
+     }
 
-  const instructions = {
-                        1: 'Select 3 venues',
-                        2: 'Invite your friends',
-                        3: 'Vote for your favorite venue',
-                        3.1: 'Wait for your friends to vote',
-                        4: 'Choose your contribution amount',
-                        4.1: 'Wait for the your friends to contribute',
-                        5: 'PARTY TIME'
-                        }
+     const instructions = {
+      1: 'Select 3 venues',
+      2: 'Invite your friends',
+      3: 'Vote for your favorite venue',
+      3.1: 'Wait for your friends to vote',
+      4: 'Choose your contribution amount',
+      4.1: 'Wait for the your friends to contribute',
+      5: 'PARTY TIME'
+    }
 
   // console.log(pages.values());
   var keys = Object.keys(pages);
@@ -186,7 +197,7 @@ const progressBarExec = () => {
       if (matchingEl) {
         matchingEl.classList.add('current');
       }
-      }, 400);
+    }, 400);
 
       return true;
     } else {
@@ -203,10 +214,10 @@ const progressBarExec = () => {
 
 document.addEventListener('DOMContentLoaded', (event) => {
 
-const venues = document.querySelectorAll('.col-xs-12.col-sm-6.col-md-4 .blog-card.mdl-shadow--2dp');
-const searchBar = document.getElementById('search-bar-input');
+  const venues = document.querySelectorAll('.col-xs-12.col-sm-6.col-md-4 .blog-card.mdl-shadow--2dp');
+  const searchBar = document.getElementById('search-bar-input');
 
-const filterResultsVenues = () => {
+  const filterResultsVenues = () => {
 
     const searchValue = searchBar.value.toLowerCase();
 
@@ -230,12 +241,12 @@ const filterResultsVenues = () => {
     });
 
     // console.log(searchValue);
-}
+  }
 
 
-const friends = document.querySelectorAll('.squadmember-list-container');
+  const friends = document.querySelectorAll('.squadmember-list-container');
 
-const filterResultsFriends = () => {
+  const filterResultsFriends = () => {
 
     const searchValue = searchBar.value.toLowerCase();
 
@@ -250,7 +261,7 @@ const filterResultsFriends = () => {
     });
 
     // console.log(searchValue);
-}
+  }
 
 
   if (searchBar) {
@@ -270,9 +281,9 @@ const filterResultsFriends = () => {
   // EXPERIMENTING WITH THE SEARCHBAR
 
   var s = $('input'),
-      f  = $('form'),
-      a = $('.after'),
-      m = $('h4');
+  f  = $('form'),
+  a = $('.after'),
+  m = $('h4');
 
   s.focus(function(){
     if( f.hasClass('open') ) return;
@@ -286,7 +297,7 @@ const filterResultsFriends = () => {
   a.on('click', function(e){
     e.preventDefault();
     if( !f.hasClass('open') ) return;
-     s.val('');
+    s.val('');
     f.addClass('close');
     f.removeClass('open');
     setTimeout(function(){
@@ -307,7 +318,7 @@ const filterResultsFriends = () => {
 
   $(document).mouseup(function(e)
   {
-      var container = $(".search-bar");
+    var container = $(".search-bar");
       // var container2 = $
 
       // if the target of the click isn't the container nor a descendant of the container
@@ -331,7 +342,7 @@ const filterResultsFriends = () => {
           }, 1300);
         }
       }
-  });
-  };
+    });
+};
 });
 </script>
