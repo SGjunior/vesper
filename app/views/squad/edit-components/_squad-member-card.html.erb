@@ -8,9 +8,7 @@
     <div class="squad-member">
 
       <div class="member-avatar">
-          <% avatar_url = current_user.facebook_picture_url || cl_image_path( current_user.photo, { width: 100, height: 100, crop: 'thumb', gravity: 'face' }) || "http://placehold.it/30x30" %>
-          <%= image_tag avatar_url, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
-
+        <img src="<%= cl_image_path s_member.photo, width: 100, height: 100, crop: 'thumb', gravity: 'face' unless s_member.photo.blank? %>">
       </div>
 
       <div class="squad-member-info">
