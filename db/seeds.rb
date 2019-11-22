@@ -27,97 +27,97 @@ def convert_yelp_pricing_to_integer(yelp_price)
 end
 
 Venue.destroy_all
-if false
+# if false
 
-  require 'json'
-  require 'open-uri'
-  require 'net/http'
-
-
-  puts "calling yelp API"
-
-  uri = URI("https://api.yelp.com/v3/businesses/search?location=montreal&categories=danceclubs&limit=50")
-
-  request = Net::HTTP::Get.new(uri)
-  request["Authorization"] = "Bearer #{ENV['YELP_API_KEY']}"
-  http = Net::HTTP.new(uri.hostname, uri.port)
-  http.use_ssl = true
-  response = http.start { |http| http.request(request) }
-  results = JSON.parse(response.body)
-
-  array_of_businesess = results["businesses"]
-  array_of_businesess.each do |business|
-    venue = Venue.new(
-      name: business["name"],
-      longitude: business["coordinates"]["longitude"],
-      latitude: business["coordinates"]["latitude"],
-      address: business["location"]["address1"],
-      description: business["categories"].map { |c| c["title"] }.join(" - "),
-      music_genre: 'lorem_ipsum',
-      rating: business["rating"],
-      remote_photo_url: business["image_url"],
-      review_count: business["review_count"],
-      pricing: convert_yelp_pricing_to_integer(business["price"])
-    )
-    venue.save!
+  # require 'json'
+  # require 'open-uri'
+  # require 'net/http'
 
 
-    # 4.times do
-    #   package = Package.new(
-    #     name: Faker::Beer.name,
-    #     price: rand(140..600),
-    #     description: 'Lorem ipsum dolor sit amet, ut amet arcu, a vel. Bibendum enim curabitur, tincidunt congue consectetuer, nunc in. Wisi wisi, vitae taciti tempor. Massa est, arcu integer, vulputate velit eu.',
-    #     available_per_night: rand(2..8),
-    #     venue: venue
-    #   )
+#   puts "calling yelp API"
 
-    #   package.save!
-    # end
-  end
+#   uri = URI("https://api.yelp.com/v3/businesses/search?location=montreal&categories=danceclubs&limit=50")
 
-  #API FOR GOOGLE PLACES
-  # url = 'https://api.github.com/users/ssaunier'
-  # user_serialized = open(url).read
-  # user = JSON.parse(user_serialized)
+#   request = Net::HTTP::Get.new(uri)
+#   request["Authorization"] = "Bearer #{ENV['YELP_API_KEY']}"
+#   http = Net::HTTP.new(uri.hostname, uri.port)
+#   http.use_ssl = true
+#   response = http.start { |http| http.request(request) }
+#   results = JSON.parse(response.body)
 
-  # puts "#{user['name']} - #{user['bio']}"
+#   array_of_businesess = results["businesses"]
+#   array_of_businesess.each do |business|
+#     venue = Venue.new(
+#       name: business["name"],
+#       longitude: business["coordinates"]["longitude"],
+#       latitude: business["coordinates"]["latitude"],
+#       address: business["location"]["address1"],
+#       description: business["categories"].map { |c| c["title"] }.join(" - "),
+#       music_genre: 'lorem_ipsum',
+#       rating: business["rating"],
+#       remote_photo_url: business["image_url"],
+#       review_count: business["review_count"],
+#       pricing: convert_yelp_pricing_to_integer(business["price"])
+#     )
+#     venue.save!
 
-  puts "calling google places"
 
-  uri = URI("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=45.5017,-73.5673&radius=1500&type=club&keyword=club&key=#{ENV['GOOGLE_PLACES_API_KEY']}")
+#     # 4.times do
+#     #   package = Package.new(
+#     #     name: Faker::Beer.name,
+#     #     price: rand(140..600),
+#     #     description: 'Lorem ipsum dolor sit amet, ut amet arcu, a vel. Bibendum enim curabitur, tincidunt congue consectetuer, nunc in. Wisi wisi, vitae taciti tempor. Massa est, arcu integer, vulputate velit eu.',
+#     #     available_per_night: rand(2..8),
+#     #     venue: venue
+#     #   )
 
-  request = Net::HTTP::Get.new(uri)
-  http = Net::HTTP.new(uri.hostname, uri.port)
-  http.use_ssl = true
-  response = http.start { |http| http.request(request) }
-  results = JSON.parse(response.body)
+#     #   package.save!
+#     # end
+#   end
 
-  array_of_clubs = results["results"]
+#   #API FOR GOOGLE PLACES
+#   # url = 'https://api.github.com/users/ssaunier'
+#   # user_serialized = open(url).read
+#   # user = JSON.parse(user_serialized)
 
-  array_of_clubs.each do |club|
-    venue = Venue.new(
-      name: club["name"],
-      longitude: club["geometry"]["location"]["lng"],
-      latitude: club["geometry"]["location"]["lat"],
-      address: club["vicinity"],
-      description: 'lorem ipsum',
-      music_genre: 'lorem_ipsum'
-      )
-    venue.save!
+#   # puts "#{user['name']} - #{user['bio']}"
 
-    4.times do
-      package = Package.new(
-        name: Faker::Beer.name,
-        price: rand(140..600),
-        description: 'Lorem ipsum dolor sit amet, ut amet arcu, a vel. Bibendum enim curabitur, tincidunt congue consectetuer, nunc in. Wisi wisi, vitae taciti tempor. Massa est, arcu integer, vulputate velit eu.',
-        available_per_night: rand(2..8),
-        venue: venue
-      )
+#   puts "calling google places"
 
-      package.save!
-    end
-  end
-end
+#   uri = URI("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=45.5017,-73.5673&radius=1500&type=club&keyword=club&key=#{ENV['GOOGLE_PLACES_API_KEY']}")
+
+#   request = Net::HTTP::Get.new(uri)
+#   http = Net::HTTP.new(uri.hostname, uri.port)
+#   http.use_ssl = true
+#   response = http.start { |http| http.request(request) }
+#   results = JSON.parse(response.body)
+
+#   array_of_clubs = results["results"]
+
+#   array_of_clubs.each do |club|
+#     venue = Venue.new(
+#       name: club["name"],
+#       longitude: club["geometry"]["location"]["lng"],
+#       latitude: club["geometry"]["location"]["lat"],
+#       address: club["vicinity"],
+#       description: 'lorem ipsum',
+#       music_genre: 'lorem_ipsum'
+#       )
+#     venue.save!
+
+#     4.times do
+#       package = Package.new(
+#         name: Faker::Beer.name,
+#         price: rand(140..600),
+#         description: 'Lorem ipsum dolor sit amet, ut amet arcu, a vel. Bibendum enim curabitur, tincidunt congue consectetuer, nunc in. Wisi wisi, vitae taciti tempor. Massa est, arcu integer, vulputate velit eu.',
+#         available_per_night: rand(2..8),
+#         venue: venue
+#       )
+
+#       package.save!
+#     end
+#   end
+# end
 
 users = [
 User.new(
@@ -289,8 +289,8 @@ venue_attributes = [
     photo: 'bar-datcha-bar-datcha',
     remote_photo_url: Cloudinary::Utils.cloudinary_url('bar-datcha-bar-datcha'),
     capacity: 100,
-    pricing: 2,
-    rating: 3,
+    pricing: 3,
+    rating: 5,
     instagram_handle: 'https://www.instagram.com/datcha/'
   },
   {
@@ -303,23 +303,9 @@ venue_attributes = [
     photo: 'Velvet_club',
     remote_photo_url: Cloudinary::Utils.cloudinary_url('Velvet_club'),
     capacity: 100,
-    pricing: 3,
-    rating: 3,
+    pricing: 4,
+    rating: 4,
     instagram_handle: 'https://www.instagram.com/velvet/'
-  },
-  {
-    name: "LaVoute",
-    description: "New club venue in an old bank, very elegant",
-    music_genre: "dance/hip-hop",
-    address: "360 St Jacques",
-    latitude: (45.5017 + rand() - rand()),
-    longitude: (rand() - 73.5673 - rand()),
-    photo: 'LaVoute_club',
-    remote_photo_url: Cloudinary::Utils.cloudinary_url('LaVoute_club'),
-    capacity: 100,
-    pricing: 3,
-    rating: 3,
-    instagram_handle: 'https://www.instagram.com/lavoute/'
   },
   {
     name: "Loic",
@@ -360,7 +346,7 @@ venue_attributes = [
     remote_photo_url: Cloudinary::Utils.cloudinary_url('Ping pong_club'),
     capacity: 100,
     pricing: 2,
-    rating: 3,
+    rating: 5,
     instagram_handle: 'https://www.instagram.com/ping-pong/'
   },
   {
@@ -373,7 +359,7 @@ venue_attributes = [
     photo: 'Henrietta_club',
     remote_photo_url: Cloudinary::Utils.cloudinary_url('Henrietta_club'),
     capacity: 100,
-    pricing: 2,
+    pricing: 3,
     rating: 3,
     instagram_handle: 'https://www.instagram.com/henrietta/'
   },
@@ -388,7 +374,7 @@ venue_attributes = [
     remote_photo_url: Cloudinary::Utils.cloudinary_url('Bar Le Ritz_club'),
     capacity: 100,
     pricing: 1,
-    rating: 3,
+    rating: 4,
     instagram_handle: 'https://www.instagram.com/barleritz/'
   },
   {
@@ -429,8 +415,8 @@ venue_attributes = [
     photo: 'Mayfair_club',
     remote_photo_url: Cloudinary::Utils.cloudinary_url('Mayfair_club'),
     capacity: 100,
-    pricing: 2,
-    rating: 3,
+    pricing: 3,
+    rating: 4,
     instagram_handle: 'https://www.instagram.com/mayfair/'
   },
   {
@@ -532,6 +518,20 @@ venue_attributes = [
     instagram_handle: 'https://www.instagram.com/cafecampus/'
   },
   {
+    name: "LaVoute",
+    description: "New club venue in an old bank, very elegant",
+    music_genre: "dance/hip-hop",
+    address: "360 St Jacques",
+    latitude: (45.5017 + rand() - rand()),
+    longitude: (rand() - 73.5673 - rand()),
+    photo: 'LaVoute_club',
+    remote_photo_url: Cloudinary::Utils.cloudinary_url('LaVoute_club'),
+    capacity: 100,
+    pricing: 4,
+    rating: 3,
+    instagram_handle: 'https://www.instagram.com/lavoute/'
+  },
+  {
     name: "Salon daome",
     description: "Great DJ venue, small and comfy vibes",
     music_genre: "electro",
@@ -542,7 +542,7 @@ venue_attributes = [
     remote_photo_url: "https://res.cloudinary.com/dw3kaeolx/image/upload/v1528470315/Salon_daome.jpg",
     capacity: 100,
     pricing: 2,
-    rating: 3,
+    rating: 4,
     instagram_handle: 'https://www.instagram.com/salondamoe/'
   },
   {
@@ -563,7 +563,7 @@ venue_attributes = [
 ]
 
 # # 5.times do
-venue_attributes.each do |venue_attributes_hash|
+venue_attributes.reverse.each do |venue_attributes_hash|
 #   venue_attributes_hash_photo = Cloudinary::Utils.cloudinary_url  "#{venue_attributes_hash["photo"]}"
 #   # venue_attributes_hash.delete("photo")
 

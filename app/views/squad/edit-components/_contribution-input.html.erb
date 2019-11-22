@@ -13,14 +13,22 @@
   <!-- calculated amounts -->
   <div class="row">
     <div class="col-xs-12 col-sm-6">
+      <div class="div" style="display: flex;">
+      <span style="margin-left: auto; padding-right: 4px;" class="total-pink"> $</span>
       <% if @squadmember.contribution != 0 && !@squadmember.contribution.nil? %>
         <h2 class="contribution-cash contribution-personnal"><%= @squadmember.contribution %></h2>
       <% else %>
         <h2 class="contribution-cash contribution-personnal" id="contribution-input"></h2>
       <% end %>
+
+    </div>
     </div>
     <div class="col-xs-12 col-sm-6">
+      <div class="div" style="display: flex;">
+      <span style="margin-left: auto; padding-right: 4px;" class="total-mint"> $</span>
       <h2 class="contribution-cash contribution-total" id="contribution-total">0</h2>
+
+      </div>
     </div>
   </div>
 
@@ -56,7 +64,7 @@
         <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
           <rect id="shape" height="40" width="150" />
           <div id="text">
-            <a class="mint" href="" style="font-size: 20px;"><span class="spot"></span>
+            <a class="mint" href="" style="font-size: 15px; padding-top: 20px !important">
               Confirm
             </a>
           </div>
@@ -77,15 +85,17 @@
     </div>
 
     <div class="svg-wrapper" data-btn-confirm-contribution="checkout" style="display: none;">
+      <%= link_to squad_path(@squad.id) do %>
       <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
         <rect id="shape" height="40" width="150" />
         <div id="text">
-          <div class="mint">
+          <div class="mint" style="font-size: 15px;">
             <!-- <i class="fas fa-arrow-right"></i> -->
             Checkout
           </div>
         </div>
       </svg>
+      <% end %>
     </div>
 
 
@@ -255,6 +265,9 @@ const displayStatusContribution = (data) => {
   }
   if (data.status.ready) {
     console.log(data.status.ready);
+      $('[data-btn-confirm-contribution="waiting"]').fadeOut();
+      $('[data-btn-confirm-contribution="checkout"]').delay(600).fadeIn();
+
 
 
   }

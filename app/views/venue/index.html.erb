@@ -1,3 +1,8 @@
+<% if user_signed_in? %>
+<%# john = current_user.facebook.get_object('me') %>
+<%#= raise %>
+<% end %>
+
 
 <div class="index-wrapper">
   <!-- <div class="col-xs-12 col-sm-10 col-sm-offset-1"> -->
@@ -45,7 +50,7 @@
 
 
   <div class="progress-btn-container">
-    <div class="svg-wrapper" id="proceed-to-create-squad-btn">
+    <div class="svg-wrapper" id="proceed-to-create-squad-btn" style="display: none;">
       <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
         <rect id="shape" height="40" width="150" />
         <div id="text">
@@ -55,6 +60,19 @@
         </div>
       </svg>
     </div>
+
+
+    <div class="svg-wrapper" id="locked-btn">
+      <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
+        <rect id="shape" height="40" width="150" />
+        <div id="text">
+          <div class="mint" href="">
+            <i class="material-icons">lock</i>
+          </div>
+        </div>
+      </svg>
+    </div>
+
   </div>
   <!-- </div> -->
 
@@ -203,6 +221,18 @@ venuesRemoveBtns.forEach((btn) => {
 
 
 
+document.addEventListener('DOMContentLoaded', (event) => {
+
+  setInterval(() => {
+    const chosenVenues = document.querySelectorAll('.chosen-venue-card');
+
+    if (chosenVenues.length == 3 ) {
+      $('#locked-btn').fadeOut();
+      $('#proceed-to-create-squad-btn').delay(400).fadeIn();
+    }
+  }, 200)
+
+})
 
 
 // LOGIC TO ADD A SELECTED VENUE ^^^^^^^^^^^^^^^^^^^^^^^^^^^^

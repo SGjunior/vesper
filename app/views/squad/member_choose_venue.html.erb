@@ -76,7 +76,7 @@
         <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
           <rect id="shape" height="40" width="150" />
           <div id="text">
-            <div class="mint" style="font-size: 18px;">
+            <div class="mint" style="font-size: 15px; padding-top: 5px;">
               Confirm vote
             </div>
           </div>
@@ -267,6 +267,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     setTimeout((event) => { waitingForSquad(); }, 500);
 
   }
+  waitingForSquad();
 });
 
 const waitingForSquad = () => {
@@ -280,8 +281,13 @@ const waitingForSquad = () => {
 
 
 const displayStatus = (data) => {
+  let userHasVoted = false
   data.squadmembers.forEach((squadmember) => {
+
     if (squadmember.squadchosenvenue_id != null) {
+      if (squadmember.user_id == <%= current_user.id %>) {
+        userHasVoted = true;
+      }
 
       const memberClosedEl = document.querySelector(`[member-closed='${squadmember.user_id}']`);
       const memberOpenEl = document.querySelector(`[member-open='${squadmember.user_id}']`);
@@ -329,9 +335,11 @@ const displayStatus = (data) => {
       $('#member-proceed-venue-btn').delay(500).fadeIn();
       statusDisplayEl.innerHTML = `We have enough votes! Lets get going!`;
   } else {
+    if (userHasVoted) {
     $('#member-proceed-venue-btn').fadeOut();
     $('#member-locked-venue-btn').delay(500).fadeIn();
     statusDisplayEl.innerHTML = `${data.status.missing_cnt} more vote to go!`;
+    }
   }
 }
 </script>

@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
+
+  devise_for :users,
+    controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+
   get 'squadmember/create'
-  devise_for :users
+
   root to: 'venue#welcome'
 
   resources :venue, { except: [:destroy] }
@@ -23,5 +27,7 @@ Rails.application.routes.draw do
   post 'squad/:id/:squad_member_id/choosecontribution', to: 'squad#member_confirm_contribution'
 
   post 'squad/:id/squadmembers/:adding_user_id', to: 'squad#update', as: 'create_squadmember'
+
+  get 'privacy', to: 'venue#privacy'
 
 end

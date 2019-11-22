@@ -1,5 +1,5 @@
 const initializeVenueChoice = () => {
-  console.log("test");
+  // console.log("test");
 }
 
 export { initializeVenueChoice }

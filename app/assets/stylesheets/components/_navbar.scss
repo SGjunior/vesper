@@ -48,7 +48,7 @@
   &.done {
     background-color: $mint;
     color: $black;
-    filter: brightness(2.5);
+    // filter: brightness(2.5);
   }
 
   &.current {
@@ -60,6 +60,7 @@
 
   &.progress-nav {
     opacity: 0.5;
+    cursor: pointer;
   }
 }
 
@@ -68,6 +69,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  a {
+    text-decoration: none;
+  }
+
 }
 
 .display-task-message {
@@ -406,4 +412,40 @@
 .glo-up-nav {
   box-shadow: 0px 0px 30px 0px rgba(124,255,203, 0.67) !important;
   text-shadow: 0 0 10px rgba(124,255,203,1) , 0 0 20px rgba(124,255,203,1) , 0 0 30px rgba(255,255,255,1) , 0 0 40px #7CFFCB , 0 0 70px #7CFFCB , 0 0 80px #7CFFCB , 0 0 100px #7CFFCB ;
+}
+
+.glo-up-txt {
+  text-shadow: 0 0 10px rgba(124,255,203,1) , 0 0 20px rgba(124,255,203,1) , 0 0 30px rgba(255,255,255,1) , 0 0 40px #7CFFCB , 0 0 70px #7CFFCB , 0 0 80px #7CFFCB , 0 0 100px #7CFFCB ;
+}
+
+
+// mdl overides
+
+.mdl-tooltip {
+  background-color: $black !important;
+}
+
+// other overides
+
+.fb-login-btn {
+  background-color: #4267B2;
+  padding: 5px 8px 3px 8px;
+  font-size: 14px;
+  text-align: center;
+  color: white !important;
+  text-decoration: none !important;
+  font-family: 'Helvetica';
+  border-radius: 3px;
+  max-width: 200px !important;
+  margin: 0px auto;
+  transition: all 0.4s ease;
+
+  i {
+    font-size: 20px;
+    color: white;
+  }
+
+  &:hover {
+    opacity: 0.8;
+  }
 }

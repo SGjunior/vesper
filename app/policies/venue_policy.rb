@@ -16,4 +16,8 @@ class VenuePolicy < ApplicationPolicy
   def show?
     true
   end
+
+  def privacy?
+    true
+  end
 end

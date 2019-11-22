@@ -140,6 +140,7 @@ class SquadController < ApplicationController
     @squad = Squad.find(params[:id])
     @squadChosenVenue = find_squad_chosen_venue
     @squadTotalContribution = find_squad_total_contribution
+    @yourContribution = @squad.squadmembers.find_by(user: current_user).contribution
     # raise
     authorize @squad
   end
@@ -231,6 +232,7 @@ class SquadController < ApplicationController
 
     member_count = @squad.squadmembers.count
     member_critial_count = (@squad.squadmembers.count/2.to_f).ceil
+    # member_critial_count = member_count - 1
     members_have_not_chosen = []
 
     member_count_have_chosen_venue = 0
@@ -243,7 +245,7 @@ class SquadController < ApplicationController
       end
     end
 
-    return { ready: member_critial_count == member_count_have_chosen_venue, missing_cnt: member_critial_count - member_count_have_chosen_venue, waiting_for: members_have_not_chosen }
+    return { ready: member_critial_count <= member_count_have_chosen_venue, missing_cnt: member_critial_count - member_count_have_chosen_venue, waiting_for: members_have_not_chosen }
   end
 
   def contribution_progess_ready?
@@ -256,14 +258,14 @@ class SquadController < ApplicationController
     member_count_have_contributed = 0
 
     @squad.squadmembers.each do |squadmember|
-      if squadmember.contribution == 0
+      if squadmember.contribution == 0 || squadmember.contribution.nil?
         members_have_not_contributed << squadmember
       else
         member_count_have_contributed += 1
       end
     end
 
-    return { ready: member_critial_count == member_count_have_contributed, missing_cnt: member_critial_count - member_count_have_contributed, waiting_for: members_have_not_contributed }
+    return { ready: member_count == member_count_have_contributed, missing_cnt: member_critial_count - member_count_have_contributed, waiting_for: members_have_not_contributed }
   end
 
 

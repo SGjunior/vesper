@@ -1,5 +1,5 @@
 class VenueController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:index, :show, :welcome]
+  skip_before_action :authenticate_user!, only: [:index, :show, :welcome, :privacy]
 
   def welcome
     @venue = Venue.first
@@ -59,6 +59,11 @@ class VenueController < ApplicationController
       lat: @venue.latitude,
       lng: @venue.longitude
     }]
+  end
+
+  def privacy
+    @venue = Venue.first
+    authorize @venue
   end
 
   private

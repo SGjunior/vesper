@@ -1,8 +1,13 @@
 .progress-btn-container {
   position: fixed;
-  bottom: 20px;
-  right: 5px;
+  bottom: 70px;
+  right: 60px;
   z-index: 9999;
+  transform: scale(2);
+
+  svg {
+    transform: scale(0.7);
+  }
 }
 
 .awesome-button {
